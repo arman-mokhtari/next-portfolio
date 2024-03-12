@@ -39,7 +39,6 @@ module.exports = {
         "accent-blue": "#1DA1F2",
       },
       fontFamily: {
-        inter: ["var(--font-inter)"],
         vazir: ["var(--font-vazir)"],
       },
       boxShadow: {
