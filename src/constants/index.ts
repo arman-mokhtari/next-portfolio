@@ -1,17 +1,37 @@
+import { SidebarLink } from "@/types";
+
 export const themes = [
-    {
-      value: "light",
-      label: "Light",
-      icon: "/assets/icons/sun.svg",
-    },
-    {
-      value: "dark",
-      label: "Dark",
-      icon: "/assets/icons/moon.svg",
-    },
-    {
-      value: "system",
-      label: "System",
-      icon: "/assets/icons/computer.svg",
-    },
-  ];
+  {
+    value: "light",
+    label: "Light",
+    icon: "/assets/icons/sun.svg",
+  },
+  {
+    value: "dark",
+    label: "Dark",
+    icon: "/assets/icons/moon.svg",
+  },
+  {
+    value: "system",
+    label: "System",
+    icon: "/assets/icons/computer.svg",
+  },
+];
+
+export const sidebarLinks: SidebarLink[] = [
+  {
+    imgURL: "/assets/icons/home.svg",
+    route: "/",
+    label: "صفحه اصلی",
+  },
+  {
+    imgURL: "/assets/icons/question.svg",
+    route: "/about",
+    label: "درباره من",
+  },
+  {
+    imgURL: "/assets/icons/user.svg",
+    route: "/profile",
+    label: "پروفایل",
+  },
+];
