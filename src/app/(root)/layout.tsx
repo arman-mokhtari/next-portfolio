@@ -10,8 +10,8 @@ const Layout = ({ children }: { children: ReactNode }) => {
       <MobileSidebar />
       <div className="flex">
         <RightSidebar/>
-        <section className="flex min-h-screen flex-1 p-8">
-          <div className="mx-auto w-full max-w-5xl">{children}</div>
+        <section className="flex min-h-screen flex-1 py-8">
+          <div className="mx-auto w-full max-w-6xl">{children}</div>
         </section>
       </div>
     </main>

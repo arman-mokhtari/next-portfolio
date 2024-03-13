@@ -5,7 +5,7 @@
 @import url("../styles/theme.css");
 
 body {
-  font-family: "Vazirmatn", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 @layer utilities {
@@ -142,6 +142,11 @@ code {
 }
 /* Markdown End */
 
+/* Clerk */
+.cl-internal-b3fm6y {
+  background: linear-gradient(129deg, #ff7000 0%, #e2995f 100%) !important;
+}
+
 .hash-span {
   margin-top: -140px;
   padding-bottom: 140px;
@@ -158,3 +163,4 @@ code {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+

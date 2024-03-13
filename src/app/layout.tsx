@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ClerkProvider } from "@clerk/nextjs";
 import { Vazirmatn } from "next/font/google";
 import "./globals.css";
 import { ReactNode } from "react";
@@ -24,7 +25,16 @@ export default function RootLayout({
   return (
     <html lang="fa" dir="rtl">
       <body className={vazir.className}>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ClerkProvider
+          appearance={{
+            elements: {
+              formButtonPrimary: "primary-gradient",
+              footerActionLink: "primary-text-gradient hover:text-primary-500",
+            },
+          }}
+        >
+          <ThemeProvider>{children}</ThemeProvider>
+        </ClerkProvider>
       </body>
     </html>
   );
