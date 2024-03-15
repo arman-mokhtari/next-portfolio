@@ -29,9 +29,4 @@ export const sidebarLinks: SidebarLink[] = [
     route: "/about",
     label: "درباره من",
   },
-  {
-    imgURL: "/assets/icons/user.svg",
-    route: "/profile",
-    label: "پروفایل",
-  },
 ];

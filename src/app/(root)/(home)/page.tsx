@@ -1,5 +1,6 @@
 // import TextTyped from "@/components/home/TextAnimate";
 
+import { SignedIn, UserButton } from "@clerk/nextjs";
 import Image from "next/image";
 
 export default function Home() {
@@ -18,6 +19,19 @@ export default function Home() {
         fill
         sizes="100vw"
       />
+      <SignedIn>
+          <UserButton
+            afterSignOutUrl="/"
+            appearance={{
+              elements: {
+                avatarBox: "h-10 w-10",
+              },
+              variables: {
+                colorPrimary: "#ff7000",
+              },
+            }}
+          />
+        </SignedIn>
     </div>
   );
 }

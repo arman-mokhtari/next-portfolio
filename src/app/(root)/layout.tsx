@@ -1,7 +1,7 @@
 import ThemeButton from "@/components/shared/ThemeButton";
 import { ReactNode } from "react";
-import RightSidebar from "@/components/shared/RightSidebar";
-import MobileSidebar from "@/components/shared/MobileSidebar";
+import RightSidebar from "@/components/shared/sidebar/RightSidebar";
+import MobileSidebar from "@/components/shared/sidebar/MobileSidebar";
 
 const Layout = ({ children }: { children: ReactNode }) => {
   return (

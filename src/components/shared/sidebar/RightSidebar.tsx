@@ -5,10 +5,11 @@ import { sidebarLinks } from "@/constants";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 import { SignedOut } from "@clerk/nextjs";
 import ProfileImage from "@/common/ProfileImage";
-import SidebarSocial from "./SocialIcons";
+import SidebarSocial from "../SocialIcons";
+import Divider from "@/common/Divider";
 
 const RightSidebar = () => {
   // TODO must change it
@@ -16,10 +17,10 @@ const RightSidebar = () => {
   const pathname = usePathname();
 
   return (
-    <section className="background-light900_dark200 light-border custom-scrollbar sticky left-0 top-0 flex h-screen flex-col justify-between overflow-y-auto border-r p-6 shadow-light-300 dark:shadow-none max-sm:hidden lg:w-[300px]">
+    <section className="sidebar-background light-border custom-scrollbar sticky left-0 top-0 flex h-screen flex-col justify-between overflow-y-auto border-l-4 border-slate-400 p-6 shadow-light-300 dark:border-slate-700 dark:shadow-none max-sm:hidden lg:w-[300px]">
       <ProfileImage />
 
-      <hr className="my-3 h-px border-t-0 bg-transparent bg-gradient-to-r from-transparent via-slate-900 to-transparent opacity-50 dark:via-white" />
+      <Divider />
 
       <div className="flex flex-1 flex-col gap-6 pt-2">
         {sidebarLinks.map((item) => {
@@ -67,7 +68,7 @@ const RightSidebar = () => {
       <SignedOut>
         <div className="flex flex-col gap-3">
           <Link href="/sign-in">
-            <Button className="small-medium btn-secondary min-h-[41px] w-full rounded-lg px-4 py-3 shadow-none">
+            <Button className="small-medium btn-secondary text-dark400_light900 min-h-[41px] w-full rounded-lg px-4 py-3 shadow-none transition-none">
               <Image
                 src="/assets/icons/account.svg"
                 alt="login"
@@ -75,12 +76,12 @@ const RightSidebar = () => {
                 height={20}
                 className="invert-colors lg:hidden"
               />
-              <span className="primary-text-gradient max-lg:hidden">ورود</span>
+              ورود
             </Button>
           </Link>
 
           <Link href="/sign-up">
-            <Button className="small-medium light-border-2 btn-tertiary text-dark400_light900 min-h-[41px] w-full rounded-lg px-4 py-3 shadow-none">
+            <Button className="small-medium light-border-2 btn-tertiary text-dark400_light900 min-h-[41px] w-full rounded-lg px-4 py-3 shadow-none transition-none">
               <Image
                 src="/assets/icons/sign-up.svg"
                 alt="sign-up"
@@ -93,6 +94,7 @@ const RightSidebar = () => {
           </Link>
         </div>
       </SignedOut>
+      <Divider />
       <div>
         <SidebarSocial />
       </div>

@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer utilities {
+  .sidebar-background {
+    @apply bg-gray-300 dark:bg-slate-950;
+  }
+
   .background-light850_dark100 {
     @apply bg-light-850 dark:bg-dark-100;
   }

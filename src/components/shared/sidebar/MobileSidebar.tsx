@@ -13,12 +13,14 @@ import {
 } from "@/components/ui/sheet";
 import { SignedOut } from "@clerk/nextjs";
 import ProfileImage from "@/common/ProfileImage";
+import Divider from "@/common/Divider";
+import SidebarSocial from "../SocialIcons";
 
 const NavContent = () => {
   const pathname = usePathname();
 
   return (
-    <section className="flex h-full flex-col gap-6 pt-6">
+    <section className="flex h-full flex-col gap-6 pt-1">
       {sidebarLinks.map((item) => {
         const isActive =
           (pathname.includes(item.route) && item.route.length > 1) ||
@@ -69,23 +71,23 @@ const MobileSidebar = () => {
 
       <SheetContent
         side="right"
-        className="background-light900_dark200 w-[350px] border-none"
+        className="sidebar-background custom-scrollbar flex w-[350px] flex-col justify-between overflow-y-auto border-none"
       >
-        <ProfileImage />
-
         <div>
+          <ProfileImage />
+          <Divider />
           <SheetClose asChild>
             <NavContent />
           </SheetClose>
+        </div>
 
-          {/* When signed out */}
-
+        <div>
           <SignedOut>
             <div className="flex flex-col gap-3">
               <SheetClose asChild>
                 <Link href="/sign-in">
-                  <Button className="small-medium btn-secondary min-h-[41px] w-full rounded-lg px-4 py-3 shadow-none">
-                    <span className="primary-text-gradient">ورود</span>
+                  <Button className="small-medium btn-secondary text-dark400_light900 min-h-[41px] w-full rounded-lg px-4 py-3 shadow-none">
+                    ورود
                   </Button>
                 </Link>
               </SheetClose>
@@ -99,6 +101,8 @@ const MobileSidebar = () => {
               </SheetClose>
             </div>
           </SignedOut>
+          <Divider />
+          <SidebarSocial />
         </div>
       </SheetContent>
     </Sheet>
