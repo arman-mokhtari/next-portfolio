@@ -191,8 +191,12 @@
     @apply shadow-light-100 dark:shadow-none;
   }
 
+  .icon-color {
+    @apply filter invert-[.280] sepia-0 saturate-200 -hue-rotate-15 dark:invert-[.80];
+  }
+
   .primary-gradient {
-    background: linear-gradient(129deg, #ff7000 0%, #e2995f 100%);
+    background: linear-gradient(129deg, #4255ff 0%, #6796ee 100%);
   }
 
   .dark-gradient {

@@ -5,13 +5,13 @@ import MobileSidebar from "@/components/shared/MobileSidebar";
 
 const Layout = ({ children }: { children: ReactNode }) => {
   return (
-    <main className="background-light850_dark100 relative">
+    <main className="background-light850_dark100 relative ">
       <ThemeButton />
       <MobileSidebar />
       <div className="flex">
-        <RightSidebar/>
-        <section className="flex min-h-screen flex-1 py-8">
-          <div className="mx-auto w-full max-w-6xl">{children}</div>
+        <RightSidebar />
+        <section className="flex min-h-screen flex-1">
+          <div className="mx-auto w-full">{children}</div>
         </section>
       </div>
     </main>

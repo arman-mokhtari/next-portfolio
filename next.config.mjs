@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
-    mdxRss: true,
+    mdxRs: true,
     serverComponentsExternalPackages: ["mongoose"],
   },
   images: {

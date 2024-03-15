@@ -19,7 +19,7 @@ const Theme = () => {
   return (
     <Menubar className="absolute left-5 top-5 rounded-full border-none bg-transparent shadow-none">
       <MenubarMenu>
-        <MenubarTrigger className="light-border-2 cursor-pointer rounded-full border focus:bg-light-900 data-[state=open]:bg-light-900 dark:focus:bg-dark-200 dark:data-[state=open]:bg-dark-200">
+        <MenubarTrigger className="cursor-pointer rounded-full">
           {mode === "light" ? (
             <Image
               src="/assets/icons/sun.svg"
