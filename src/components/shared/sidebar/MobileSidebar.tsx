@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { usePathname } from "next/navigation";
 import { sidebarLinks } from "@/constants";
 import {
@@ -15,6 +14,7 @@ import { SignedOut } from "@clerk/nextjs";
 import ProfileImage from "@/common/ProfileImage";
 import Divider from "@/common/Divider";
 import SidebarSocial from "../SocialIcons";
+import SignButtons from "./SignButtons";
 
 const NavContent = () => {
   const pathname = usePathname();
@@ -68,10 +68,9 @@ const MobileSidebar = () => {
           alt="menu"
         />
       </SheetTrigger>
-
       <SheetContent
         side="right"
-        className="sidebar-background custom-scrollbar flex w-[350px] flex-col justify-between overflow-y-auto border-none"
+        className="sidebar-background custom-scrollbar z-50 flex w-[350px] flex-col justify-between overflow-y-auto border-none shadow-2xl sm:hidden"
       >
         <div>
           <ProfileImage />
@@ -83,23 +82,9 @@ const MobileSidebar = () => {
 
         <div>
           <SignedOut>
-            <div className="flex flex-col gap-3">
-              <SheetClose asChild>
-                <Link href="/sign-in">
-                  <Button className="small-medium btn-secondary text-dark400_light900 min-h-[41px] w-full rounded-lg px-4 py-3 shadow-none">
-                    ورود
-                  </Button>
-                </Link>
-              </SheetClose>
-
-              <SheetClose asChild>
-                <Link href="/sign-up">
-                  <Button className="small-medium light-border-2 btn-tertiary text-dark400_light900 min-h-[41px] w-full rounded-lg px-4 py-3 shadow-none">
-                    ثبت نام
-                  </Button>
-                </Link>
-              </SheetClose>
-            </div>
+            <SheetClose asChild>
+              <SignButtons />
+            </SheetClose>
           </SignedOut>
           <Divider />
           <SidebarSocial />

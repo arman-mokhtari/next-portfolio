@@ -4,7 +4,7 @@
 
 @layer utilities {
   .sidebar-background {
-    @apply bg-gray-300 dark:bg-slate-950;
+    @apply bg-slate-200 dark:bg-slate-900;
   }
 
   .background-light850_dark100 {
@@ -99,8 +99,12 @@
     @apply border-light-800 dark:border-dark-300;
   }
 
+  .theme-border-color {
+    @apply border-slate-300 dark:border-slate-700;
+  }
+
   .light-border-2 {
-    @apply border-light-700 dark:border-dark-400 !important;
+    @apply dark:border-slate-700 border-slate-400 !important;
   }
 
   .h1-bold {

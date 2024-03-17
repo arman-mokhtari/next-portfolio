@@ -1,14 +1,12 @@
 // import TextTyped from "@/components/home/TextAnimate";
 
-import { SignedIn, UserButton } from "@clerk/nextjs";
-import Image from "next/image";
 
 export default function Home() {
-  const banner = "https://cdn.workfolio.ir/images/portfolio/home/dev.png";
+  // const banner = "https://cdn.workfolio.ir/images/portfolio/home/dev.png";
   return (
     <div className="h-screen">
       {/* <TextTyped /> */}
-      <Image
+      {/* <Image
         className="imp-static overflow-hidden object-cover object-top"
         alt="طراحی وبسایت و خدمات وب"
         src={banner}
@@ -18,20 +16,7 @@ export default function Home() {
         priority
         fill
         sizes="100vw"
-      />
-      <SignedIn>
-          <UserButton
-            afterSignOutUrl="/"
-            appearance={{
-              elements: {
-                avatarBox: "h-10 w-10",
-              },
-              variables: {
-                colorPrimary: "#ff7000",
-              },
-            }}
-          />
-        </SignedIn>
+      /> */}
     </div>
   );
 }

@@ -62,7 +62,7 @@ const Theme = () => {
               <p
                 className={`body-semibold text-light-500 ${
                   mode === item.value
-                    ? "text-primary-500"
+                    ? "active-theme"
                     : "text-dark100_light900"
                 }`}
               >
