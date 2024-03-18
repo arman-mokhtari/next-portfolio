@@ -15,7 +15,7 @@ const RightSidebar = () => {
   const pathname = usePathname();
 
   return (
-    <section className="sidebar-background light-border custom-scrollbar sticky left-0 top-0 z-50 flex h-screen flex-col justify-between overflow-y-auto border-l-4 border-slate-300 py-2 dark:border-slate-800 max-sm:hidden lg:w-[300px]">
+    <section className="sidebar-background light-border custom-scrollbar sticky left-0 top-0 z-50 flex h-screen w-[300px] flex-col justify-between overflow-y-auto border-l-4 border-slate-300 py-2 dark:border-slate-800 max-lg:hidden">
       <ProfileImage />
 
       <Divider />
@@ -43,11 +43,7 @@ const RightSidebar = () => {
                 height={20}
                 className={`${isActive ? "active-theme" : "invert-colors"}`}
               />
-              <p
-                className={`${
-                  isActive ? "base-bold" : "base-medium"
-                } max-lg:hidden`}
-              >
+              <p className={`${isActive ? "base-bold" : "base-medium"}`}>
                 {item.label}
               </p>
             </Link>

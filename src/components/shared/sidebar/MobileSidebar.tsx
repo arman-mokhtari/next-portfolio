@@ -58,7 +58,7 @@ const MobileSidebar = () => {
   return (
     <Sheet>
       <SheetTrigger
-        className="absolute right-5 top-5 cursor-pointer rounded-full bg-slate-400 p-1.5 dark:bg-slate-600 sm:hidden"
+        className="absolute right-5 top-5 cursor-pointer rounded-full bg-slate-300 p-1.5 dark:bg-slate-400 lg:hidden"
         asChild
       >
         <Image
@@ -70,7 +70,7 @@ const MobileSidebar = () => {
       </SheetTrigger>
       <SheetContent
         side="right"
-        className="sidebar-background custom-scrollbar z-50 flex w-[350px] flex-col justify-between overflow-y-auto border-none px-0 py-2 shadow-2xl sm:hidden"
+        className="sidebar-background custom-scrollbar z-50 flex w-[350px] flex-col justify-between overflow-y-auto border-none px-0 py-2 shadow-2xl lg:hidden"
       >
         <div>
           <ProfileImage />
