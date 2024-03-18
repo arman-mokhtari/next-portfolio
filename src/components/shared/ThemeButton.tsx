@@ -31,7 +31,7 @@ const Theme = () => {
               />
             </div>
           ) : (
-            <div className="flex flex-row gap-1 rounded-full bg-slate-400 p-2 shadow-lg shadow-gray-500 hover:bg-slate-300 active:shadow-md">
+            <div className="flex flex-row gap-1 rounded-full bg-slate-400 p-2 hover:bg-slate-300 active:shadow-md">
               <p className="active-theme">روشن</p>
               <Image
                 src="/assets/icons/sun.svg"

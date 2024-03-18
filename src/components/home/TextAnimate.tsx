@@ -28,7 +28,7 @@ const TextTyped = () => {
 
   return (
     <div>
-      <span className="text-dark400_light900" ref={el} />
+      <span ref={el} />
     </div>
   );
 };

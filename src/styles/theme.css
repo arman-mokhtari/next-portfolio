@@ -203,6 +203,10 @@
     @apply filter invert-[.280] sepia-0 saturate-200 -hue-rotate-15 dark:invert-[.80];
   }
 
+  .hover-gradient {
+    @apply bg-gradient-to-r from-blue-700 via-blue-600 to-blue-400 hover:from-blue-800 hover:to-blue-600;
+  }
+
   .primary-gradient {
     background: linear-gradient(129deg, #4255ff 0%, #6796ee 100%);
   }
