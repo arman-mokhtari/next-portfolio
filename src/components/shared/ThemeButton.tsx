@@ -16,11 +16,11 @@ const Theme = () => {
   const { mode, setMode } = useTheme();
 
   return (
-    <Menubar className="absolute left-5 top-5 z-10 rounded-full border-none bg-transparent shadow-none">
+    <Menubar className="absolute left-5 top-5 z-10 border-none bg-transparent">
       <MenubarMenu>
-        <MenubarTrigger className="cursor-pointer rounded-full">
+        <MenubarTrigger className="cursor-pointer">
           {mode === "light" ? (
-            <div className="flex flex-row gap-1 rounded-full bg-slate-300 p-2">
+            <div className="flex flex-row gap-1 rounded-full bg-slate-300 p-2 shadow-lg shadow-gray-300 hover:bg-slate-400 active:shadow-md">
               <p className="active-theme">تاریک</p>
               <Image
                 src="/assets/icons/moon.svg"
@@ -31,7 +31,7 @@ const Theme = () => {
               />
             </div>
           ) : (
-            <div className="flex flex-row gap-1 rounded-full bg-slate-400 p-2">
+            <div className="flex flex-row gap-1 rounded-full bg-slate-400 p-2 shadow-lg shadow-gray-500 hover:bg-slate-300 active:shadow-md">
               <p className="active-theme">روشن</p>
               <Image
                 src="/assets/icons/sun.svg"
