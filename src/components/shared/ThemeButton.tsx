@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { useTheme } from "@/context/ThemeProvider";
 import Image from "next/image";
 
@@ -17,25 +16,31 @@ const Theme = () => {
   const { mode, setMode } = useTheme();
 
   return (
-    <Menubar className="absolute left-5 top-5 rounded-full border-none bg-transparent shadow-none">
+    <Menubar className="absolute left-5 top-5 z-10 rounded-full border-none bg-transparent shadow-none">
       <MenubarMenu>
         <MenubarTrigger className="cursor-pointer rounded-full">
           {mode === "light" ? (
-            <Image
-              src="/assets/icons/sun.svg"
-              width={20}
-              height={20}
-              alt="sun"
-              className="active-theme"
-            />
+            <div className="flex flex-row gap-1 rounded-full bg-slate-300 p-2">
+              <p className="active-theme">تاریک</p>
+              <Image
+                src="/assets/icons/moon.svg"
+                width={20}
+                height={20}
+                alt="sun"
+                className="active-theme"
+              />
+            </div>
           ) : (
-            <Image
-              src="/assets/icons/moon.svg"
-              width={20}
-              height={20}
-              alt="moon"
-              className="active-theme"
-            />
+            <div className="flex flex-row gap-1 rounded-full bg-slate-400 p-2">
+              <p className="active-theme">روشن</p>
+              <Image
+                src="/assets/icons/sun.svg"
+                width={20}
+                height={20}
+                alt="moon"
+                className="active-theme"
+              />
+            </div>
           )}
         </MenubarTrigger>
         <MenubarContent className=" absolute left-[2.5rem] top-[-1.4rem] mt-3 min-w-[120px] rounded border bg-light-900 py-2 dark:border-dark-400 dark:bg-dark-300">
@@ -61,9 +66,7 @@ const Theme = () => {
               />
               <p
                 className={`body-semibold text-light-500 ${
-                  mode === item.value
-                    ? "active-theme"
-                    : "text-dark100_light900"
+                  mode === item.value ? "active-theme" : "text-dark100_light900"
                 }`}
               >
                 {item.label}
