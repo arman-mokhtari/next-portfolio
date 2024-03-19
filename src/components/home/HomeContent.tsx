@@ -1,7 +1,7 @@
 import { Button } from "../ui/button";
 import TextTyped from "./TextAnimate";
 
-const AdminIntroduce = () => {
+const HomeContent = () => {
   return (
     <div className="text-dark500_light700 flex flex-col items-center gap-6 font-bold">
       <h1 className="text-[1.2rem] md:text-[1.5rem]">
@@ -28,4 +28,4 @@ const AdminIntroduce = () => {
   );
 };
 
-export default AdminIntroduce;
+export default HomeContent;

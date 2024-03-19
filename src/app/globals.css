@@ -167,3 +167,24 @@ code {
 .imp-static {
   position: static !important;
 }
+
+/* speech-bubble */
+.speech-bubble {
+	position: relative;
+}
+
+.speech-bubble:after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 40%;
+	width: 0;
+	height: 0;
+	border: 10px solid transparent;
+	border-top-color: #2563EB;
+	border-bottom: 0;
+	border-right: 0;
+	margin-left: 0;
+	margin-bottom: -10px;
+}
+/* speech-bubble */

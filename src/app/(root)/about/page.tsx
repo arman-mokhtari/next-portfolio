@@ -1,8 +1,8 @@
-import React from 'react'
+import MainContent from '@/components/about/MainContent'
 
 const Page = () => {
   return (
-    <div>Page</div>
+    <MainContent/>
   )
 }
 
