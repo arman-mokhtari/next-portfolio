@@ -7,7 +7,7 @@ const HomeContent = () => {
       <h1 className="text-[1.2rem] md:text-[1.5rem]">
         سلام من
         <span className="mx-1.5 inline-block whitespace-nowrap text-blue-600">
-          آرمان مختاری
+          لونا وایلر
         </span>
         هستم!
       </h1>

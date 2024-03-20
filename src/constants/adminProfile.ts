@@ -1,7 +1,7 @@
 export const profileData = [
   {
     key: "نام",
-    value: "آرمان مختاری",
+    value: "لونا وایلر",
   },
   {
     key: "سن",
@@ -18,6 +18,10 @@ export const profileData = [
   {
     key: "آدرس",
     value: "ایران، تهران",
+  },
+  {
+    key: "تخصص",
+    value: "برنامه‌نویسی",
   },
   {
     key: "فریلنس",

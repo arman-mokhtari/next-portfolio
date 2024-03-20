@@ -9,23 +9,23 @@ const FullIntroduce = () => {
 
   return (
     <div className="flex flex-1 flex-col justify-around ">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between gap-3">
         <div>
           {isBubble && (
-            <div>
-              <span className="speech-bubble relative mb-3 inline-block whitespace-nowrap rounded bg-blue-600 px-2 py-[.2rem] text-sm font-semibold text-light-800">
-                سلام
-              </span>
-            </div>
+            <span className="speech-bubble relative mb-3 mr-2 inline-block whitespace-nowrap rounded bg-blue-600 px-2 py-[.2rem] text-sm font-semibold text-light-800">
+              سلام
+            </span>
           )}
-          <AdminIntroduce />
+          <div className="border-r-[5px] border-blue-600 pr-2">
+            <AdminIntroduce />
+          </div>
         </div>
         <Image
           className="rounded-3xl object-cover sm:hidden"
           src="/assets/images/about.png"
           alt="profile"
-          width={150}
-          height={150}
+          width={100}
+          height={100}
         />
       </div>
       <Divider otherClass="mx-0 my-4" />
