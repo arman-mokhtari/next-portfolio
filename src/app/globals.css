@@ -41,8 +41,12 @@ body {
     @apply max-w-full prose dark:prose-p:text-light-700 dark:prose-ol:text-light-700 dark:prose-ul:text-light-500 dark:prose-strong:text-white dark:prose-headings:text-white prose-headings:text-dark-400 prose-h1:text-dark-300 prose-h2:text-dark-300 prose-p:text-dark-500 prose-ul:text-dark-500 prose-ol:text-dark-500;
   }
 
+  .primary-gradient-light {
+    @apply bg-gradient-to-r from-blue-700 via-blue-600 to-blue-500;
+  }
+
   .primary-gradient {
-    background: linear-gradient(129deg, #4255ff 0%, #6796ee 100%);
+    @apply bg-gradient-to-r from-blue-700 via-blue-600 to-blue-400;
   }
 
   .dark-gradient {

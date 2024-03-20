@@ -34,7 +34,7 @@ const RightSidebar = () => {
                 isActive
                   ? "border-l-4 border-blue-600 text-blue-600"
                   : "text-dark300_light900"
-              } flex items-center justify-start gap-4 bg-transparent p-4`}
+              } flex items-center justify-start gap-4 bg-transparent px-4 py-3`}
             >
               <Image
                 src={item.imgURL}

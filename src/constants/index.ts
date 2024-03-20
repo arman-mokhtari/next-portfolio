@@ -29,4 +29,49 @@ export const sidebarLinks: SidebarLink[] = [
     route: "/about",
     label: "درباره من",
   },
+  {
+    imgURL: "/assets/icons/question.svg",
+    route: "/skills",
+    label: "مهارت‌ها",
+  },
+];
+
+
+export const skillData = [
+  {
+    id: 1,
+    key: 'js',
+    title: "جاوا اسکریپت",
+    number: 65,
+  },
+  {
+    id: 2,
+    key: 'html',
+    title: "اچ تی ام ال",
+    number: 92,
+  },
+  {
+    id: 3,
+    key: 'css',
+    title: "سی اس اس",
+    number: 82,
+  },
+  {
+    id: 5,
+    key: 'react',
+    title: "ری‌اکت",
+    number: 89,
+  },
+  {
+    id: 6,
+    key: 'node',
+    title: "نود جی اس",
+    number: 75,
+  },
+  {
+    id: 7,
+    key: 'next',
+    title: "نکست جی اس",
+    number: 85,
+  },
 ];
