@@ -15,12 +15,12 @@ const RightSidebar = () => {
   const pathname = usePathname();
 
   return (
-    <section className="sidebar-background light-border custom-scrollbar sticky left-0 top-0 z-50 flex h-screen w-[300px] flex-col justify-between overflow-y-auto border-l-4 border-slate-300 py-2 dark:border-slate-800 max-lg:hidden">
+    <section className="sidebar-background light-border custom-scrollbar fixed right-0 top-0 z-50 flex h-screen w-[300px] flex-col justify-between overflow-y-auto border-l-4 border-slate-300 py-2 dark:border-slate-800 max-lg:hidden">
       <ProfileImage />
 
       <Divider />
 
-      <div className="flex flex-1 flex-col gap-6">
+      <div className="flex flex-1 flex-col gap-2">
         {sidebarLinks.map((item) => {
           const isActive =
             (pathname.includes(item.route) && item.route.length > 1) ||

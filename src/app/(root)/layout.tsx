@@ -12,7 +12,10 @@ const Layout = ({ children }: { children: ReactNode }) => {
       <ProfileBtn />
       <MobileSidebar />
       <div className="flex">
-        <RightSidebar />
+        <div className="sticky lg:w-[300px]">
+          <RightSidebar />
+        </div>
+
         <section className="relative flex min-h-screen flex-1 bg-slate-100 dark:bg-slate-950">
           <HomeLines />
           <div className="z-[2] mx-auto w-full">

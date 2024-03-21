@@ -16,7 +16,7 @@ const Theme = () => {
   const { mode, setMode } = useTheme();
 
   return (
-    <Menubar className="absolute left-5 top-5 z-10 border-none bg-transparent">
+    <Menubar className="fixed left-5 top-5 z-10 border-none bg-transparent">
       <MenubarMenu>
         <MenubarTrigger className="cursor-pointer">
           {mode === "light" ? (

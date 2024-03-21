@@ -4,12 +4,13 @@ import { Progress } from "@/components/ui/progress";
 import { useState, useEffect } from "react";
 import { Badge } from "../ui/badge";
 import { skillData } from "@/constants";
+import TitleBadge from "@/common/TitleBadge";
 
 type Skills = {
   [key: string]: number;
 };
 
-const ResumeMainContent = () => {
+const SkillsMainContent = () => {
   const [skills, setSkills] = useState<Skills>({
     js: 0,
     css: 0,
@@ -41,11 +42,8 @@ const ResumeMainContent = () => {
   return (
     <div className="flex h-screen items-center justify-center">
       <div className="text-dark400_light900 flex w-full flex-col gap-8 md:w-[95%] xl:w-[80%] xl:flex-row">
-
         <div className="w-full">
-          <Badge className="background-slate300_slate700 mb-4 transition-none">
-            <h2 className="p-1 text-xl text-blue-600">مهارت‌های عمومی</h2>
-          </Badge>
+          <TitleBadge title="مهارت‌های عمومی" />
           <div className="shadow-grey-darknone flex w-full flex-col gap-3 rounded-xl bg-slate-200  p-4 dark:bg-slate-800 ">
             {firstHalfSkillData.map((skill) => (
               <div key={skill.id}>
@@ -66,9 +64,7 @@ const ResumeMainContent = () => {
         </div>
 
         <div className="w-full">
-          <Badge className="background-slate300_slate700 mb-4 transition-none">
-            <h2 className="p-1 text-xl text-blue-600">مهارت‌های تخصصی</h2>
-          </Badge>
+          <TitleBadge title="مهارت‌های تخصصی" />
           <div className="shadow-grey-darknone flex w-full flex-col gap-3  rounded-xl bg-slate-200 p-4 dark:bg-slate-800">
             {secondHalfSkillData.map((skill) => (
               <div key={skill.id}>
@@ -87,10 +83,9 @@ const ResumeMainContent = () => {
             ))}
           </div>
         </div>
-
       </div>
     </div>
   );
 };
 
-export default ResumeMainContent;
+export default SkillsMainContent;
