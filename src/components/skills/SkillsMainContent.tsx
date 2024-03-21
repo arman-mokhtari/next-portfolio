@@ -40,7 +40,7 @@ const SkillsMainContent = () => {
   );
   const secondHalfSkillData = skillData.slice(Math.ceil(skillData.length / 2));
   return (
-    <div className="flex h-screen items-center justify-center">
+    <div className="flex min-h-screen items-center justify-center">
       <div className="text-dark400_light900 flex w-full flex-col gap-8 md:w-[95%] xl:w-[80%] xl:flex-row">
         <div className="w-full">
           <TitleBadge title="مهارت‌های عمومی" />

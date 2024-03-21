@@ -2,7 +2,7 @@ import TitleBadge from "@/common/TitleBadge";
 
 const ResumeMainContent = () => {
   return (
-    <div className="flex min-h-screen items-center justify-center">
+    <div className="min-h-screen flex items-center justify-center">
       <div className="my-20 flex w-full flex-col items-center justify-center gap-10 md:w-[95%] lg:flex-row xl:w-[80%]">
         <div>
           <TitleBadge title="مدارک تحصیلی" />
