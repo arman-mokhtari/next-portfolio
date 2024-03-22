@@ -39,6 +39,11 @@ export const sidebarLinks: SidebarLink[] = [
     route: "/resume",
     label: "رزومه",
   },
+  {
+    imgURL: "/assets/icons/question.svg",
+    route: "/activities",
+    label: "فعالیت‌ها",
+  },
 ];
 
 export const skillData = [
