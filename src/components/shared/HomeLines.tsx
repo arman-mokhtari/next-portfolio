@@ -4,7 +4,7 @@ const HomeLines = () => {
       {["20%", "40%", "60%", "80%"].map((value, i) => (
         <span
           key={i}
-          className={`absolute h-screen w-[0.8px] bg-slate-200 dark:bg-slate-900`}
+          className={`absolute h-full min-h-screen w-[0.8px] bg-slate-200 dark:bg-slate-900`}
           style={{ left: `${value}` }}
         />
       ))}

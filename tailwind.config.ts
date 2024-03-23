@@ -41,6 +41,10 @@ module.exports = {
       fontFamily: {
         vazir: ["var(--font-vazir)"],
       },
+      card: {
+        DEFAULT: "hsl(var(--card))",
+        foreground: "hsl(var(--card-foreground))",
+      },
       transitionDuration: {
         '2000': '2000ms',
       },

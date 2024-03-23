@@ -1,7 +1,7 @@
-import ResumeMainContent from "@/components/skills/SkillsMainContent";
+import SkillsMainContent from "@/components/skills/SkillsMainContent";
 
 const Page = () => {
-  return <ResumeMainContent />;
+  return <SkillsMainContent />;
 };
 
 export default Page;
