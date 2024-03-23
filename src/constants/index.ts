@@ -44,6 +44,11 @@ export const sidebarLinks: SidebarLink[] = [
     route: "/activities",
     label: "فعالیت‌ها",
   },
+  {
+    imgURL: "/assets/icons/question.svg",
+    route: "/contact",
+    label: "ارتباط",
+  },
 ];
 
 export const skillData = [
