@@ -15,6 +15,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { contactSchema } from "@/lib/validation";
 import { useState } from "react";
+import { sendContactUsEmail } from "@/backend/libs/actions/contact.action";
 
 // Define type for field names and placeholders
 type FieldName = "fullName" | "email" | "phone" | "message";
@@ -34,10 +35,11 @@ const ContactForm = () => {
   });
 
   // Define a submit handler.
-  function onSubmit(values: z.infer<typeof contactSchema>) {
+  async function onSubmit(values: z.infer<typeof contactSchema>) {
     setIsSubmit(true);
     try {
-      console.log(values);
+      await sendContactUsEmail({ values });
+      form.reset();
     } catch (error) {
       console.error(error);
     } finally {
