@@ -66,11 +66,21 @@ body {
   @apply focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 !important;
 }
 
+.input-light {
+  @apply min-h-12 border-4 placeholder:text-sm placeholder:font-medium 
+  focus-visible:border-blue-400
+  focus-visible:shadow-lg focus-visible:shadow-gray-400 dark:shadow-none;
+}
+
 .active-theme {
   filter: invert(43%) sepia(57%) saturate(6407%) hue-rotate(213deg)
     brightness(92%) contrast(100%);
   -webkit-filter: invert(43%) sepia(57%) saturate(6407%) hue-rotate(213deg)
     brightness(92%) contrast(100%);
+}
+
+.hover-gradient {
+  @apply bg-gradient-to-r from-blue-700 via-blue-600 to-blue-400 hover:from-blue-800 hover:to-blue-600;
 }
 
 .light-gradient {
@@ -238,7 +248,7 @@ code {
 /* about page image */
 
 /* imp */
-.flex-imp{
+.flex-imp {
   display: flex !important;
 }
 /* imp */
@@ -247,11 +257,12 @@ code {
   color: #2563eb !important;
 }
 
-.slick-dots li button:before{
+.slick-dots li button:before {
   color: #868686 !important;
 }
 
-.slick-next:before , .slick-prev:before{
+.slick-next:before,
+.slick-prev:before {
   color: #2563eb !important;
 }
 /* slick carousel */

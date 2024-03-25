@@ -223,6 +223,12 @@
     @apply bg-gradient-to-r from-blue-700 via-blue-600 to-blue-400;
   }
 
+  .input-light {
+    @apply min-h-12 border-4 placeholder:text-sm placeholder:font-medium 
+    focus-visible:border-blue-400
+    focus-visible:shadow-lg focus-visible:shadow-gray-400 dark:shadow-none;
+  }
+
   .dark-gradient {
     background: linear-gradient(
       232deg,
