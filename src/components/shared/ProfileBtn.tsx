@@ -3,7 +3,7 @@ import { SignedIn, UserButton } from "@clerk/nextjs";
 const ProfileBtn = () => {
   return (
     <SignedIn>
-      <div className="absolute bottom-2 left-2">
+      <div className="absolute bottom-2 left-2 z-50">
         <UserButton
           userProfileMode="modal"
           afterSignOutUrl="/"
