@@ -6,7 +6,11 @@ const Page = () => {
   if (!checkRole("admin")) {
     redirect("/404");
   }
-  return <div>profile</div>;
+  return (
+  <div>
+
+  </div>
+  );
 };
 
 export default Page;
