@@ -1,12 +1,13 @@
+import FullIntroduce from "@/components/about/FullIntroduce";
 import CustomizedCard from "@/components/shared/CustomizedCard";
 
 const DashboardMainContent = () => {
   return (
-    <div className="flex min-h-screen items-center justify-center">
+
       <CustomizedCard>
-        <div></div>
+        <FullIntroduce />
       </CustomizedCard>
-    </div>
+
   );
 };
 

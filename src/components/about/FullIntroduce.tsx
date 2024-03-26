@@ -4,8 +4,13 @@ import { profileData } from "@/constants/adminProfile";
 import Divider from "@/common/Divider";
 import Image from "next/image";
 
-const FullIntroduce = () => {
-  const isBubble = true;
+interface Props {
+  otherClasses?: string;
+  topBubble?: boolean;
+}
+
+const FullIntroduce = ({ otherClasses, topBubble }: Props) => {
+  const isBubble = topBubble || false;
 
   return (
     <div className="flex flex-1 flex-col justify-around ">
@@ -21,7 +26,7 @@ const FullIntroduce = () => {
           </div>
         </div>
         <Image
-          className="rounded-3xl object-cover sm:hidden"
+          className={`rounded-3xl object-cover ${otherClasses}`}
           src="/assets/images/about.png"
           alt="profile"
           width={100}
