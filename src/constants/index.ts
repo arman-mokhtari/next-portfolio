@@ -50,6 +50,23 @@ export const sidebarLinks: SidebarLink[] = [
     label: "ارتباط",
   },
 ];
+export const adminSidebarLinks: SidebarLink[] = [
+  {
+    imgURL: "/assets/icons/sidebar/home.svg",
+    route: "/",
+    label: "صفحه اصلی",
+  },
+  {
+    imgURL: "/assets/icons/sidebar/dashboard.svg",
+    route: "/admin/dashboard",
+    label: "داشبورد",
+  },
+  {
+    imgURL: "/assets/icons/sidebar/user.svg",
+    route: "/admin/profile",
+    label: "پروفایل",
+  }
+];
 
 export const skillData = [
   {
