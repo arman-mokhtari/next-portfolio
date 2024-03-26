@@ -195,6 +195,10 @@
     @apply invert dark:invert-0;
   }
 
+  .sidebar-svg {
+    @apply invert-0 dark:invert;
+  }
+
   .shadow-light100_dark100 {
     @apply shadow-light-100 dark:shadow-dark-100;
   }

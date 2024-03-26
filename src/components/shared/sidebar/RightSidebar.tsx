@@ -41,7 +41,7 @@ const RightSidebar = () => {
                 alt={item.label}
                 width={20}
                 height={20}
-                className={`${isActive ? "active-theme" : "invert-colors"}`}
+                className={`${isActive ? "active-theme" : "sidebar-svg"}`}
               />
               <p className={`${isActive ? "base-bold" : "base-medium"}`}>
                 {item.label}

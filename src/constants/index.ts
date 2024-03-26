@@ -20,32 +20,32 @@ export const themes = [
 
 export const sidebarLinks: SidebarLink[] = [
   {
-    imgURL: "/assets/icons/home.svg",
+    imgURL: "/assets/icons/sidebar/home.svg",
     route: "/",
     label: "صفحه اصلی",
   },
   {
-    imgURL: "/assets/icons/question.svg",
+    imgURL: "/assets/icons/sidebar/user.svg",
     route: "/about",
     label: "درباره من",
   },
   {
-    imgURL: "/assets/icons/question.svg",
+    imgURL: "/assets/icons/sidebar/skills.svg",
     route: "/skills",
     label: "مهارت‌ها",
   },
   {
-    imgURL: "/assets/icons/question.svg",
+    imgURL: "/assets/icons/sidebar/resume.svg",
     route: "/resume",
     label: "رزومه",
   },
   {
-    imgURL: "/assets/icons/question.svg",
+    imgURL: "/assets/icons/sidebar/activities.svg",
     route: "/activities",
     label: "فعالیت‌ها",
   },
   {
-    imgURL: "/assets/icons/question.svg",
+    imgURL: "/assets/icons/sidebar/contact.svg",
     route: "/contact",
     label: "ارتباط",
   },
