@@ -1,78 +1,71 @@
 import { Schema, models, model, Document } from "mongoose";
 
+// Define interfaces for specialized skills and general skills
 interface ISkill {
   name: string;
   rate: number;
 }
 
-interface IWorkingExperience extends Document {
-  description: string;
-  date: Date;
-}
+// Schema for specialized skills
+const SpecializedSkillSchema = new Schema({
+  name: { type: String },
+  rate: { type: Number },
+});
 
-interface IEducationalQualification extends Document {
-  description: string;
-  date: Date;
-}
+// Schema for general skills
+const GeneralSkillSchema = new Schema({
+  name: { type: String },
+  rate: { type: Number },
+});
+
+// Schema for working experience
+const WorkingExperienceSchema = new Schema({
+  description: { type: String },
+  date: { type: Date },
+});
+
+// Schema for educational qualifications
+const EducationalQualificationSchema = new Schema({
+  description: { type: String },
+  date: { type: Date },
+});
 
 export interface IUser extends Document {
   clerkId: string;
   name: string;
   bio?: string;
   email: string;
-  phone?: string;
+  phoneNumber?: string;
   nationality?: string;
   age?: string;
   expertise?: string;
   languages?: string[];
   avatar?: string;
   profileImage?: string;
-  resumeLink?: string;
-  typedStrings?: string[];
   projectsImage?: string[];
   password?: string;
   location?: string;
-  contactTitle?: string;
-  contactDescription?: string;
-  activitiesTitle?: string;
-  activitiesDescription?: string;
+  contactTitle: string;
+  contactDescription: string;
+  activitiesTitle: string;
+  activitiesDescription: string;
   instagram?: string;
   twitter?: string;
   telegram?: string;
   facebook?: string;
   specializedSkills?: ISkill[];
   generalSkills?: ISkill[];
-  workingExperience?: IWorkingExperience[];
-  educationalQualifications?: IEducationalQualification[];
+  workingExperience?: Array<Document>;
+  educationalQualifications?: Array<Document>;
 }
 
-const SpecializedSkillSchema = new Schema({
-  name: { type: String, required: true },
-  rate: { type: Number, required: true },
-});
-
-const GeneralSkillSchema = new Schema({
-  name: { type: String, required: true },
-  rate: { type: Number, required: true },
-});
-
-const WorkingExperienceSchema = new Schema({
-  description: { type: String, required: true },
-  date: { type: Date, required: true },
-});
-
-const EducationalQualificationSchema = new Schema({
-  description: { type: String, required: true },
-  date: { type: Date, required: true },
-});
-
-const UserSchema = new Schema<IUser>(
+const UserSchema = new Schema(
   {
     clerkId: { type: String, required: true },
     name: { type: String, required: true },
     bio: { type: String },
     email: { type: String, required: true, unique: true },
-    phone: { type: String, trim: true },
+    phoneNumber: { type: String, trim: true },
     nationality: { type: String, trim: true },
     age: { type: String, trim: true },
     expertise: { type: String, trim: true },
@@ -102,8 +95,7 @@ const UserSchema = new Schema<IUser>(
   }
 );
 
-UserSchema.index({ email: 1 }, { unique: true });
-
-const User = models.User || model<IUser>("User", UserSchema);
+const User = models.User || model("User", UserSchema);
 
 export default User;
+
