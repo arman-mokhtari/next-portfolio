@@ -3,7 +3,7 @@
 import { settings } from "@/constants/sliderSettings";
 import Image from "next/image";
 import Slider from "react-slick";
-import ActivitiesDesc from "./ActivitiesDesc";
+import TitleHeading from "../shared/TitleHeading";
 const projects = [
   {
     src: "/assets/images/carousel/1.png",
@@ -29,7 +29,12 @@ const projects = [
 const ProjectSlider = () => {
   return (
     <div className="absolute w-full md:w-[95%] xl:w-[80%]">
-      <ActivitiesDesc />
+      <TitleHeading
+        heading="بهترین پروژه‌های من"
+        text="در کنار شما هستیم تا با قیمتی مقرون به صرفه کسب و کار خود را به صورت
+        آنلاین به میلیون‌ها نفر معرفی کنید. هزاران کسب و کار تا به امروز با ما
+        به نتایج شگفت‌انگیزی دست پیدا کرده‌اند."
+      />
       <Slider {...settings}>
         {projects.map((item, i) => (
           <div className="flex-imp flex justify-center" key={i}>

@@ -3,3 +3,10 @@ export interface SidebarLink {
   route: string;
   label: string;
 }
+
+export interface EmailParams {
+  name: string;
+  email: string;
+  phoneNumber?: string;
+  message: string;
+}

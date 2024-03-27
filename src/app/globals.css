@@ -66,11 +66,21 @@ body {
   @apply focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 !important;
 }
 
+.input-light {
+  @apply min-h-12 border-4 placeholder:text-sm placeholder:font-medium 
+  focus-visible:border-blue-400
+  focus-visible:shadow-lg focus-visible:shadow-gray-400 dark:shadow-none;
+}
+
 .active-theme {
   filter: invert(43%) sepia(57%) saturate(6407%) hue-rotate(213deg)
     brightness(92%) contrast(100%);
   -webkit-filter: invert(43%) sepia(57%) saturate(6407%) hue-rotate(213deg)
     brightness(92%) contrast(100%);
+}
+
+.hover-gradient {
+  @apply bg-gradient-to-r from-blue-700 via-blue-600 to-blue-400 hover:from-blue-800 hover:to-blue-600;
 }
 
 .light-gradient {
@@ -238,7 +248,7 @@ code {
 /* about page image */
 
 /* imp */
-.flex-imp{
+.flex-imp {
   display: flex !important;
 }
 /* imp */
@@ -247,11 +257,34 @@ code {
   color: #2563eb !important;
 }
 
-.slick-dots li button:before{
+.slick-dots li button:before {
   color: #868686 !important;
 }
 
-.slick-next:before , .slick-prev:before{
+.slick-next:before,
+.slick-prev:before {
   color: #2563eb !important;
 }
 /* slick carousel */
+
+/* hover card */
+.customized-card {
+  box-shadow:
+    rgba(0, 0, 0, 0.2) 0px 2px 4px -1px,
+    rgba(0, 0, 0, 0.14) 0px 4px 5px 0px,
+    rgba(0, 0, 0, 0.12) 0px 1px 10px 0px;
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  -moz-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  -ms-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  -o-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  overflow: hidden;
+  width: 100%;
+}
+.customized-card:hover {
+  box-shadow:
+    rgba(0, 0, 0, 0.2) 0px 6px 6px -3px,
+    rgba(0, 0, 0, 0.14) 0px 10px 14px 1px,
+    rgba(0, 0, 0, 0.12) 0px 4px 18px 3px;
+}
+/* hover card */

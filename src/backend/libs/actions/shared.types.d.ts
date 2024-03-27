@@ -4,14 +4,11 @@ import { IUser } from "@/mongodb";
 
 
 export interface CreateUserParams {
+  clerkId: string;
   name: string;
-  biography?: string;
+  username: string;
   email: string;
-  roll: string;
-  isActive?: boolean;
-  isVerified?: boolean;
-  avatar?: string;
-  password?: string;
+  picture: string;
 }
 
 export interface GetUserByIdParams {

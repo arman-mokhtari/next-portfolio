@@ -4,15 +4,11 @@ import {
   SheetClose,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { SignedOut } from "@clerk/nextjs";
 import ProfileImage from "@/common/ProfileImage";
 import Divider from "@/common/Divider";
-import SidebarSocial from "../SocialIcons";
-import SignButtons from "./SignButtons";
-import AdminDashboardLink from "./AdminDashboardLink";
-import MobileNavContent from "./MobileNavContent";
+import MobileNavContent from "./AdminMobileNavContent";
 
-const MobileSidebar = () => {
+const AdminMobileSidebar = () => {
   return (
     <Sheet>
       <SheetTrigger
@@ -36,24 +32,14 @@ const MobileSidebar = () => {
           <ProfileImage />
           <Divider />
           <SheetClose asChild>
-            <div>
-              <MobileNavContent />
-              <AdminDashboardLink />
-            </div>
-          </SheetClose>
-        </div>
 
-        <div>
-          <SignedOut>
-            <SheetClose asChild>
-              <SignButtons />
-            </SheetClose>
-          </SignedOut>
-          <Divider />
-          <SidebarSocial />
+              <MobileNavContent />
+
+
+          </SheetClose>
         </div>
       </SheetContent>
     </Sheet>
   );
 };
-export default MobileSidebar;
+export default AdminMobileSidebar;
