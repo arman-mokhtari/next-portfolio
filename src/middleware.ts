@@ -10,7 +10,7 @@ export default authMiddleware({
     "/activities",
     "/contact",
   ],
-  ignoredRoutes: ["/api/webhook"],
+  ignoredRoutes: ["/api/webhooks"],
 });
 
 export const config = {
