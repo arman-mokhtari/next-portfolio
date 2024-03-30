@@ -8,7 +8,7 @@ const AdminDashboardLink = () => {
     return (
       <Link
         href="/admin/dashboard"
-        className="flex items-center justify-start gap-4 bg-transparent px-4 py-3"
+        className="text-dark300_light900 flex items-center justify-start gap-4 bg-transparent px-4 py-3"
       >
         <Image
           src="/assets/icons/sidebar/dashboard.svg"
