@@ -1,16 +1,33 @@
 import React from "react";
 import AdminIntroduce from "../shared/AdminIntroduce";
-import { profileData } from "@/constants/adminProfile";
+
 import Divider from "@/common/Divider";
 import Image from "next/image";
+import { getAdmin } from "@/backend/libs/actions/user.action";
 
 interface Props {
   otherClasses?: string;
   topBubble?: boolean;
 }
 
-const FullIntroduce = ({ otherClasses, topBubble }: Props) => {
+const FullIntroduce = async ({ otherClasses, topBubble }: Props) => {
+  const admin = await getAdmin();
+  if (!admin) {
+    return <div>Loading...</div>;
+  }
+  console.log("admin: ", admin && admin.role);
   const isBubble = topBubble || false;
+
+  const itemMappings: { [key: string]: string } = {
+    name: "نام",
+    age: "سن",
+    nationality: "ملیت",
+    languages: "زبان‌ها",
+    location: "موقعیت",
+    expertise: "تخصص",
+    status: "وضعیت",
+  };
+  
 
   return (
     <div className="flex flex-1 flex-col justify-around ">
@@ -22,7 +39,7 @@ const FullIntroduce = ({ otherClasses, topBubble }: Props) => {
             </span>
           )}
           <div className="border-r-[5px] border-blue-600 pr-2">
-            <AdminIntroduce />
+            <AdminIntroduce admin={admin} />
           </div>
         </div>
         <Image
@@ -36,13 +53,13 @@ const FullIntroduce = ({ otherClasses, topBubble }: Props) => {
       <Divider otherClass="mx-0 my-4" />
 
       <ul role="list" className="">
-        {profileData.map((item, i) => (
+        {Object.keys(itemMappings).map((key) => (
           <li
-            key={i}
-            className="text-dark400_light900 flex justify-between  overflow-hidden p-2 font-[400] odd:bg-slate-300 dark:odd:bg-slate-700"
+            key={key}
+            className="text-dark400_light900 flex justify-between overflow-hidden p-2 font-[400] odd:bg-slate-300 dark:odd:bg-slate-700"
           >
-            <p>{item.key}:</p>
-            <p>{item.value}</p>
+            <p>{itemMappings[key]}:</p>
+            <p>{admin[key]}</p>
           </li>
         ))}
       </ul>
