@@ -1,10 +1,20 @@
-import CustomizedCard from "@/components/shared/CustomizedCard";
+import { auth } from "@clerk/nextjs";
+import ProfileForm from "../forms/ProfileForm";
+import { getUserById } from "@/backend/libs/actions/user.action";
 
-const ProfileMainContent = () => {
+const ProfileMainContent = async () => {
+  const { userId } = auth();
+
+  if (!userId) return null;
+  console.log("userId: ", userId);
+  const mongoUser = await getUserById({ userId });
   return (
-    <CustomizedCard>
-      <div></div>
-    </CustomizedCard>
+    <div className="mt-5">
+       <div className="flex min-h-screen items-center justify-center">
+      <ProfileForm clerkId={userId} user={JSON.stringify(mongoUser)} />
+    </div>
+    </div>
+   
   );
 };
 
