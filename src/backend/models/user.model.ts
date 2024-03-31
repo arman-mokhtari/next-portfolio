@@ -13,6 +13,7 @@ export interface IUser extends Document {
   picture: string;
   avatar?: string;
   profileImage?: string;
+  status?: string;
   password?: string;
   location?: string;
   instagram?: string;
@@ -35,6 +36,7 @@ const UserSchema = new Schema(
     picture: { type: String, required: true },
     avatar: { type: String },
     profileImage: { type: String },
+    status: { type: String },
     password: { type: String },
     location: { type: String, required: true, default: "ایران، تهران" },
     instagram: {

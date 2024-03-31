@@ -20,7 +20,6 @@ import { updateUser } from "@/backend/libs/actions/user.action";
 
 // Define type for field names and placeholders
 type FieldName =
-  | "name"
   | "phone"
   | "bio"
   | "location"
@@ -30,6 +29,7 @@ type FieldName =
   | "languages"
   | "avatar"
   | "profileImage"
+  | "status"
   | "instagram"
   | "twitter"
   | "telegram"
@@ -52,7 +52,6 @@ const ProfileForm = ({ clerkId, user }: Props) => {
   const form = useForm<z.infer<typeof userValidationSchema>>({
     resolver: zodResolver(userValidationSchema),
     defaultValues: {
-      name: parsedUser.name || "",
       phone: parsedUser.phone || "",
       bio: parsedUser.bio || "",
       location: parsedUser.location || "",
@@ -62,6 +61,7 @@ const ProfileForm = ({ clerkId, user }: Props) => {
       languages: parsedUser.languages || "",
       avatar: parsedUser.avatar || "",
       profileImage: parsedUser.profileImage || "",
+      status: parsedUser.status || "",
       instagram: parsedUser.instagram || "",
       twitter: parsedUser.twitter || "",
       telegram: parsedUser.telegram || "",
@@ -71,31 +71,14 @@ const ProfileForm = ({ clerkId, user }: Props) => {
 
   // Define a submit handler.
   async function onSubmit(values: z.infer<typeof userValidationSchema>) {
-    alert("submitting")
     setIsSubmit(true);
     try {
       await updateUser({
         clerkId,
-        updateData: {
-          name: values.name,
-          phone: values.phone,
-          bio: values.bio,
-          location: values.location,
-          nationality: values.nationality,
-          age: values.age,
-          expertise: values.expertise,
-          languages: values.languages,
-          avatar: values.avatar,
-          profileImage: values.profileImage,
-          instagram: values.instagram,
-          twitter: values.twitter,
-          telegram: values.telegram,
-          facebook: values.facebook,
-        },
+        updateData: values,
         path: pathname,
       });
       router.back();
-      form.reset();
     } catch (error) {
       console.error(error);
     } finally {
@@ -110,7 +93,6 @@ const ProfileForm = ({ clerkId, user }: Props) => {
 
   // Object to store field names and placeholders
   const placeholders: Placeholders = {
-    name: "نام و نام خانوادگی",
     phone: "موبایل",
     bio: "بیوگرافی",
     location: "آدرس",
@@ -120,6 +102,7 @@ const ProfileForm = ({ clerkId, user }: Props) => {
     languages: "زبان‌ها",
     avatar: "تصویر آواتار",
     profileImage: "تصویر پروفایل",
+    status: "وضعیت",
     instagram: "لینک اینستاگرام",
     twitter: "لینک توییتر",
     telegram: "لینک تلگرام",
@@ -127,7 +110,6 @@ const ProfileForm = ({ clerkId, user }: Props) => {
   };
 
   const fieldNames: FieldName[] = [
-    "name",
     "phone",
     "bio",
     "location",
@@ -137,6 +119,7 @@ const ProfileForm = ({ clerkId, user }: Props) => {
     "languages",
     "avatar",
     "profileImage",
+    "status",
     "instagram",
     "twitter",
     "telegram",
