@@ -9,8 +9,9 @@ export interface IUser extends Document {
   nationality?: string;
   age?: string;
   expertise?: string;
-  languages?: string[];
+  languages?: string;
   picture: string;
+  avatar?: string;
   profileImage?: string;
   password?: string;
   location?: string;
@@ -30,8 +31,9 @@ const UserSchema = new Schema(
     nationality: { type: String, trim: true, required: true, default: "ایران" },
     age: { type: String, trim: true },
     expertise: { type: String, trim: true },
-    languages: [{ type: String }],
+    languages: { type: String, trim: true },
     picture: { type: String, required: true },
+    avatar: { type: String },
     profileImage: { type: String },
     password: { type: String },
     location: { type: String, required: true, default: "ایران، تهران" },
