@@ -36,22 +36,24 @@ export const userValidationSchema = z.object({
   phone: z.string().regex(/^0\d{10}$/, {
     message: "شماره موبایل باید 11 رقم باشد و با 0 شروع شود",
   }),
-  bio: z.string().max(20, {
-    message: "بیوگرافی نباید بیشتر از 20 کاراکتر باشد!",
+  bio: z.string().max(40, {
+    message: "بیوگرافی نباید بیشتر از 40 کاراکتر باشد!",
   }),
   location: z.string().max(20, {
     message: "آدرس نباید بیشتر از 20 کاراکتر باشد!",
   }),
-  nationality: z.string().max(10, {
-    message: "ملیت نباید بیشتر از 10 کاراکتر باشد!",
+  nationality: z.string().max(20, {
+    message: "ملیت نباید بیشتر از 20 کاراکتر باشد!",
   }),
   age: z.string().regex(/^\d{2}$/, {
     message: "سن باید 2 رقم باشد",
   }),
-  expertise: z.string().max(10, {
-    message: "تخصص نباید بیشتر از 10 کاراکتر باشد!",
+  expertise: z.string().max(20, {
+    message: "تخصص نباید بیشتر از 20 کاراکتر باشد!",
   }),
-  languages: z.string(),
+  languages: z.string().min(3, {
+    message: "زبان‌های گفتاری خود را وارد کنید",
+  }),
   avatar: z.string().min(1, {
     message: "لینک آواتار را وارد کنید",
   }),

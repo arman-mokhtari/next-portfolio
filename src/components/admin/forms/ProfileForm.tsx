@@ -28,6 +28,7 @@ type FieldName =
   | "age"
   | "expertise"
   | "languages"
+  | "avatar"
   | "profileImage"
   | "instagram"
   | "twitter"
@@ -59,6 +60,7 @@ const ProfileForm = ({ clerkId, user }: Props) => {
       age: parsedUser.age || "",
       expertise: parsedUser.expertise || "",
       languages: parsedUser.languages || "",
+      avatar: parsedUser.avatar || "",
       profileImage: parsedUser.profileImage || "",
       instagram: parsedUser.instagram || "",
       twitter: parsedUser.twitter || "",
@@ -69,6 +71,7 @@ const ProfileForm = ({ clerkId, user }: Props) => {
 
   // Define a submit handler.
   async function onSubmit(values: z.infer<typeof userValidationSchema>) {
+    alert("submitting")
     setIsSubmit(true);
     try {
       await updateUser({
@@ -82,6 +85,7 @@ const ProfileForm = ({ clerkId, user }: Props) => {
           age: values.age,
           expertise: values.expertise,
           languages: values.languages,
+          avatar: values.avatar,
           profileImage: values.profileImage,
           instagram: values.instagram,
           twitter: values.twitter,
@@ -114,6 +118,7 @@ const ProfileForm = ({ clerkId, user }: Props) => {
     age: "سن",
     expertise: "تخصص",
     languages: "زبان‌ها",
+    avatar: "تصویر آواتار",
     profileImage: "تصویر پروفایل",
     instagram: "لینک اینستاگرام",
     twitter: "لینک توییتر",
@@ -130,6 +135,7 @@ const ProfileForm = ({ clerkId, user }: Props) => {
     "age",
     "expertise",
     "languages",
+    "avatar",
     "profileImage",
     "instagram",
     "twitter",
