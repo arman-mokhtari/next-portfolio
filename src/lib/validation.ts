@@ -22,17 +22,6 @@ export const contactSchema = z.object({
 });
 
 export const userValidationSchema = z.object({
-  name: z
-    .string()
-    .min(5, {
-      message: "نام و نام خانوادگی باید حداقل حاوی 5 کاراکتر باشد!",
-    })
-    .max(50, {
-      message: "نام و نام خانوادگی نباید بیشتر از 50 کاراکتر باشد!",
-    }),
-  email: z.string().email({
-    message: "ایمیل با فرمت صحیح را وارد کنید!",
-  }),
   phone: z.string().regex(/^0\d{10}$/, {
     message: "شماره موبایل باید 11 رقم باشد و با 0 شروع شود",
   }),
@@ -60,8 +49,11 @@ export const userValidationSchema = z.object({
   profileImage: z.string().min(1, {
     message: "لینک تصویر پروفایل را وارد کنید",
   }),
-  instagram: z.string().optional(),
-  twitter: z.string().optional(),
-  telegram: z.string().optional(),
-  facebook: z.string().optional(),
+  status: z.string().max(20, {
+    message: "وضعیت فعلی را ثبت کنید",
+  }),
+  instagram: z.string(),
+  twitter: z.string(),
+  telegram: z.string(),
+  facebook: z.string(),
 });

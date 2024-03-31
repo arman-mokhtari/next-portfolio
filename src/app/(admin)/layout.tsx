@@ -4,6 +4,7 @@ import HomeLines from "@/components/shared/HomeLines";
 import ProfileBtn from "@/components/shared/ProfileBtn";
 import AdminMobileSidebar from "@/components/admin/shared/sidebar/AdminMobileSidebar";
 import AdminRightSidebar from "@/components/admin/shared/sidebar/AdminRightSidebar";
+import { Toaster } from "@/components/ui/toaster";
 
 const Layout = ({ children }: { children: ReactNode }) => {
   return (
@@ -23,6 +24,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
           </div>
         </section>
       </div>
+      <Toaster />
     </main>
   );
 };
