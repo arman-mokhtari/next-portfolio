@@ -28,18 +28,33 @@ export const userValidationSchema = z.object({
   bio: z.string().max(40, {
     message: "بیوگرافی نباید بیشتر از 40 کاراکتر باشد!",
   }),
-  location: z.string().max(20, {
-    message: "آدرس نباید بیشتر از 20 کاراکتر باشد!",
-  }),
-  nationality: z.string().max(20, {
-    message: "ملیت نباید بیشتر از 20 کاراکتر باشد!",
-  }),
+  location: z
+    .string()
+    .min(1, {
+      message: "آدرس را ثبت کنید!",
+    })
+    .max(25, {
+      message: "آدرس باید فقط حاوی شهر و کشور باشد!",
+    }),
+  nationality: z
+    .string()
+    .min(1, {
+      message: "ملیت را ثبت کنید!",
+    })
+    .max(20, {
+      message: "ملیت نباید بیشتر از 20 کاراکتر باشد!",
+    }),
   age: z.string().regex(/^\d{2}$/, {
-    message: "سن باید 2 رقم باشد",
+    message: "سن باید 2 رقمی باشد",
   }),
-  expertise: z.string().max(20, {
-    message: "تخصص نباید بیشتر از 20 کاراکتر باشد!",
-  }),
+  expertise: z
+    .string()
+    .min(1, {
+      message: "تخصص خود را ثبت کنید!",
+    })
+    .max(20, {
+      message: "تخصص نباید بیشتر از 20 کاراکتر باشد!",
+    }),
   languages: z.string().min(3, {
     message: "زبان‌های گفتاری خود را وارد کنید",
   }),
@@ -49,11 +64,16 @@ export const userValidationSchema = z.object({
   profileImage: z.string().min(1, {
     message: "لینک تصویر پروفایل را وارد کنید",
   }),
-  status: z.string().max(20, {
-    message: "وضعیت فعلی را ثبت کنید",
-  }),
-  instagram: z.string(),
-  twitter: z.string(),
-  telegram: z.string(),
-  facebook: z.string(),
+  status: z
+    .string()
+    .min(1, {
+      message: "وضعیت فعلی را ثبت کنید",
+    })
+    .max(20, {
+      message: "حداکثر 20 کاراکتر",
+    }),
+  instagram: z.string().optional(),
+  twitter: z.string().optional(),
+  telegram: z.string().optional(),
+  facebook: z.string().optional(),
 });
