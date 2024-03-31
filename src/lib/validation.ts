@@ -22,10 +22,13 @@ export const contactSchema = z.object({
 });
 
 export const userValidationSchema = z.object({
+  role: z.string().default("ADMIN"),
   phone: z.string().regex(/^0\d{10}$/, {
     message: "شماره موبایل باید 11 رقم باشد و با 0 شروع شود",
   }),
-  bio: z.string().max(40, {
+  bio: z.string().min(1, {
+    message: "بیوگرافی کوتاه را وارد کنید!",
+  }).max(40, {
     message: "بیوگرافی نباید بیشتر از 40 کاراکتر باشد!",
   }),
   location: z
