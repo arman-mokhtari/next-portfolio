@@ -28,6 +28,36 @@ export interface IUser extends Document {
     metaTitle: string;
     metaDesk: string;
   };
+  about?: {
+    title: string;
+    desc: string;
+    metaTitle: string;
+    metaDesk: string;
+  };
+  skills?: {
+    title: string;
+    desc: string;
+    metaTitle: string;
+    metaDesk: string;
+  };
+  resume?: {
+    title: string;
+    desc: string;
+    metaTitle: string;
+    metaDesk: string;
+  };
+  activities?: {
+    title: string;
+    desc: string;
+    metaTitle: string;
+    metaDesk: string;
+  };
+  contact?: {
+    title: string;
+    desc: string;
+    metaTitle: string;
+    metaDesk: string;
+  };
 }
 
 const UserSchema = new Schema(
@@ -59,6 +89,36 @@ const UserSchema = new Schema(
     telegram: { type: String },
     facebook: { type: String },
     home: {
+      title: { type: String },
+      desc: { type: String },
+      metaTitle: { type: String },
+      metaDesk: { type: String },
+    },
+    about: {
+      title: { type: String },
+      desc: { type: String },
+      metaTitle: { type: String },
+      metaDesk: { type: String },
+    },
+    skills: {
+      title: { type: String },
+      desc: { type: String },
+      metaTitle: { type: String },
+      metaDesk: { type: String },
+    },
+    resume: {
+      title: { type: String },
+      desc: { type: String },
+      metaTitle: { type: String },
+      metaDesk: { type: String },
+    },
+    activities: {
+      title: { type: String },
+      desc: { type: String },
+      metaTitle: { type: String },
+      metaDesk: { type: String },
+    },
+    contact: {
       title: { type: String },
       desc: { type: String },
       metaTitle: { type: String },
