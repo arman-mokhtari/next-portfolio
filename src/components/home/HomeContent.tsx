@@ -7,6 +7,7 @@ const HomeContent = async () => {
   if (!admin) {
     return <div>Loading...</div>;
   }
+
   return (
     <div className="text-dark500_light700 flex flex-col items-center gap-6 font-bold">
       <h1 className="text-[1.2rem] md:text-[1.5rem]">
@@ -22,7 +23,8 @@ const HomeContent = async () => {
       <p className="text-[1rem] md:text-[1.1rem]">ساکن {admin.location}.</p>
       <a
         download="resume"
-        href="https://cdn.workfolio.ir/pdf/cv/resume.pdf"
+        title={`دانلود رزومه ${admin.name}`}
+        href={admin.cv}
         className="mt-4"
       >
         <Button className="hover-gradient min-h-[46px] min-w-[140px] rounded-full px-4 py-3 text-base !text-light-900 shadow-lg shadow-slate-400 active:shadow-md dark:shadow-none">

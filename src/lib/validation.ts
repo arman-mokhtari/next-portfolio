@@ -26,11 +26,14 @@ export const userValidationSchema = z.object({
   phone: z.string().regex(/^0\d{10}$/, {
     message: "شماره موبایل باید 11 رقم باشد و با 0 شروع شود",
   }),
-  bio: z.string().min(1, {
-    message: "بیوگرافی کوتاه را وارد کنید!",
-  }).max(40, {
-    message: "بیوگرافی نباید بیشتر از 40 کاراکتر باشد!",
-  }),
+  bio: z
+    .string()
+    .min(1, {
+      message: "بیوگرافی کوتاه را وارد کنید!",
+    })
+    .max(40, {
+      message: "بیوگرافی نباید بیشتر از 40 کاراکتر باشد!",
+    }),
   cv: z.string().min(1, {
     message: "لینک رزومه را وارد کنید!",
   }),
@@ -78,8 +81,12 @@ export const userValidationSchema = z.object({
     .max(20, {
       message: "حداکثر 20 کاراکتر",
     }),
+});
+
+export const sidebarSettingsSchema = z.object({
   instagram: z.string().optional(),
   twitter: z.string().optional(),
   telegram: z.string().optional(),
   facebook: z.string().optional(),
+  typed: z.array(z.string().min(1).max(40)).min(3).max(15),
 });
