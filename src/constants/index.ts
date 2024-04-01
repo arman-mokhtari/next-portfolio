@@ -71,6 +71,11 @@ export const adminSidebarLinks: SidebarLink[] = [
     route: "/admin/sidebar-settings",
     label: "نوار سمت راست",
   },
+  {
+    imgURL: "/assets/icons/sidebar/user.svg",
+    route: "/admin/home-edit",
+    label: "تنظیمات صفحه اصلی",
+  },
 ];
 
 export const skillData = [

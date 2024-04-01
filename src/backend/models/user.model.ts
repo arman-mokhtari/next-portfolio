@@ -22,6 +22,12 @@ export interface IUser extends Document {
   twitter?: string;
   telegram?: string;
   facebook?: string;
+  home?: {
+    title: string;
+    desc: string;
+    metaTitle: string;
+    metaDesk: string;
+  };
 }
 
 const UserSchema = new Schema(
@@ -52,6 +58,12 @@ const UserSchema = new Schema(
     },
     telegram: { type: String },
     facebook: { type: String },
+    home: {
+      title: { type: String },
+      desc: { type: String },
+      metaTitle: { type: String },
+      metaDesk: { type: String },
+    },
   },
   {
     timestamps: true,
