@@ -1,20 +1,25 @@
+import { getAdmin } from "@/backend/libs/actions/user.action";
 import { Button } from "../ui/button";
 import TextTyped from "./TextAnimate";
 
-const HomeContent = () => {
+const HomeContent = async () => {
+  const admin = await getAdmin();
+  if (!admin) {
+    return <div>Loading...</div>;
+  }
   return (
     <div className="text-dark500_light700 flex flex-col items-center gap-6 font-bold">
       <h1 className="text-[1.2rem] md:text-[1.5rem]">
         سلام من
         <span className="mx-1.5 inline-block whitespace-nowrap text-blue-600">
-          لونا وایلر
+          {admin.name}
         </span>
         هستم!
       </h1>
       <div className="h-8 text-center  text-2xl md:text-3xl">
         <TextTyped />
       </div>
-      <p className="text-[1rem] md:text-[1.1rem]">ساکن ایران، تهران.</p>
+      <p className="text-[1rem] md:text-[1.1rem]">ساکن {admin.location}.</p>
       <a
         download="resume"
         href="https://cdn.workfolio.ir/pdf/cv/resume.pdf"

@@ -9,6 +9,7 @@ import {
   FormControl,
   FormField,
   FormItem,
+  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -22,6 +23,7 @@ import { updateUser } from "@/backend/libs/actions/user.action";
 type FieldName =
   | "phone"
   | "bio"
+  | "cv"
   | "location"
   | "nationality"
   | "age"
@@ -54,6 +56,7 @@ const ProfileForm = ({ clerkId, user }: Props) => {
     defaultValues: {
       phone: parsedUser.phone || "",
       bio: parsedUser.bio || "",
+      cv: parsedUser.cv || "",
       location: parsedUser.location || "",
       nationality: parsedUser.nationality || "",
       age: parsedUser.age || "",
@@ -95,6 +98,7 @@ const ProfileForm = ({ clerkId, user }: Props) => {
   const placeholders: Placeholders = {
     phone: "موبایل",
     bio: "بیوگرافی",
+    cv: "لینک رزومه",
     location: "آدرس",
     nationality: "ملیت",
     age: "سن",
@@ -112,6 +116,7 @@ const ProfileForm = ({ clerkId, user }: Props) => {
   const fieldNames: FieldName[] = [
     "phone",
     "bio",
+    "cv",
     "location",
     "nationality",
     "age",
@@ -129,14 +134,17 @@ const ProfileForm = ({ clerkId, user }: Props) => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full ">
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           {fieldNames.map((fieldName) => (
             <FormField
               key={fieldName}
               control={form.control}
               name={fieldName}
               render={({ field }) => (
-                <FormItem className="flex-1" key={fieldName}>
+                <FormItem className="flex-1 space-y-1" key={fieldName}>
+                  <FormLabel className="paragraph-semibold text-dark400_light800 ">
+                    {placeholders[fieldName]}
+                  </FormLabel>
                   <FormControl>
                     <Input
                       className="paragraph-regular background-light800_dark400 theme-border-color text-dark300_light700 input-light"

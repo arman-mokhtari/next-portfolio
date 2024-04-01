@@ -9,12 +9,11 @@ const ProfileMainContent = async () => {
   console.log("userId: ", userId);
   const mongoUser = await getUserById({ userId });
   return (
-    <div className="mt-5">
-       <div className="flex min-h-screen items-center justify-center">
-      <ProfileForm clerkId={userId} user={JSON.stringify(mongoUser)} />
+    <div className="mt-10 lg:mt-0">
+      <div className="flex min-h-screen items-center justify-center">
+        <ProfileForm clerkId={userId} user={JSON.stringify(mongoUser)} />
+      </div>
     </div>
-    </div>
-   
   );
 };
 
