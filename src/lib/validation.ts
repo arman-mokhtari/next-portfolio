@@ -88,5 +88,21 @@ export const sidebarSettingsSchema = z.object({
   twitter: z.string().optional(),
   telegram: z.string().optional(),
   facebook: z.string().optional(),
-  typed: z.array(z.string().min(1).max(40)).min(3).max(15),
+  typed: z
+    .array(
+      z
+        .string()
+        .min(10, {
+          message: "آیتم‌ها نباید کمتر از 10 کاراکتر باشند",
+        })
+        .max(70, {
+          message: "آیتم‌ها نباید بیشتر از 70 کاراکتر باشند",
+        })
+    )
+    .min(3, {
+      message: "مجموع آیتم‌ها نباید کمتر از 3 آیتم باشند",
+    })
+    .max(10, {
+      message: "مجموع آیتم‌ها نباید بیشتر از 10 آیتم باشند",
+    }),
 });
