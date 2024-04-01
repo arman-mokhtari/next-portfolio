@@ -31,11 +31,7 @@ type FieldName =
   | "languages"
   | "avatar"
   | "profileImage"
-  | "status"
-  | "instagram"
-  | "twitter"
-  | "telegram"
-  | "facebook";
+  | "status";
 
 type Placeholders = Record<FieldName, string>;
 
@@ -65,10 +61,6 @@ const ProfileForm = ({ clerkId, user }: Props) => {
       avatar: parsedUser.avatar || "",
       profileImage: parsedUser.profileImage || "",
       status: parsedUser.status || "",
-      instagram: parsedUser.instagram || "",
-      twitter: parsedUser.twitter || "",
-      telegram: parsedUser.telegram || "",
-      facebook: parsedUser.facebook || "",
     },
   });
 
@@ -107,10 +99,6 @@ const ProfileForm = ({ clerkId, user }: Props) => {
     avatar: "تصویر آواتار",
     profileImage: "تصویر پروفایل",
     status: "وضعیت",
-    instagram: "لینک اینستاگرام",
-    twitter: "لینک توییتر",
-    telegram: "لینک تلگرام",
-    facebook: "لینک فیسبوک",
   };
 
   const fieldNames: FieldName[] = [
@@ -125,10 +113,6 @@ const ProfileForm = ({ clerkId, user }: Props) => {
     "avatar",
     "profileImage",
     "status",
-    "instagram",
-    "twitter",
-    "telegram",
-    "facebook",
   ];
 
   return (

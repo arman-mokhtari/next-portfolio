@@ -3,19 +3,24 @@ import AdminIntroduce from "../shared/AdminIntroduce";
 
 import Divider from "@/common/Divider";
 import Image from "next/image";
-import { getAdmin } from "@/backend/libs/actions/user.action";
 
 interface Props {
   otherClasses?: string;
   topBubble?: boolean;
+  admin: {
+    name: string;
+    age: number;
+    nationality: string;
+    languages: string[];
+    location: string;
+    expertise: string;
+    status: string;
+    profileImage: string;
+  };
 }
 
-const FullIntroduce = async ({ otherClasses, topBubble }: Props) => {
-  const admin = await getAdmin();
-  if (!admin) {
-    return <div>Loading...</div>;
-  }
-  console.log("admin: ", admin && admin.role);
+const FullIntroduce = ({ otherClasses, topBubble, admin }: Props) => {
+
   const isBubble = topBubble || false;
 
   const itemMappings: { [key: string]: string } = {
@@ -27,7 +32,6 @@ const FullIntroduce = async ({ otherClasses, topBubble }: Props) => {
     expertise: "تخصص",
     status: "وضعیت",
   };
-  
 
   return (
     <div className="flex flex-1 flex-col justify-around ">
@@ -44,7 +48,7 @@ const FullIntroduce = async ({ otherClasses, topBubble }: Props) => {
         </div>
         <Image
           className={`rounded-3xl object-cover ${otherClasses}`}
-          src="/assets/images/about.png"
+          src={admin.profileImage}
           alt="profile"
           width={100}
           height={100}
@@ -52,14 +56,14 @@ const FullIntroduce = async ({ otherClasses, topBubble }: Props) => {
       </div>
       <Divider otherClass="mx-0 my-4" />
 
-      <ul role="list" className="">
+      <ul role="list">
         {Object.keys(itemMappings).map((key) => (
           <li
             key={key}
             className="text-dark400_light900 flex justify-between overflow-hidden p-2 font-[400] odd:bg-slate-300 dark:odd:bg-slate-700"
           >
             <p>{itemMappings[key]}:</p>
-            <p>{admin[key]}</p>
+            <p>{(admin as any)[key]}</p>
           </li>
         ))}
       </ul>
