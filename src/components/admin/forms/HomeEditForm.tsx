@@ -33,7 +33,7 @@ interface Props {
   user: string;
 }
 
-const SidebarSettingsForm = ({ clerkId, user }: Props) => {
+const HomeEditForm = ({ clerkId, user }: Props) => {
   const parsedUser = JSON.parse(user);
   const [isSubmit, setIsSubmit] = useState(false);
   const router = useRouter();
@@ -42,10 +42,10 @@ const SidebarSettingsForm = ({ clerkId, user }: Props) => {
   const form = useForm<z.infer<typeof homeEditSchema>>({
     resolver: zodResolver(homeEditSchema),
     defaultValues: {
-      title: parsedUser.title || "",
-      desc: parsedUser.desc || "",
-      metaTitle: parsedUser.metaTitle || "",
-      metaDesk: parsedUser.metaDesk || "",
+      title: parsedUser.home?.title || "",
+      desc: parsedUser.home?.desc || "",
+      metaTitle: parsedUser.home?.metaTitle || "",
+      metaDesk: parsedUser.home?.metaDesk || "",
       typed: parsedUser.typed || "",
     },
   });
@@ -216,4 +216,4 @@ const SidebarSettingsForm = ({ clerkId, user }: Props) => {
   );
 };
 
-export default SidebarSettingsForm;
+export default HomeEditForm;

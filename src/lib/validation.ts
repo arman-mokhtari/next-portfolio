@@ -90,7 +90,7 @@ export const sidebarSettingsSchema = z.object({
   facebook: z.string().optional(),
 });
 
-export const homeEditSchema = z.object({
+const commonValidation = z.object({
   title: z
     .string()
     .min(1, {
@@ -123,6 +123,10 @@ export const homeEditSchema = z.object({
     .max(200, {
       message: "توضیحات متا نباید بیشتر از 200 کاراکتر باشد",
     }),
+});
+
+export const homeEditSchema = z.object({
+  ...commonValidation.shape,
   typed: z
     .array(
       z
@@ -140,4 +144,11 @@ export const homeEditSchema = z.object({
     .max(10, {
       message: "مجموع آیتم‌ها نباید بیشتر از 10 آیتم باشند",
     }),
+});
+
+export const aboutEditSchema = z.object({
+  ...commonValidation.shape,
+  profileImage: z.string().min(1, {
+    message: "لینک تصویر پروفایل را وارد کنید",
+  }),
 });
