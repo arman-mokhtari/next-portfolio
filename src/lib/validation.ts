@@ -31,6 +31,9 @@ export const userValidationSchema = z.object({
   }).max(40, {
     message: "بیوگرافی نباید بیشتر از 40 کاراکتر باشد!",
   }),
+  cv: z.string().min(1, {
+    message: "لینک رزومه را وارد کنید!",
+  }),
   location: z
     .string()
     .min(1, {
@@ -55,8 +58,8 @@ export const userValidationSchema = z.object({
     .min(1, {
       message: "تخصص خود را ثبت کنید!",
     })
-    .max(20, {
-      message: "تخصص نباید بیشتر از 20 کاراکتر باشد!",
+    .max(40, {
+      message: "تخصص نباید بیشتر از 40 کاراکتر باشد!",
     }),
   languages: z.string().min(3, {
     message: "زبان‌های گفتاری خود را وارد کنید",

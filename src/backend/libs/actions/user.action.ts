@@ -9,6 +9,21 @@ import {
 } from "./shared.types";
 import { revalidatePath } from "next/cache";
 
+
+
+export async function getAdmin() {
+  try {
+    connectToDatabase();
+    const admin = await User.findOne({ role: "ADMIN" });
+    console.log(admin);
+    return admin;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+
 export async function getUserById(params: any) {
   try {
     connectToDatabase();
@@ -20,6 +35,8 @@ export async function getUserById(params: any) {
     throw error;
   }
 }
+
+
 
 export async function createUser(userData: CreateUserParams) {
   try {
