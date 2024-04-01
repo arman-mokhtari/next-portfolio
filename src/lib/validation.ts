@@ -70,9 +70,6 @@ export const userValidationSchema = z.object({
   avatar: z.string().min(1, {
     message: "لینک آواتار را وارد کنید",
   }),
-  profileImage: z.string().min(1, {
-    message: "لینک تصویر پروفایل را وارد کنید",
-  }),
   status: z
     .string()
     .min(1, {
