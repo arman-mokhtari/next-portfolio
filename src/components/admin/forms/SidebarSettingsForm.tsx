@@ -92,7 +92,7 @@ const SidebarSettingsForm = ({ clerkId, user }: Props) => {
     if (e.key === "Enter") {
       e.preventDefault();
       const typedInput = e.target as HTMLInputElement;
-      const typedValue = typedInput.value.trim();
+      const typedValue = typedInput.value;
 
       if (typedValue !== "") {
         if (typedValue.length > 15) {

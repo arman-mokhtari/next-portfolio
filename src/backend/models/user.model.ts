@@ -42,6 +42,7 @@ const UserSchema = new Schema(
     profileImage: { type: String },
     status: { type: String },
     password: { type: String },
+    typed: [{ type: String }],
     location: { type: String, required: true, default: "ایران، تهران" },
     instagram: {
       type: String,
