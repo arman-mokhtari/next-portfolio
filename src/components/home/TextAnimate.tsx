@@ -3,17 +3,13 @@
 import { useEffect, useRef } from "react";
 import Typed from "typed.js";
 
-const TextTyped = () => {
+const TextTyped = ({ textArray }: any) => {
   // Create reference to store the DOM element containing the animation
   const el = useRef(null);
-
+  console.log("textArray: ", textArray);
   useEffect(() => {
     const typed = new Typed(el.current, {
-      strings: [
-        "سلام من یک برنامه نویس هستم.",
-        "من یک توسعه دهنده جاوا اسپر",
-        "من یک توسعه دهنده جاوا اسکریپت هستم!",
-      ],
+      strings: textArray,
       typeSpeed: 90,
       loop: true,
       backSpeed: 50,
@@ -24,7 +20,7 @@ const TextTyped = () => {
     return () => {
       typed.destroy();
     };
-  }, []);
+  }, [textArray]);
 
   return (
     <div>

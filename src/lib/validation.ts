@@ -88,15 +88,50 @@ export const sidebarSettingsSchema = z.object({
   twitter: z.string().optional(),
   telegram: z.string().optional(),
   facebook: z.string().optional(),
+});
+
+export const homeEditSchema = z.object({
+  title: z
+    .string()
+    .min(1, {
+      message: "تایتل را وارد کنید",
+    })
+    .max(70, {
+      message: "تایتل نباید بیشتر از 70 کاراکتر باشد",
+    }),
+  desc: z
+    .string()
+    .min(1, {
+      message: "توضیحات را وارد کنید",
+    })
+    .max(250, {
+      message: "توضیحات نباید بیشتر از 250 کاراکتر باشد",
+    }),
+  metaTitle: z
+    .string()
+    .min(1, {
+      message: "متا تایتل را وارد کنید",
+    })
+    .max(70, {
+      message: "متا تایتل نباید بیشتر از 70 کاراکتر باشد",
+    }),
+  metaDesk: z
+    .string()
+    .min(1, {
+      message: "توضیحات متا را وارد کنید",
+    })
+    .max(200, {
+      message: "توضیحات متا نباید بیشتر از 200 کاراکتر باشد",
+    }),
   typed: z
     .array(
       z
         .string()
         .min(10, {
-          message: "آیتم‌ها نباید کمتر از 10 کاراکتر باشند",
+          message: "آیتم نباید کمتر از 10 کاراکتر باشد",
         })
         .max(70, {
-          message: "آیتم‌ها نباید بیشتر از 70 کاراکتر باشند",
+          message: "آیتم‌ نباید بیشتر از 70 کاراکتر باشد",
         })
     )
     .min(3, {

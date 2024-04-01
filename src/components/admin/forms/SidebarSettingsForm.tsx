@@ -1,6 +1,6 @@
 "use client";
 
-import React, { KeyboardEvent, useState } from "react";
+import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -9,7 +9,6 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -21,8 +20,6 @@ import { toast } from "@/components/ui/use-toast";
 import { usePathname, useRouter } from "next/navigation";
 import { updateUser } from "@/backend/libs/actions/user.action";
 import { sidebarSettingsSchema } from "@/lib/validation";
-import { Badge } from "@/components/ui/badge";
-import Image from "next/image";
 
 type FieldName = "instagram" | "twitter" | "telegram" | "facebook";
 
@@ -46,7 +43,6 @@ const SidebarSettingsForm = ({ clerkId, user }: Props) => {
       twitter: parsedUser.twitter || "",
       telegram: parsedUser.telegram || "",
       facebook: parsedUser.facebook || "",
-      typed: parsedUser.typed || "",
     },
   });
 
@@ -72,7 +68,7 @@ const SidebarSettingsForm = ({ clerkId, user }: Props) => {
         updateData: values,
         path: pathname,
       });
-      router.back();
+      router.push("/admin/dashboard");
     } catch (error) {
       console.error(error);
     } finally {
@@ -83,41 +79,6 @@ const SidebarSettingsForm = ({ clerkId, user }: Props) => {
       title: "تغییرات ثبت شد!",
       variant: !isSubmit ? "default" : "destructive",
     });
-  };
-
-  const handleTypedChange = (
-    e: KeyboardEvent<HTMLInputElement>,
-    field: any
-  ) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      const typedInput = e.target as HTMLInputElement;
-      const typedValue = typedInput.value;
-
-      if (typedValue !== "") {
-        if (typedValue.length > 15) {
-          return form.setError("typed", {
-            type: "required",
-            message: "Tag must be less than 15 characters",
-          });
-        }
-
-        if (!field.value.includes(typedValue as never)) {
-          const newValue = [...field.value, typedValue];
-          form.setValue("typed", newValue);
-        }
-      } else {
-        form.trigger();
-      }
-      typedInput.value = "";
-    }
-  };
-
-  const handleTagAction = (tag: string, field: any, isRemove: boolean) => {
-    const newValue = isRemove
-      ? field.value.filter((t: string) => t !== tag)
-      : [...field.value, tag];
-    form.setValue("typed", newValue);
   };
 
   return (
@@ -147,52 +108,6 @@ const SidebarSettingsForm = ({ clerkId, user }: Props) => {
             />
           ))}
         </div>
-
-        <FormField
-          control={form.control}
-          name="typed"
-          render={({ field }) => (
-            <FormItem className="mt-6 flex w-full flex-col">
-              <FormLabel className="paragraph-semibold text-dark400_light800">
-                متن در حال تایپ صفحه نخست
-              </FormLabel>
-              <FormControl className="mt-3.5">
-                <>
-                  <Input
-                    className="paragraph-regular background-light800_dark400 theme-border-color text-dark300_light700 input-light"
-                    placeholder="متن در حال تایپ صفحه نخست"
-                    onKeyDown={(e) => handleTypedChange(e, field)}
-                  />
-                  <FormDescription className="body-regular mt-2.5 text-light-500">
-                    متن را تایپ کرده و سپس کلید Enter را بفشارید و برای اضافه کردن متن‌های بیشتر این پروسه را تکرار نمایید.
-                  </FormDescription>
-                  <FormMessage className="text-xs text-rose-600" />
-                  {field.value.length > 0 && (
-                    <div className="mt-2.5 flex flex-col items-start gap-2.5">
-                      {field.value.map((tag: any) => (
-                        <Badge
-                          key={tag}
-                          className="subtle-medium background-light800_dark300 text-light400_light500 flex items-center justify-center gap-2 rounded-md border-none px-4 py-2"
-                          onClick={() => handleTagAction(tag, field, true)}
-                        >
-                          {tag}
-
-                          <Image
-                            src="/assets/icons/close.svg"
-                            alt="Close icon"
-                            width={12}
-                            height={12}
-                            className="cursor-pointer object-contain invert-0 dark:invert"
-                          />
-                        </Badge>
-                      ))}
-                    </div>
-                  )}
-                </>
-              </FormControl>
-            </FormItem>
-          )}
-        />
         <Button
           className="hover-gradient mt-4 min-h-[46px] min-w-[140px] rounded-full px-4 py-3 text-base !text-light-900 shadow-lg shadow-slate-400 active:shadow-md dark:shadow-none"
           type="submit"
