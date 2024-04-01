@@ -11,6 +11,7 @@ import SidebarSocial from "../SocialIcons";
 import SignButtons from "./SignButtons";
 import AdminDashboardLink from "./AdminDashboardLink";
 import MobileNavContent from "./MobileNavContent";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 const MobileSidebar = () => {
   return (
@@ -35,12 +36,15 @@ const MobileSidebar = () => {
         <div>
           <ProfileImage />
           <Divider />
-          <SheetClose asChild>
-            <div>
-              <MobileNavContent />
-              <AdminDashboardLink />
-            </div>
-          </SheetClose>
+
+          <ScrollArea dir="rtl" className="h-96 w-full">
+            <SheetClose asChild>
+              <div>
+                <MobileNavContent />
+                <AdminDashboardLink />
+              </div>
+            </SheetClose>
+          </ScrollArea>
         </div>
 
         <div>
