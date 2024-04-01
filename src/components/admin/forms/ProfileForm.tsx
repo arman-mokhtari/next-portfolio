@@ -73,7 +73,7 @@ const ProfileForm = ({ clerkId, user }: Props) => {
         updateData: values,
         path: pathname,
       });
-      router.back();
+      router.push("/admin/dashboard");
     } catch (error) {
       console.error(error);
     } finally {

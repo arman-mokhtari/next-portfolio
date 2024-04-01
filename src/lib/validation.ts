@@ -93,10 +93,10 @@ export const sidebarSettingsSchema = z.object({
       z
         .string()
         .min(10, {
-          message: "آیتم‌ها نباید کمتر از 10 کاراکتر باشند",
+          message: "آیتم نباید کمتر از 10 کاراکتر باشد",
         })
         .max(70, {
-          message: "آیتم‌ها نباید بیشتر از 70 کاراکتر باشند",
+          message: "آیتم‌ نباید بیشتر از 70 کاراکتر باشد",
         })
     )
     .min(3, {

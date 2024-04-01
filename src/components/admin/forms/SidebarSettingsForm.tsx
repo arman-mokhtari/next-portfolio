@@ -72,7 +72,7 @@ const SidebarSettingsForm = ({ clerkId, user }: Props) => {
         updateData: values,
         path: pathname,
       });
-      router.back();
+      router.push("/admin/dashboard");
     } catch (error) {
       console.error(error);
     } finally {
@@ -95,10 +95,17 @@ const SidebarSettingsForm = ({ clerkId, user }: Props) => {
       const typedValue = typedInput.value;
 
       if (typedValue !== "") {
-        if (typedValue.length > 15) {
+        if (typedValue.length > 70) {
           return form.setError("typed", {
             type: "required",
-            message: "Tag must be less than 15 characters",
+            message: "آیتم‌ نباید بیشتر از 70 کاراکتر باشد",
+          });
+        }
+
+        if (typedValue.length < 10) {
+          return form.setError("typed", {
+            type: "required",
+            message: "آیتم نباید کمتر از 10 کاراکتر باشد",
           });
         }
 
@@ -164,7 +171,8 @@ const SidebarSettingsForm = ({ clerkId, user }: Props) => {
                     onKeyDown={(e) => handleTypedChange(e, field)}
                   />
                   <FormDescription className="body-regular mt-2.5 text-light-500">
-                    متن را تایپ کرده و سپس کلید Enter را بفشارید و برای اضافه کردن متن‌های بیشتر این پروسه را تکرار نمایید.
+                    متن را تایپ کرده و سپس کلید Enter را بفشارید و برای اضافه
+                    کردن متن‌های بیشتر این پروسه را تکرار نمایید.
                   </FormDescription>
                   <FormMessage className="text-xs text-rose-600" />
                   {field.value.length > 0 && (
