@@ -105,28 +105,13 @@ const HomeEditForm = ({ clerkId, user }: Props) => {
   const onSubmit = async (values: z.infer<typeof skillsEditSchema>) => {
     setIsSubmit(true);
     try {
-      const { title, desc, metaTitle, metaDesk, skillsItem } = values;
       console.log("values :", values);
-      const updatedSkills = {
-        title,
-        desc,
-        metaTitle,
-        metaDesk,
-        skills: {
-          public: skillsItem.public.map((item) => ({
-            title: item.title,
-            number: item.number,
-          })),
-          pro: skillsItem.pro.map((item) => ({
-            title: item.title,
-            number: item.number,
-          })),
-        },
-      };
 
       await updateUser({
         clerkId,
-        updateData: updatedSkills,
+        updateData: {
+          skills:  values
+        },
         path: pathname,
       });
       router.push("/admin/dashboard");
