@@ -81,43 +81,46 @@ export const adminSidebarLinks: SidebarLink[] = [
     route: "/admin/about-edit",
     label: "تنظیمات درباره من",
   },
+  {
+    imgURL: "/assets/icons/sidebar/user.svg",
+    route: "/admin/skills-edit",
+    label: "تنظیمات مهارت‌ها",
+  },
 ];
 
-export const skillData = [
-  {
-    id: 1,
-    key: "js",
-    title: "جاوا اسکریپت",
-    number: 65,
-  },
-  {
-    id: 2,
-    key: "html",
-    title: "اچ تی ام ال",
-    number: 92,
-  },
-  {
-    id: 3,
-    key: "css",
-    title: "سی اس اس",
-    number: 82,
-  },
-  {
-    id: 5,
-    key: "react",
-    title: "ری‌اکت",
-    number: 89,
-  },
-  {
-    id: 6,
-    key: "node",
-    title: "نود جی اس",
-    number: 75,
-  },
-  {
-    id: 7,
-    key: "next",
-    title: "نکست جی اس",
-    number: 85,
-  },
-];
+export const skillData = {
+  public: [
+    {
+      _id: 1,
+      title: "جاوا اسکریپت",
+      number: 65,
+    },
+    {
+      _id: 2,
+      title: "اچ تی ام ال",
+      number: 92,
+    },
+    {
+      _id: 3,
+      title: "سی اس اس",
+      number: 82,
+    }
+  ],
+  pro: [
+    {
+      _id: 5,
+      title: "ری‌اکت",
+      number: 89,
+    },
+    {
+      _id: 6,
+      title: "نود جی اس",
+      number: 75,
+    },
+    {
+      _id: 7,
+      title: "نکست جی اس",
+      number: 85,
+    }
+  ]
+};

@@ -1,5 +1,23 @@
 import { Schema, models, model, Document } from "mongoose";
 
+const CommonSchema = {
+  title: { type: String },
+  desc: { type: String },
+  metaTitle: { type: String },
+  metaDesk: { type: String },
+};
+
+interface ISkill {
+  _id: number;
+  title: string;
+  number: number;
+}
+
+interface IUserSkills {
+  public: ISkill[];
+  pro: ISkill[];
+}
+
 export interface IUser extends Document {
   clerkId: string;
   name: string;
@@ -22,43 +40,18 @@ export interface IUser extends Document {
   twitter?: string;
   telegram?: string;
   facebook?: string;
-  home?: {
-    title: string;
-    desc: string;
-    metaTitle: string;
-    metaDesk: string;
-  };
-  about?: {
-    title: string;
-    desc: string;
-    metaTitle: string;
-    metaDesk: string;
-  };
-  skills?: {
-    title: string;
-    desc: string;
-    metaTitle: string;
-    metaDesk: string;
-  };
-  resume?: {
-    title: string;
-    desc: string;
-    metaTitle: string;
-    metaDesk: string;
-  };
-  activities?: {
-    title: string;
-    desc: string;
-    metaTitle: string;
-    metaDesk: string;
-  };
-  contact?: {
-    title: string;
-    desc: string;
-    metaTitle: string;
-    metaDesk: string;
-  };
+  home?: typeof CommonSchema;
+  about?: typeof CommonSchema & { isTopBubble?: boolean; topBubble?: string };
+  skills?: typeof CommonSchema & { skillsItem: IUserSkills };
+  resume?: typeof CommonSchema;
+  activities?: typeof CommonSchema;
+  contact?: typeof CommonSchema;
 }
+
+const SkillSchema = new Schema({
+  title: { type: String, required: true, default: "جاوا اسکریپت" },
+  number: { type: Number, required: true, default: 95 },
+});
 
 const UserSchema = new Schema(
   {
@@ -88,44 +81,19 @@ const UserSchema = new Schema(
     },
     telegram: { type: String },
     facebook: { type: String },
-    home: {
-      title: { type: String },
-      desc: { type: String },
-      metaTitle: { type: String },
-      metaDesk: { type: String },
-    },
+    home: CommonSchema,
     about: {
-      title: { type: String },
-      desc: { type: String },
-      metaTitle: { type: String },
-      metaDesk: { type: String },
+      ...CommonSchema,
       isTopBubble: { type: Boolean },
       topBubble: { type: String },
     },
     skills: {
-      title: { type: String },
-      desc: { type: String },
-      metaTitle: { type: String },
-      metaDesk: { type: String },
+      ...CommonSchema,
+      skillsItem: { public: [SkillSchema], pro: [SkillSchema] },
     },
-    resume: {
-      title: { type: String },
-      desc: { type: String },
-      metaTitle: { type: String },
-      metaDesk: { type: String },
-    },
-    activities: {
-      title: { type: String },
-      desc: { type: String },
-      metaTitle: { type: String },
-      metaDesk: { type: String },
-    },
-    contact: {
-      title: { type: String },
-      desc: { type: String },
-      metaTitle: { type: String },
-      metaDesk: { type: String },
-    },
+    resume: CommonSchema,
+    activities: CommonSchema,
+    contact: CommonSchema,
   },
   {
     timestamps: true,
