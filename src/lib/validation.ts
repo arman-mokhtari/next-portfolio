@@ -159,16 +159,14 @@ export const skillsEditSchema = z.object({
   skillsItem: z.object({
     public: z.array(
       z.object({
-        _id: z.number(), // Assuming _id is always a number
-        title: z.string(),
-        number: z.number(),
+        title: z.string().optional(),
+        number: z.number().optional(),
       })
     ),
     pro: z.array(
       z.object({
-        _id: z.number(), // Assuming _id is always a number
-        title: z.string(),
-        number: z.number(),
+        title: z.string().optional(),
+        number: z.number().optional(),
       })
     ),
   }),

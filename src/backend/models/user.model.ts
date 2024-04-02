@@ -8,7 +8,6 @@ const CommonSchema = {
 };
 
 interface ISkill {
-  _id: number;
   title: string;
   number: number;
 }
@@ -49,8 +48,8 @@ export interface IUser extends Document {
 }
 
 const SkillSchema = new Schema({
-  title: { type: String, required: true, default: "جاوا اسکریپت" },
-  number: { type: Number, required: true, default: 95 },
+  title: { type: String, required: true, },
+  number: { type: Number, required: true, },
 });
 
 const UserSchema = new Schema(
