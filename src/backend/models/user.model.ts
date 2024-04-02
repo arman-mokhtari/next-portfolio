@@ -99,6 +99,8 @@ const UserSchema = new Schema(
       desc: { type: String },
       metaTitle: { type: String },
       metaDesk: { type: String },
+      isTopBubble: { type: Boolean },
+      topBubble: { type: String },
     },
     skills: {
       title: { type: String },

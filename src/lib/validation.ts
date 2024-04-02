@@ -148,4 +148,8 @@ export const aboutEditSchema = z.object({
   profileImage: z.string().min(1, {
     message: "لینک تصویر پروفایل را وارد کنید",
   }),
+  isTopBubble: z.boolean().default(false).optional(),
+  topBubble: z.string().refine((val) => val.length <= 10, {
+    message: "String can't be more than 10 characters",
+  }),
 });
