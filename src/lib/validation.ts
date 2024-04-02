@@ -70,9 +70,6 @@ export const userValidationSchema = z.object({
   avatar: z.string().min(1, {
     message: "لینک آواتار را وارد کنید",
   }),
-  profileImage: z.string().min(1, {
-    message: "لینک تصویر پروفایل را وارد کنید",
-  }),
   status: z
     .string()
     .min(1, {
@@ -150,5 +147,9 @@ export const aboutEditSchema = z.object({
   ...commonValidation.shape,
   profileImage: z.string().min(1, {
     message: "لینک تصویر پروفایل را وارد کنید",
+  }),
+  isTopBubble: z.boolean().default(false).optional(),
+  topBubble: z.string().refine((val) => val.length <= 10, {
+    message: "String can't be more than 10 characters",
   }),
 });

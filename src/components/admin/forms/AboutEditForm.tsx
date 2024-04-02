@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -21,6 +21,7 @@ import { toast } from "@/components/ui/use-toast";
 import { usePathname, useRouter } from "next/navigation";
 import { updateUser } from "@/backend/libs/actions/user.action";
 import { aboutEditSchema } from "@/lib/validation";
+import { Checkbox } from "@/components/ui/checkbox";
 
 type FieldName = "title" | "desc" | "metaTitle" | "metaDesk" | "profileImage";
 
@@ -45,6 +46,8 @@ const AboutEditForm = ({ clerkId, user }: Props) => {
       metaTitle: parsedUser.about?.metaTitle || "",
       metaDesk: parsedUser.about?.metaDesk || "",
       profileImage: parsedUser.profileImage || "",
+      isTopBubble: parsedUser.about?.isTopBubble || true,
+      topBubble: parsedUser.about?.topBubble || "",
     },
   });
 
@@ -56,10 +59,17 @@ const AboutEditForm = ({ clerkId, user }: Props) => {
     profileImage: "لینک تصویر",
   };
 
-  const fieldNames: FieldName[] = ["title", "desc", "metaTitle", "metaDesk","profileImage"];
+  const fieldNames: FieldName[] = [
+    "title",
+    "desc",
+    "metaTitle",
+    "metaDesk",
+    "profileImage",
+  ];
 
   const onSubmit = async (values: z.infer<typeof aboutEditSchema>) => {
     setIsSubmit(true);
+    console.log(values);
     try {
       await updateUser({
         clerkId,
@@ -70,6 +80,8 @@ const AboutEditForm = ({ clerkId, user }: Props) => {
             desc: values.desc,
             metaTitle: values.metaTitle,
             metaDesk: values.metaDesk,
+            isTopBubble: values.isTopBubble,
+            topBubble: values.topBubble,
           },
         },
         path: pathname,
@@ -113,6 +125,48 @@ const AboutEditForm = ({ clerkId, user }: Props) => {
               )}
             />
           ))}
+        </div>
+        <div className="light-border-2 mt-6 space-y-4 rounded-md border p-4">
+          <FormField
+            control={form.control}
+            name="isTopBubble"
+            render={({ field }) => (
+              <FormItem className="text-dark400_light800 flex flex-col items-start space-x-3 space-y-2 ">
+                <FormLabel>حباب آبی رنگ بالای نام</FormLabel>
+                <FormControl>
+                  <Checkbox
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                </FormControl>
+                <div className="leading-none">
+                  <FormDescription>
+                    در صورت تمایل به وجود حباب در قسمت بالای نام، فیلد بالا را
+                    تایید کنید.
+                  </FormDescription>
+                </div>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="topBubble"
+            render={({ field }) => (
+              <FormItem className="space-y-1 sm:w-1/2">
+                <FormLabel className="paragraph-semibold text-dark400_light800 ">
+                  متن درون حباب
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    className="paragraph-regular background-light800_dark400 theme-border-color text-dark300_light700 input-light"
+                    placeholder="متن درون حباب"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage className="text-xs text-rose-600" />
+              </FormItem>
+            )}
+          />
         </div>
 
         <Button

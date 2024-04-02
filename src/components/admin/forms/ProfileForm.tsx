@@ -30,7 +30,6 @@ type FieldName =
   | "expertise"
   | "languages"
   | "avatar"
-  | "profileImage"
   | "status";
 
 type Placeholders = Record<FieldName, string>;
@@ -59,7 +58,6 @@ const ProfileForm = ({ clerkId, user }: Props) => {
       expertise: parsedUser.expertise || "",
       languages: parsedUser.languages || "",
       avatar: parsedUser.avatar || "",
-      profileImage: parsedUser.profileImage || "",
       status: parsedUser.status || "",
     },
   });
@@ -97,7 +95,6 @@ const ProfileForm = ({ clerkId, user }: Props) => {
     expertise: "تخصص",
     languages: "زبان‌ها",
     avatar: "تصویر آواتار",
-    profileImage: "تصویر پروفایل",
     status: "وضعیت",
   };
 
@@ -111,7 +108,6 @@ const ProfileForm = ({ clerkId, user }: Props) => {
     "expertise",
     "languages",
     "avatar",
-    "profileImage",
     "status",
   ];
 
