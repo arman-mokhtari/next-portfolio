@@ -159,14 +159,32 @@ export const skillsEditSchema = z.object({
   skillsItem: z.object({
     public: z.array(
       z.object({
-        title: z.string().optional(),
-        number: z.number().optional(),
+        title: z.string().min(1, {
+          message: "عنوان را وارد کنید",
+        }),
+        number: z
+          .number()
+          .min(0, {
+            message: "از بین 0 تا 100 درصد مهارت را انتخاب کنید",
+          })
+          .max(100, {
+            message: "میزان مهارت باید بین 0 تا 100 باشد",
+          }),
       })
     ),
     pro: z.array(
       z.object({
-        title: z.string().optional(),
-        number: z.number().optional(),
+        title: z.string().min(1, {
+          message: "عنوان را وارد کنید",
+        }),
+        number: z
+          .number()
+          .min(0, {
+            message: "از بین 0 تا 100 درصد مهارت را انتخاب کنید",
+          })
+          .max(100, {
+            message: "میزان مهارت باید بین 0 تا 100 باشد",
+          }),
       })
     ),
   }),
