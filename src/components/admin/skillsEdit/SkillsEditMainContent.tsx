@@ -1,8 +1,8 @@
 import { getUserById } from "@/backend/libs/actions/user.action";
 import { auth } from "@clerk/nextjs";
-import HomeEditForm from "../forms/HomeEditForm";
+import SkillsEditForm from "../forms/SkillsForm";
 
-const HomeEditMainContent = async () => {
+const SkillsEditMainContent = async () => {
   const { userId } = auth();
 
   if (!userId) return null;
@@ -10,10 +10,10 @@ const HomeEditMainContent = async () => {
   return (
     <div className="mt-10 lg:mt-0">
       <div className="flex min-h-screen items-center justify-center">
-        <HomeEditForm clerkId={userId} user={JSON.stringify(mongoUser)} />
+        <SkillsEditForm clerkId={userId} user={JSON.stringify(mongoUser)} />
       </div>
     </div>
   );
 };
 
-export default HomeEditMainContent;
+export default SkillsEditMainContent;

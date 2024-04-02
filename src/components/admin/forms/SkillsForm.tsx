@@ -33,7 +33,7 @@ interface Props {
   user: string;
 }
 
-const AboutEditForm = ({ clerkId, user }: Props) => {
+const SkillEditForm = ({ clerkId, user }: Props) => {
   const parsedUser = JSON.parse(user);
   const [isSubmit, setIsSubmit] = useState(false);
   const router = useRouter();
@@ -191,4 +191,4 @@ const AboutEditForm = ({ clerkId, user }: Props) => {
   );
 };
 
-export default AboutEditForm;
+export default SkillEditForm;

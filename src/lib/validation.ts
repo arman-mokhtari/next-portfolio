@@ -153,3 +153,23 @@ export const aboutEditSchema = z.object({
     message: "String can't be more than 10 characters",
   }),
 });
+
+export const skillsEditSchema = z.object({
+  ...commonValidation.shape,
+  skillsItem: z.object({
+    public: z.array(
+      z.object({
+        _id: z.number(), // Assuming _id is always a number
+        title: z.string(),
+        number: z.number(),
+      })
+    ),
+    pro: z.array(
+      z.object({
+        _id: z.number(), // Assuming _id is always a number
+        title: z.string(),
+        number: z.number(),
+      })
+    ),
+  }),
+});

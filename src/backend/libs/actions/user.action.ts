@@ -15,7 +15,6 @@ export async function getAdmin() {
   try {
     connectToDatabase();
     const admin = await User.findOne({ role: "ADMIN" });
-    console.log(admin);
     return admin;
   } catch (error) {
     console.error(error);

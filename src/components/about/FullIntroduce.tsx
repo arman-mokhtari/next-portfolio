@@ -3,6 +3,7 @@ import AdminIntroduce from "../shared/AdminIntroduce";
 
 import Divider from "@/common/Divider";
 import Image from "next/image";
+import Bubble from "../shared/Bubble";
 
 interface Props {
   otherClasses?: string;
@@ -16,12 +17,15 @@ interface Props {
     expertise: string;
     status: string;
     profileImage: string;
+    about: {
+      isTopBubble: boolean;
+      topBubble: string;
+    };
   };
 }
 
-const FullIntroduce = ({ otherClasses, topBubble, admin }: Props) => {
-
-  const isBubble = topBubble || false;
+const FullIntroduce = ({ otherClasses, admin }: Props) => {
+  const isBubble = admin.about.isTopBubble || false;
 
   const itemMappings: { [key: string]: string } = {
     name: "نام",
@@ -38,9 +42,7 @@ const FullIntroduce = ({ otherClasses, topBubble, admin }: Props) => {
       <div className="flex items-center justify-between gap-3">
         <div>
           {isBubble && (
-            <span className="speech-bubble relative mb-3 mr-2 inline-block whitespace-nowrap rounded bg-blue-600 px-2 py-[.2rem] text-sm font-semibold text-light-800">
-              سلام
-            </span>
+            <Bubble otherClasses="after:left-[40%]" text={admin.about.topBubble} />
           )}
           <div className="border-r-[5px] border-blue-600 pr-2">
             <AdminIntroduce admin={admin} />

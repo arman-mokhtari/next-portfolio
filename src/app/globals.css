@@ -193,7 +193,6 @@ code {
   content: "";
   position: absolute;
   bottom: 0;
-  left: 40%;
   width: 0;
   height: 0;
   border: 10px solid transparent;
