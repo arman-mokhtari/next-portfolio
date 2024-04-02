@@ -48,7 +48,6 @@ export async function updateUser(params: UpdateUserParams) {
   try {
     connectToDatabase();
     const { clerkId, updateData, path } = params;
-    console.log("updateData: ", updateData);
     let updateQuery: any = {};
 
     if (updateData.skills) {

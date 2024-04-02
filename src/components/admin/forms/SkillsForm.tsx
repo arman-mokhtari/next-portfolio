@@ -18,6 +18,7 @@ import { toast } from "@/components/ui/use-toast";
 import { usePathname, useRouter } from "next/navigation";
 import { updateUser } from "@/backend/libs/actions/user.action";
 import { skillsEditSchema } from "@/lib/validation";
+import BlueButton from "@/components/shared/BlueButton";
 
 type FieldName = "title" | "desc" | "metaTitle" | "metaDesk";
 type Placeholders = Record<FieldName, string>;
@@ -105,12 +106,10 @@ const HomeEditForm = ({ clerkId, user }: Props) => {
   const onSubmit = async (values: z.infer<typeof skillsEditSchema>) => {
     setIsSubmit(true);
     try {
-      console.log("values :", values);
-
       await updateUser({
         clerkId,
         updateData: {
-          skills:  values
+          skills: values,
         },
         path: pathname,
       });
@@ -156,53 +155,60 @@ const HomeEditForm = ({ clerkId, user }: Props) => {
         </div>
 
         {/* Input for Public Skills */}
-        <div>
-          <Input
-            placeholder="Enter Public Skill"
-            value={publicSkill}
-            onChange={handlePublicSkillChange}
-          />
-          <Input
-            placeholder="Enter Public Skill Number"
-            type="number"
-            value={publicSkillNumber}
-            onChange={handlePublicSkillNumberChange}
-          />
-          <Button onClick={handleAddPublicSkill} type="button">
-            Add Public Skill
-          </Button>
-          {/* Display Public Skills as tags */}
-          {form.getValues().skillsItem.public.map((item, index) => (
-            <div key={index}>
-              {item.title} - {item.number}
+        <div className="light-border-2 mt-6 flex flex-col gap-4 space-y-4 rounded-md border p-4">
+          <div>
+            <div className="grid grid-cols-2 gap-4">
+              <Input
+                className="paragraph-regular background-light800_dark400 theme-border-color text-dark300_light700 input-light"
+                placeholder="مهارت عمومی"
+                value={publicSkill}
+                onChange={handlePublicSkillChange}
+              />
+              <Input
+                className="paragraph-regular background-light800_dark400 theme-border-color text-dark300_light700 input-light"
+                placeholder="میزان مهارت عمومی"
+                type="number"
+                value={publicSkillNumber}
+                onChange={handlePublicSkillNumberChange}
+              />
             </div>
-          ))}
-        </div>
+            <BlueButton onClick={handleAddPublicSkill} text="اضافه" />
 
-        {/* Input for Pro Skills */}
-        <div>
-          <Input
-            placeholder="Enter Pro Skill"
-            value={proSkill}
-            onChange={handleProSkillChange}
-          />
-          <Input
-            placeholder="Enter Pro Skill Number"
-            type="number"
-            value={proSkillNumber}
-            onChange={handleProSkillNumberChange}
-          />
-          <Button onClick={handleAddProSkill} type="button">
-            Add Pro Skill
-          </Button>
-          {/* Display Pro Skills as tags */}
-          {form.getValues().skillsItem.pro.map((item, index) => (
-            <div key={index}>
-              {item.title} - {item.number}
+            {/* Display Public Skills as tags */}
+            {form.getValues().skillsItem.public.map((item, index) => (
+              <div key={index}>
+                {item.title} - {item.number}
+              </div>
+            ))}
+          </div>
+
+          {/* Input for Pro Skills */}
+          <div>
+            <div className="grid grid-cols-2 gap-4">
+              <Input
+                className="paragraph-regular background-light800_dark400 theme-border-color text-dark300_light700 input-light"
+                placeholder="مهارت تخصصی"
+                value={proSkill}
+                onChange={handleProSkillChange}
+              />
+              <Input
+                className="paragraph-regular background-light800_dark400 theme-border-color text-dark300_light700 input-light"
+                placeholder="میزان مهارت تخصصی"
+                type="number"
+                value={proSkillNumber}
+                onChange={handleProSkillNumberChange}
+              />
             </div>
-          ))}
+            <BlueButton onClick={handleAddProSkill} text="اضافه"/> 
+ 
+            {/* Display Pro Skills as tags */}
+            {form.getValues().skillsItem.pro.map((item, index) => (
+              <div key={index}>
+                {item.title} - {item.number}
+              </div>
+            ))}
+          </div>
         </div>
-
         <Button
           className="hover-gradient mt-4 min-h-[46px] min-w-[140px] rounded-full px-4 py-3 text-base !text-light-900 shadow-lg shadow-slate-400 active:shadow-md dark:shadow-none"
           type="submit"
