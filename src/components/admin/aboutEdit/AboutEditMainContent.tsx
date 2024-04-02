@@ -7,7 +7,6 @@ const AboutEditMainContent = async () => {
   const { userId } = auth();
 
   if (!userId) return null;
-  console.log("userId: ", userId);
   const mongoUser = await getUserById({ userId });
   return (
     <div className="mt-10 lg:mt-0">

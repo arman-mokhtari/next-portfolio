@@ -22,6 +22,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { updateUser } from "@/backend/libs/actions/user.action";
 import { aboutEditSchema } from "@/lib/validation";
 import { Checkbox } from "@/components/ui/checkbox";
+import Bubble from "@/components/shared/Bubble";
 
 type FieldName = "title" | "desc" | "metaTitle" | "metaDesk" | "profileImage";
 
@@ -69,7 +70,6 @@ const AboutEditForm = ({ clerkId, user }: Props) => {
 
   const onSubmit = async (values: z.infer<typeof aboutEditSchema>) => {
     setIsSubmit(true);
-    console.log(values);
     try {
       await updateUser({
         clerkId,
@@ -132,7 +132,12 @@ const AboutEditForm = ({ clerkId, user }: Props) => {
             name="isTopBubble"
             render={({ field }) => (
               <FormItem className="text-dark400_light800 flex flex-col items-start space-x-3 space-y-2 ">
-                <FormLabel>حباب آبی رنگ بالای نام</FormLabel>
+                <FormLabel>
+                  <Bubble
+                    otherClasses="after:left-[88%]"
+                    text="حباب آبی رنگ بالای نام"
+                  />
+                </FormLabel>
                 <FormControl>
                   <Checkbox
                     checked={field.value}
@@ -168,6 +173,11 @@ const AboutEditForm = ({ clerkId, user }: Props) => {
             )}
           />
         </div>
+
+        <p className="text-dark400_light800 mt-3 text-sm">
+          برخی از اطلاعات صفحه درباره من با اطلاعات پروفایل مشترک هستند، برای
+          تغییر آنها به تنظیمات پروفایل مراجعه کنید.
+        </p>
 
         <Button
           className="hover-gradient mt-4 min-h-[46px] min-w-[140px] rounded-full px-4 py-3 text-base !text-light-900 shadow-lg shadow-slate-400 active:shadow-md dark:shadow-none"

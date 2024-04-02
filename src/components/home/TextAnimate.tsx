@@ -6,7 +6,6 @@ import Typed from "typed.js";
 const TextTyped = ({ textArray }: any) => {
   // Create reference to store the DOM element containing the animation
   const el = useRef(null);
-  console.log("textArray: ", textArray);
   useEffect(() => {
     const typed = new Typed(el.current, {
       strings: textArray,
