@@ -7,16 +7,6 @@ const CommonSchema = {
   metaDesk: { type: String },
 };
 
-interface ISkill {
-  title: string;
-  number: number;
-}
-
-interface IUserSkills {
-  public: ISkill[];
-  pro: ISkill[];
-}
-
 export interface IUser extends Document {
   clerkId: string;
   name: string;
@@ -41,16 +31,12 @@ export interface IUser extends Document {
   facebook?: string;
   home?: typeof CommonSchema;
   about?: typeof CommonSchema & { isTopBubble?: boolean; topBubble?: string };
-  skills?: typeof CommonSchema & { skillsItem: IUserSkills };
+  skills?: typeof CommonSchema & Schema.Types.ObjectId[];
   resume?: typeof CommonSchema;
   activities?: typeof CommonSchema;
   contact?: typeof CommonSchema;
 }
 
-const SkillSchema = new Schema({
-  title: { type: String, required: true, },
-  number: { type: Number, required: true, },
-});
 
 const UserSchema = new Schema(
   {
@@ -88,7 +74,7 @@ const UserSchema = new Schema(
     },
     skills: {
       ...CommonSchema,
-      skillsItem: { public: [SkillSchema], pro: [SkillSchema] },
+      skillsItem: [{ type: Schema.Types.ObjectId, ref: 'Skills' }],
     },
     resume: CommonSchema,
     activities: CommonSchema,

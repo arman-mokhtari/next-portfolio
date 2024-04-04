@@ -156,36 +156,72 @@ export const aboutEditSchema = z.object({
 
 export const skillsEditSchema = z.object({
   ...commonValidation.shape,
-  skillsItem: z.object({
-    public: z.array(
-      z.object({
-        title: z.string().min(1, {
+  proTitle: z
+    .array(
+      z
+        .string()
+        .min(1, {
           message: "عنوان را وارد کنید",
-        }),
-        number: z
-          .number()
-          .min(0, {
-            message: "از بین 0 تا 100 درصد مهارت را انتخاب کنید",
-          })
-          .max(100, {
-            message: "میزان مهارت باید بین 0 تا 100 باشد",
-          }),
-      })
-    ),
-    pro: z.array(
-      z.object({
-        title: z.string().min(1, {
+        })
+        .max(25, {
+          message: "عنوان نباید بیشتر از 25 کاراکتر باشد",
+        })
+    )
+    .min(2, {
+      message: "مجموع آیتم‌ها نباید کمتر از 2 آیتم باشند",
+    })
+    .max(20, {
+      message: "مجموع آیتم‌ها نباید بیشتر از 20 آیتم باشند",
+    }),
+  proNumber: z
+    .array(
+      z
+        .number()
+        .min(0, {
+          message: "میزان مهارت را از بین اعداد 0 تا 100 وارد کنید",
+        })
+        .max(100, {
+          message: "میزان مهارت نباید بیشتر از 100 باشد",
+        })
+    )
+    .min(2, {
+      message: "مجموع آیتم‌ها نباید کمتر از 2 آیتم باشند",
+    })
+    .max(20, {
+      message: "مجموع آیتم‌ها نباید بیشتر از 20 آیتم باشند",
+    }),
+  publicTitle: z
+    .array(
+      z
+        .string()
+        .min(1, {
           message: "عنوان را وارد کنید",
-        }),
-        number: z
-          .number()
-          .min(0, {
-            message: "از بین 0 تا 100 درصد مهارت را انتخاب کنید",
-          })
-          .max(100, {
-            message: "میزان مهارت باید بین 0 تا 100 باشد",
-          }),
-      })
-    ),
-  }),
+        })
+        .max(25, {
+          message: "عنوان نباید بیشتر از 25 کاراکتر باشد",
+        })
+    )
+    .min(2, {
+      message: "مجموع آیتم‌ها نباید کمتر از 2 آیتم باشند",
+    })
+    .max(20, {
+      message: "مجموع آیتم‌ها نباید بیشتر از 20 آیتم باشند",
+    }),
+  publicNumber: z
+    .array(
+      z
+        .number()
+        .min(0, {
+          message: "میزان مهارت را از بین اعداد 0 تا 100 وارد کنید",
+        })
+        .max(100, {
+          message: "میزان مهارت نباید بیشتر از 100 باشد",
+        })
+    )
+    .min(2, {
+      message: "مجموع آیتم‌ها نباید کمتر از 2 آیتم باشند",
+    })
+    .max(20, {
+      message: "مجموع آیتم‌ها نباید بیشتر از 20 آیتم باشند",
+    }),
 });
