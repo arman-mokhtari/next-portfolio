@@ -12,7 +12,7 @@ import { revalidatePath } from "next/cache";
 export async function getAdmin() {
   try {
     connectToDatabase();
-    const admin = await User.findOne({ role: "ADMIN" });
+    const admin = await User.findOne({ role: "ADMIN" }).populate("skills");
     return admin;
   } catch (error) {
     console.error(error);
@@ -48,29 +48,10 @@ export async function updateUser(params: UpdateUserParams) {
   try {
     connectToDatabase();
     const { clerkId, updateData, path } = params;
-    console.log("updateData: ", updateData);
-    let updateQuery: any = {};
 
-    if (updateData.skills) {
-      updateQuery = {
-        ...updateQuery,
-        "skills.title": updateData.skills.title,
-        "skills.desc": updateData.skills.desc,
-        "skills.metaTitle": updateData.skills.metaTitle,
-        "skills.metaDesk": updateData.skills.metaDesk,
-        "skills.skillsItem.public": updateData.skills.skillsItem.public,
-        "skills.skillsItem.pro": updateData.skills.skillsItem.pro,
-      };
-    } else {
-      updateQuery = updateData;
-    }
-
-    await User.findOneAndUpdate(
-      { clerkId },
-      { $set: updateQuery },
-      { new: true }
-    );
-
+    await User.findOneAndUpdate({ clerkId }, updateData, {
+      new: true,
+    });
     revalidatePath(path);
   } catch (error) {
     console.error(error);
