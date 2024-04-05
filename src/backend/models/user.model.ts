@@ -74,7 +74,7 @@ const UserSchema = new Schema(
     },
     skills: {
       ...CommonSchema,
-      skillsItem: [{ type: Schema.Types.ObjectId, ref: 'Skills' }],
+      skillsItem: [{ type: Schema.Types.ObjectId, ref: 'Skill' }],
     },
     resume: CommonSchema,
     activities: CommonSchema,

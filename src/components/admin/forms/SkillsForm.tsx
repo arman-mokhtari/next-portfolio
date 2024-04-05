@@ -60,12 +60,31 @@ const HomeEditForm = ({ clerkId, user }: Props) => {
 
   const onSubmit = async (values: z.infer<typeof skillsEditSchema>) => {
     setIsSubmit(true);
+    const {
+      title,
+      desc,
+      metaTitle,
+      metaDesk,
+      proTitle,
+      proNumber,
+      publicTitle,
+      publicNumber,
+    } = values;
     try {
       console.log("values: ", values);
       await updateUser({
         clerkId,
         updateData: {
-          skills: values,
+          title,
+          desc,
+          metaTitle,
+          metaDesk,
+          skillsItem: {
+            proTitle,
+            proNumber,
+            publicTitle,
+            publicNumber,
+          },
         },
         path: pathname,
       });
