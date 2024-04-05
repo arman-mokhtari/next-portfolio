@@ -1,19 +1,19 @@
 import { Schema, models, model, Document } from "mongoose";
 
-export interface ISkills extends Document {
+export interface ISkill extends Document {
   proTitle: string;
   proNumber: number;
   publicTitle: string;
   publicNumber: number;
 }
 
-const SkillsSchema = new Schema({
-  proTitle: { type: String, required: true },
-  proNumber: { type: Number, required: true },
-  publicTitle: { type: String, required: true },
-  publicNumber: { type: Number, required: true },
+const SkillSchema = new Schema({
+  proTitle: { type: String },
+  proNumber: { type: Number },
+  publicTitle: { type: String },
+  publicNumber: { type: Number },
 });
 
-const Skills = models.Skills || model("Skills", SkillsSchema);
+const Skill = models.Skills || model("Skill", SkillSchema);
 
-export default Skills;
+export default Skill;

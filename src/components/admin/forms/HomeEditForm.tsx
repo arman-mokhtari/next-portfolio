@@ -61,16 +61,17 @@ const HomeEditForm = ({ clerkId, user }: Props) => {
 
   const onSubmit = async (values: z.infer<typeof homeEditSchema>) => {
     setIsSubmit(true);
+    const { typed, title, desc, metaTitle, metaDesk } = values;
     try {
       await updateUser({
         clerkId,
         updateData: {
-          ...values,
+          typed,
           home: {
-            title: values.title,
-            desc: values.desc,
-            metaTitle: values.metaTitle,
-            metaDesk: values.metaDesk,
+            title,
+            desc,
+            metaTitle,
+            metaDesk,
           },
         },
         path: pathname,

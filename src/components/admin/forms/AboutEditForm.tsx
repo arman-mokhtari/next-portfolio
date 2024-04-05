@@ -70,18 +70,27 @@ const AboutEditForm = ({ clerkId, user }: Props) => {
 
   const onSubmit = async (values: z.infer<typeof aboutEditSchema>) => {
     setIsSubmit(true);
+    const {
+      isTopBubble,
+      topBubble,
+      title,
+      desc,
+      metaTitle,
+      metaDesk,
+      profileImage,
+    } = values;
     try {
       await updateUser({
         clerkId,
         updateData: {
-          ...values,
+          profileImage,
           about: {
-            title: values.title,
-            desc: values.desc,
-            metaTitle: values.metaTitle,
-            metaDesk: values.metaDesk,
-            isTopBubble: values.isTopBubble,
-            topBubble: values.topBubble,
+            title,
+            desc,
+            metaTitle,
+            metaDesk,
+            isTopBubble,
+            topBubble,
           },
         },
         path: pathname,
