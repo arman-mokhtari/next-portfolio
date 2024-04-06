@@ -7,8 +7,8 @@ export interface ISkill extends Document {
 }
 
 const SkillSchema = new Schema({
-  type: { type: String, required: true, default: "" },
-  title: { type: String, required: true, default: "" },
+  type: { type: String, required: true, default: "pro" },
+  title: { type: String, required: true, default: "x" },
   number: { type: Number, required: true, default: 0 },
 });
 
