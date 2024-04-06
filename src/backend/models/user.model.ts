@@ -32,7 +32,7 @@ export interface IUser extends Document {
   home?: typeof CommonSchema;
   about?: typeof CommonSchema & { isTopBubble?: boolean; topBubble?: string };
   skills?: typeof CommonSchema;
-  skillsItem?: Schema.Types.ObjectId[];
+  skillsItem: Schema.Types.ObjectId[];
   resume?: typeof CommonSchema;
   activities?: typeof CommonSchema;
   contact?: typeof CommonSchema;
@@ -75,7 +75,7 @@ const UserSchema = new Schema(
     skills: {
       ...CommonSchema,
     },
-    skillsItem: [{ type: Schema.Types.ObjectId, ref: "Skill" }],
+    skillsItem: [{ type: Schema.Types.ObjectId,required: true, ref: "Skill" }],
     resume: CommonSchema,
     activities: CommonSchema,
     contact: CommonSchema,
