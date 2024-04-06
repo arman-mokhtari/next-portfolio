@@ -35,6 +35,17 @@ const HomeEditForm = ({ clerkId, user }: Props) => {
   const router = useRouter();
   const pathname = usePathname();
 
+  const groupedProTitle = parsedUser?.skillsItem.map((item: any) => item.title);
+  const groupedProNumber = parsedUser?.skillsItem.map(
+    (item: any) => item.number
+  );
+  const groupedPublicTitle = parsedUser?.skillsItem.map(
+    (item: any) => item.title
+  );
+  const groupedPublicNumber = parsedUser?.skillsItem.map(
+    (item: any) => item.number
+  );
+
   const form = useForm<z.infer<typeof skillsEditSchema>>({
     resolver: zodResolver(skillsEditSchema),
     defaultValues: {
@@ -42,10 +53,10 @@ const HomeEditForm = ({ clerkId, user }: Props) => {
       desc: parsedUser.skills?.desc || "",
       metaTitle: parsedUser.skills?.metaTitle || "",
       metaDesk: parsedUser.skills?.metaDesk || "",
-      proTitle: parsedUser.skills?.proTitle || "",
-      proNumber: parsedUser.skills?.proNumber || 0,
-      publicTitle: parsedUser.skills?.publicTitle || "",
-      publicNumber: parsedUser.skills?.publicNumber || 0,
+      proTitle: groupedProTitle || [],
+      proNumber: groupedProNumber || [],
+      publicTitle: groupedPublicTitle || [],
+      publicNumber: groupedPublicNumber || [],
     },
   });
 
@@ -65,10 +76,10 @@ const HomeEditForm = ({ clerkId, user }: Props) => {
       desc,
       metaTitle,
       metaDesk,
-      proTitle,
-      proNumber,
-      publicTitle,
-      publicNumber,
+      // proTitle,
+      // proNumber,
+      // publicTitle,
+      // publicNumber,
     } = values;
 
     // Map over the grouped data to create arrays of objects
@@ -84,18 +95,7 @@ const HomeEditForm = ({ clerkId, user }: Props) => {
             metaTitle,
             metaDesk,
           },
-          skillsItem: [
-            {
-              type: "pro",
-              proTitle,
-              proNumber,
-            },
-            {
-              type: "public",
-              publicTitle,
-              publicNumber,
-            },
-          ],
+...values
         },
         path: pathname,
       });
