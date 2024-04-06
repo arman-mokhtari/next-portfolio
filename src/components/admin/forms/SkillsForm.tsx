@@ -70,17 +70,9 @@ const HomeEditForm = ({ clerkId, user }: Props) => {
       publicTitle,
       publicNumber,
     } = values;
-  
+
     // Map over the grouped data to create arrays of objects
-    const mappedProTitles = proTitle.map((title: string, index: number) => ({
-      title,
-      number: proNumber[index],
-    }));
-    const mappedPublicTitles = publicTitle.map((title: string, index: number) => ({
-      title,
-      number: publicNumber[index],
-    }));
-  
+
     try {
       console.log("values: ", values);
       await updateUser({
@@ -93,14 +85,16 @@ const HomeEditForm = ({ clerkId, user }: Props) => {
             metaDesk,
           },
           skillsItem: [
-            ...mappedProTitles.map((item) => ({
+            {
               type: "pro",
-              ...item,
-            })),
-            ...mappedPublicTitles.map((item) => ({
+              proTitle,
+              proNumber,
+            },
+            {
               type: "public",
-              ...item,
-            })),
+              publicTitle,
+              publicNumber,
+            },
           ],
         },
         path: pathname,
@@ -111,13 +105,12 @@ const HomeEditForm = ({ clerkId, user }: Props) => {
     } finally {
       setIsSubmit(false);
     }
-  
+
     return toast({
       title: "تغییرات ثبت شد!",
       variant: !isSubmit ? "default" : "destructive",
     });
   };
-  
 
   const handleProTitleChange = (
     e: KeyboardEvent<HTMLInputElement>,

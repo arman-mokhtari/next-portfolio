@@ -7,9 +7,9 @@ export interface ISkill extends Document {
 }
 
 const SkillSchema = new Schema({
-  type: { type: String, required: true },
-  title: { type: String, required: true },
-  number: { type: Number, required: true },
+  type: { type: String, required: true, default: "" },
+  title: { type: String, required: true, default: "" },
+  number: { type: Number, required: true, default: 0 },
 });
 
 const Skill = models.Skill || model("Skill", SkillSchema);
