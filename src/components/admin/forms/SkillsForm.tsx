@@ -35,16 +35,17 @@ const HomeEditForm = ({ clerkId, user }: Props) => {
   const router = useRouter();
   const pathname = usePathname();
 
-  const groupedProTitle = parsedUser?.skillsItem.map((item: any) => item.title);
-  const groupedProNumber = parsedUser?.skillsItem.map(
-    (item: any) => item.number
+  const proSkills = parsedUser?.skillsItem.filter(
+    (item: any) => item.type === "pro"
   );
-  const groupedPublicTitle = parsedUser?.skillsItem.map(
-    (item: any) => item.title
+  const publicSkills = parsedUser?.skillsItem.filter(
+    (item: any) => item.type === "public"
   );
-  const groupedPublicNumber = parsedUser?.skillsItem.map(
-    (item: any) => item.number
-  );
+
+  const groupedProTitle = proSkills.map((item: any) => item.title);
+  const groupedProNumber = proSkills.map((item: any) => item.number);
+  const groupedPublicTitle = publicSkills.map((item: any) => item.title);
+  const groupedPublicNumber = publicSkills.map((item: any) => item.number);
 
   const form = useForm<z.infer<typeof skillsEditSchema>>({
     resolver: zodResolver(skillsEditSchema),
@@ -71,22 +72,40 @@ const HomeEditForm = ({ clerkId, user }: Props) => {
 
   const onSubmit = async (values: z.infer<typeof skillsEditSchema>) => {
     setIsSubmit(true);
-    const {
-      title,
-      desc,
-      metaTitle,
-      metaDesk,
-      // proTitle,
-      // proNumber,
-      // publicTitle,
-      // publicNumber,
-    } = values;
-
-    // Map over the grouped data to create arrays of objects
 
     try {
-      console.log("values: ", values);
-      await updateUser({
+      const {
+        title,
+        desc,
+        metaTitle,
+        metaDesk,
+        proTitle,
+        proNumber,
+        publicTitle,
+        publicNumber,
+      } = values;
+
+      // Define the type for skillsItem
+      type SkillsItem = {
+        title: string;
+        number: number;
+        type: string;
+      };
+
+      // Update the type of updateData.skillsItem
+      const data: {
+        clerkId: string;
+        updateData: {
+          skills: {
+            title: string;
+            desc: string;
+            metaTitle: string;
+            metaDesk: string;
+          };
+          skillsItem: SkillsItem[]; // Explicitly define the type as SkillsItem[]
+        };
+        path: string;
+      } = {
         clerkId,
         updateData: {
           skills: {
@@ -95,21 +114,53 @@ const HomeEditForm = ({ clerkId, user }: Props) => {
             metaTitle,
             metaDesk,
           },
-...values
+          skillsItem: [], // Initialize as an empty array
         },
         path: pathname,
-      });
+      };
+
+      // Populate skillsItem array with professional skills
+      for (let i = 0; i < proTitle.length; i++) {
+        const skillItem: SkillsItem = {
+          title: proTitle[i],
+          number: proNumber[i],
+          type: "pro",
+        };
+        data.updateData.skillsItem.push(skillItem);
+      }
+
+      // Populate skillsItem array with public skills
+      for (let i = 0; i < publicTitle.length; i++) {
+        const skillItem: SkillsItem = {
+          title: publicTitle[i],
+          number: publicNumber[i],
+          type: "public",
+        };
+        data.updateData.skillsItem.push(skillItem);
+      }
+
+      // Send data to the backend
+      await updateUser(data);
+
+      // Redirect to the dashboard after successful submission
       router.push("/admin/dashboard");
+
+      // Show success message to the user
+      toast({
+        title: "تغییرات ثبت شد!",
+        variant: !isSubmit ? "default" : "destructive",
+      });
     } catch (error) {
       console.error(error);
+
+      // Handle errors gracefully, inform the user about the error
+      toast({
+        title: "خطا در ذخیره اطلاعات!",
+        variant: "destructive",
+      });
     } finally {
       setIsSubmit(false);
     }
-
-    return toast({
-      title: "تغییرات ثبت شد!",
-      variant: !isSubmit ? "default" : "destructive",
-    });
   };
 
   const handleProTitleChange = (
@@ -126,13 +177,6 @@ const HomeEditForm = ({ clerkId, user }: Props) => {
           return form.setError("proTitle", {
             type: "required",
             message: "آیتم‌ نباید بیشتر از 70 کاراکتر باشد",
-          });
-        }
-
-        if (typedValue.length < 10) {
-          return form.setError("proTitle", {
-            type: "required",
-            message: "آیتم نباید کمتر از 10 کاراکتر باشد",
           });
         }
 
@@ -193,13 +237,6 @@ const HomeEditForm = ({ clerkId, user }: Props) => {
           return form.setError("publicTitle", {
             type: "required",
             message: "آیتم‌ نباید بیشتر از 70 کاراکتر باشد",
-          });
-        }
-
-        if (typedValue.length < 1) {
-          return form.setError("publicTitle", {
-            type: "required",
-            message: "آیتم را وارد کنید",
           });
         }
 
