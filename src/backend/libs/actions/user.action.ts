@@ -8,15 +8,11 @@ import {
   UpdateUserParams,
 } from "./shared.types";
 import { revalidatePath } from "next/cache";
-import Skill from "@/backend/models/skillsItem.model";
 
 export async function getAdmin() {
   try {
     connectToDatabase();
-    const admin = await User.findOne({ role: "ADMIN" }).populate({
-      path: "skillsItem",
-      model: Skill,
-    });
+    const admin = await User.findOne({ role: "ADMIN" });
     return admin;
   } catch (error) {
     console.error(error);
