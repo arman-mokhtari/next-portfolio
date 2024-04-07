@@ -80,8 +80,8 @@ const UserSchema = new Schema(
       ...CommonSchema,
     },
     skillsItem: {
-      title: { type: String, default: "نامشخص" },
-      number: { type: Number, default: 0 },
+      title: { type: String, required: true, default: "نامشخص" },
+      number: { type: Number, required: true, default: 0 },
       type: { type: String },
     },
     resume: CommonSchema,
