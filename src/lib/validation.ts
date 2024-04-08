@@ -163,8 +163,8 @@ export const skillsEditSchema = z.object({
         .min(1, {
           message: "عنوان را وارد کنید",
         })
-        .max(25, {
-          message: "عنوان نباید بیشتر از 25 کاراکتر باشد",
+        .max(100, {
+          message: "عنوان نباید بیشتر از 100 کاراکتر باشد",
         })
     )
     .min(2, {
@@ -197,8 +197,8 @@ export const skillsEditSchema = z.object({
         .min(1, {
           message: "عنوان را وارد کنید",
         })
-        .max(25, {
-          message: "عنوان نباید بیشتر از 25 کاراکتر باشد",
+        .max(100, {
+          message: "عنوان نباید بیشتر از 100 کاراکتر باشد",
         })
     )
     .min(2, {
