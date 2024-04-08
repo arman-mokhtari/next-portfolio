@@ -1,6 +1,7 @@
 import SkillsMainContent from "@/components/skills/SkillsMainContent";
 
-const Page = () => {
+const Page =() => {
+ 
   return <SkillsMainContent />;
 };
 

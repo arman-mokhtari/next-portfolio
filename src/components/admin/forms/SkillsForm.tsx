@@ -122,7 +122,7 @@ const HomeEditForm = ({ clerkId, user }: Props) => {
       // Populate skillsItem array with professional skills
       for (let i = 0; i < proTitle.length; i++) {
         const skillItem: SkillsItem = {
-          title: proTitle[i],
+          title: proTitle[i] || "عنوان",
           number: proNumber[i] || 0,
           type: "pro",
         };
@@ -132,7 +132,7 @@ const HomeEditForm = ({ clerkId, user }: Props) => {
       // Populate skillsItem array with public skills
       for (let i = 0; i < publicTitle.length; i++) {
         const skillItem: SkillsItem = {
-          title: publicTitle[i],
+          title: publicTitle[i] || "عنوان",
           number: publicNumber[i] || 0,
           type: "public",
         };
@@ -436,11 +436,17 @@ const HomeEditForm = ({ clerkId, user }: Props) => {
               )}
             />
           </div>
-
-          <p className="body-regular mt-2.5 text-light-500">
-            در فیلدهای بالا مقدار را تایپ کرده و سپس کلید Enter را بفشارید و
-            برای اضافه کردن متن‌های بیشتر این پروسه را تکرار نمایید.
-          </p>
+          <div>
+            <p className="body-regular text-light-500">
+              در فیلدهای بالا مقدار را تایپ کرده و سپس کلید Enter را بفشارید و
+              برای اضافه کردن متن‌های بیشتر این پروسه را تکرار نمایید.
+            </p>
+            <p className="body-regular mt-1 text-light-500">
+              <span className="text-rose-500">* </span>
+              توجه داشته باشید بابت هر عنوان باید مقدار مهارت وارد شود و بلعکس
+              در غیر اینصورت مقادیر از پیش تایید شده جایگزین خواهند شد.
+            </p>
+          </div>
         </div>
 
         <Button
