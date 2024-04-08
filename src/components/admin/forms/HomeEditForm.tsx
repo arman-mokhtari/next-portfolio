@@ -5,7 +5,6 @@ import React, { KeyboardEvent, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -23,6 +22,7 @@ import { updateUser } from "@/backend/libs/actions/user.action";
 import { homeEditSchema } from "@/lib/validation";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
+import SubmitButton from "../shared/SubmitButton";
 
 type FieldName = "title" | "desc" | "metaTitle" | "metaDesk";
 
@@ -205,13 +205,7 @@ const HomeEditForm = ({ clerkId, user }: Props) => {
             </FormItem>
           )}
         />
-        <Button
-          className="hover-gradient mt-4 min-h-[46px] min-w-[140px] rounded-full px-4 py-3 text-base !text-light-900 shadow-lg shadow-slate-400 active:shadow-md dark:shadow-none"
-          type="submit"
-          disabled={isSubmit}
-        >
-          {isSubmit ? "در حال ثبت..." : "ثبت"}
-        </Button>
+        <SubmitButton isSubmit={isSubmit} />
       </form>
     </Form>
   );

@@ -29,7 +29,7 @@ interface Props {
   user: string;
 }
 
-const SkillsEditForm = ({ clerkId, user }: Props) => {
+const ResumeEditForm = ({ clerkId, user }: Props) => {
   const parsedUser = JSON.parse(user);
   const [isSubmit, setIsSubmit] = useState(false);
   const router = useRouter();
@@ -237,9 +237,12 @@ const SkillsEditForm = ({ clerkId, user }: Props) => {
     { title: "عنوان مهارت تخصصی", name: "proTitle" as const, type: "text" },
     { title: "میزان مهارت تخصصی", name: "proNumber" as const, type: "number" },
     { title: "عنوان مهارت عمومی", name: "publicTitle" as const, type: "text" },
-    { title: "میزان مهارت عمومی", name: "publicNumber" as const, type: "number" },
+    {
+      title: "میزان مهارت عمومی",
+      name: "publicNumber" as const,
+      type: "number",
+    },
   ];
-  
 
   return (
     <Form {...form}>
@@ -270,68 +273,69 @@ const SkillsEditForm = ({ clerkId, user }: Props) => {
         </div>
 
         <div className="light-border-2 mt-6 flex flex-col gap-4 space-y-4 rounded-md border p-4">
-        <div className="grid grid-cols-2 gap-4">
-          {skillFields.map(({ title, name, type }) => (
-            <FormField
-              key={name}
-              control={form.control}
-              name={name}
-              render={({ field }) => (
-                <FormItem className="mt-6 flex w-full flex-col">
-                  <FormLabel className="paragraph-semibold text-dark400_light800">
-                    {title}
-                  </FormLabel>
-                  <FormControl className="mt-3.5">
-                    <>
-                      <Input
-                        type={type}
-                        className="paragraph-regular background-light800_dark400 theme-border-color text-dark300_light700 input-light"
-                        placeholder={title}
-                        onKeyDown={(e) => handleFieldChange(e, field, name)}
-                      />
-                      <FormMessage className="text-xs text-rose-600" />
-                      {field.value.length > 0 && (
-                        <div className="mt-2.5 flex flex-col items-start gap-2.5">
-                          {field.value.map((tag: any) => (
-                            <Badge
-                              key={tag}
-                              className="subtle-medium background-light800_dark300 text-light400_light500 flex items-center justify-center gap-2 rounded-md border-none px-4 py-2"
-                              onClick={() => handleTagAction(tag, field, true)}
-                            >
-                              {tag}
+          <div className="grid grid-cols-2 gap-4">
+            {skillFields.map(({ title, name, type }) => (
+              <FormField
+                key={name}
+                control={form.control}
+                name={name}
+                render={({ field }) => (
+                  <FormItem className="mt-6 flex w-full flex-col">
+                    <FormLabel className="paragraph-semibold text-dark400_light800">
+                      {title}
+                    </FormLabel>
+                    <FormControl className="mt-3.5">
+                      <>
+                        <Input
+                          type={type}
+                          className="paragraph-regular background-light800_dark400 theme-border-color text-dark300_light700 input-light"
+                          placeholder={title}
+                          onKeyDown={(e) => handleFieldChange(e, field, name)}
+                        />
+                        <FormMessage className="text-xs text-rose-600" />
+                        {field.value.length > 0 && (
+                          <div className="mt-2.5 flex flex-col items-start gap-2.5">
+                            {field.value.map((tag: any) => (
+                              <Badge
+                                key={tag}
+                                className="subtle-medium background-light800_dark300 text-light400_light500 flex items-center justify-center gap-2 rounded-md border-none px-4 py-2"
+                                onClick={() =>
+                                  handleTagAction(tag, field, true)
+                                }
+                              >
+                                {tag}
 
-                              <Image
-                                src="/assets/icons/close.svg"
-                                alt="Close icon"
-                                width={12}
-                                height={12}
-                                className="cursor-pointer object-contain invert-0 dark:invert"
-                              />
-                            </Badge>
-                          ))}
-                        </div>
-                      )}
-                    </>
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-          ))}
+                                <Image
+                                  src="/assets/icons/close.svg"
+                                  alt="Close icon"
+                                  width={12}
+                                  height={12}
+                                  className="cursor-pointer object-contain invert-0 dark:invert"
+                                />
+                              </Badge>
+                            ))}
+                          </div>
+                        )}
+                      </>
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+            ))}
+          </div>
+
+          <div>
+            <p className="body-regular text-light-500">
+              در فیلدهای بالا مقدار را تایپ کرده و سپس کلید Enter را بفشارید و
+              برای اضافه کردن متن‌های بیشتر این پروسه را تکرار نمایید.
+            </p>
+            <p className="body-regular mt-1 text-light-500">
+              <span className="ml-1 text-rose-500">*</span>
+              توجه داشته باشید بابت هر عنوان باید مقدار مهارت وارد شود و بلعکس
+              در غیر اینصورت مقادیر پیش‌فرض جایگزین خواهند شد.
+            </p>
+          </div>
         </div>
-
-        <div>
-          <p className="body-regular text-light-500">
-            در فیلدهای بالا مقدار را تایپ کرده و سپس کلید Enter را بفشارید و
-            برای اضافه کردن متن‌های بیشتر این پروسه را تکرار نمایید.
-          </p>
-          <p className="body-regular mt-1 text-light-500">
-            <span className="ml-1 text-rose-500">*</span>
-            توجه داشته باشید بابت هر عنوان باید مقدار مهارت وارد شود و بلعکس
-            در غیر اینصورت مقادیر پیش‌فرض جایگزین خواهند شد.
-          </p>
-        </div>
-
-      </div>
 
         <SubmitButton isSubmit={isSubmit} />
       </form>
@@ -339,4 +343,4 @@ const SkillsEditForm = ({ clerkId, user }: Props) => {
   );
 };
 
-export default SkillsEditForm;
+export default ResumeEditForm;

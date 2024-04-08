@@ -3,7 +3,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -18,6 +17,7 @@ import { userValidationSchema } from "@/lib/validation";
 import { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { updateUser } from "@/backend/libs/actions/user.action";
+import SubmitButton from "../shared/SubmitButton";
 
 // Define type for field names and placeholders
 type FieldName =
@@ -138,13 +138,7 @@ const ProfileForm = ({ clerkId, user }: Props) => {
             />
           ))}
         </div>
-        <Button
-          className="hover-gradient mt-4 min-h-[46px] min-w-[140px] rounded-full px-4 py-3 text-base !text-light-900 shadow-lg shadow-slate-400 active:shadow-md dark:shadow-none"
-          type="submit"
-          disabled={isSubmit}
-        >
-          {isSubmit ? "در حال ثبت..." : "ثبت"}
-        </Button>
+        <SubmitButton isSubmit={isSubmit} />
       </form>
     </Form>
   );

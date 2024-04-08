@@ -86,4 +86,9 @@ export const adminSidebarLinks: SidebarLink[] = [
     route: "/admin/skills-edit",
     label: "تنظیمات مهارت‌ها",
   },
+  {
+    imgURL: "/assets/icons/sidebar/user.svg",
+    route: "/admin/resume-edit",
+    label: "تنظیمات رزومه",
+  },
 ];
