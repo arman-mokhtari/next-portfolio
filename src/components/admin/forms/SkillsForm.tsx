@@ -123,7 +123,7 @@ const HomeEditForm = ({ clerkId, user }: Props) => {
       for (let i = 0; i < proTitle.length; i++) {
         const skillItem: SkillsItem = {
           title: proTitle[i],
-          number: proNumber[i],
+          number: proNumber[i] || 0,
           type: "pro",
         };
         data.updateData.skillsItem.push(skillItem);
@@ -133,7 +133,7 @@ const HomeEditForm = ({ clerkId, user }: Props) => {
       for (let i = 0; i < publicTitle.length; i++) {
         const skillItem: SkillsItem = {
           title: publicTitle[i],
-          number: publicNumber[i],
+          number: publicNumber[i] || 0,
           type: "public",
         };
         data.updateData.skillsItem.push(skillItem);
@@ -163,9 +163,10 @@ const HomeEditForm = ({ clerkId, user }: Props) => {
     }
   };
 
-  const handleProTitleChange = (
+  const handleFieldChange = (
     e: KeyboardEvent<HTMLInputElement>,
-    field: any
+    field: any,
+    type: string
   ) => {
     if (e.key === "Enter") {
       e.preventDefault();
@@ -173,155 +174,63 @@ const HomeEditForm = ({ clerkId, user }: Props) => {
       const typedValue = typedInput.value;
 
       if (typedValue !== "") {
-        if (typedValue.length > 70) {
-          return form.setError("proTitle", {
-            type: "required",
-            message: "آیتم‌ نباید بیشتر از 70 کاراکتر باشد",
-          });
-        }
+        const isNumberField = field.name.includes("Number");
+        const newValue = Array.isArray(field.value) ? [...field.value] : [];
 
-        // Ensure field.value is always an array before calling includes
-        const newValue = Array.isArray(field.value) ? field.value : [];
-        if (!newValue.includes(typedValue as never)) {
+        // Check if the field is a number field
+        if (isNumberField) {
+          const numericValue = Number(typedValue);
+
+          // Check if the value is a valid number between 0 and 100
+          if (
+            !isNaN(numericValue) &&
+            numericValue >= 0 &&
+            numericValue <= 100
+          ) {
+            newValue.push(numericValue);
+            form.setValue(field.name, newValue);
+          } else {
+            form.setError(field.name, {
+              type: "required",
+              message: "مقدار باید عددی بین 0 و 100 باشد",
+            });
+          }
+        } else {
+          const maxLength = 100;
+          const minLength = 1;
+
+          if (typedValue.length > maxLength) {
+            return form.setError(field.name, {
+              type: "required",
+              message: `آیتم‌ نباید بیشتر از ${maxLength} کاراکتر باشد`,
+            });
+          }
+
+          if (typedValue.length < minLength) {
+            return form.setError(field.name, {
+              type: "required",
+              message: `آیتم نباید کمتر از ${minLength} کاراکتر باشد`,
+            });
+          }
+
+          // Push the value to the array
           newValue.push(typedValue);
-          form.setValue("proTitle", newValue);
+          form.setValue(field.name, newValue);
         }
       } else {
+        // Trigger validation for empty input
         form.trigger();
       }
+      // Clear the input after handling the value
       typedInput.value = "";
     }
   };
 
-  const handleProNumberChange = (
-    e: KeyboardEvent<HTMLInputElement>,
-    field: any
-  ) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      const typedInput = e.target as HTMLInputElement;
-      const typedValue = parseInt(typedInput.value);
-
-      if (!isNaN(typedValue)) {
-        if (typedValue > 100) {
-          return form.setError("proNumber", {
-            type: "required",
-            message: "آیتم‌ نباید بیشتر از 100 باشد",
-          });
-        }
-
-        // Ensure field.value is always an array before calling includes
-        const newValue = Array.isArray(field.value) ? field.value : [];
-        if (!newValue.includes(typedValue as never)) {
-          newValue.push(typedValue);
-          form.setValue("proNumber", newValue);
-        }
-      } else {
-        form.trigger();
-      }
-      typedInput.value = "";
-    }
-  };
-
-  const handlePublicTitleChange = (
-    e: KeyboardEvent<HTMLInputElement>,
-    field: any
-  ) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      const typedInput = e.target as HTMLInputElement;
-      const typedValue = typedInput.value;
-
-      if (typedValue !== "") {
-        if (typedValue.length > 70) {
-          return form.setError("publicTitle", {
-            type: "required",
-            message: "آیتم‌ نباید بیشتر از 70 کاراکتر باشد",
-          });
-        }
-
-        // Ensure field.value is always an array before calling includes
-        const newValue = Array.isArray(field.value) ? field.value : [];
-        if (!newValue.includes(typedValue as never)) {
-          newValue.push(typedValue);
-          form.setValue("publicTitle", newValue);
-        }
-      } else {
-        form.trigger();
-      }
-      typedInput.value = "";
-    }
-  };
-
-  const handlePublicNumberChange = (
-    e: KeyboardEvent<HTMLInputElement>,
-    field: any
-  ) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      const typedInput = e.target as HTMLInputElement;
-      const typedValue = parseInt(typedInput.value);
-
-      if (!isNaN(typedValue)) {
-        if (typedValue > 100) {
-          return form.setError("publicNumber", {
-            type: "required",
-            message: "آیتم‌ نباید بیشتر از 100 باشد",
-          });
-        }
-
-        // Ensure field.value is always an array before calling includes
-        const newValue = Array.isArray(field.value) ? field.value : [];
-        if (!newValue.includes(typedValue as never)) {
-          newValue.push(typedValue);
-          form.setValue("publicNumber", newValue);
-        }
-      } else {
-        form.trigger();
-      }
-      typedInput.value = "";
-    }
-  };
-
-  const handleProTitleTagAction = (
-    tag: string,
-    field: any,
-    isRemove: boolean
-  ) => {
+  const handleTagAction = (tag: string, field: any, isRemove: boolean) => {
     const newValue = isRemove
       ? field.value.filter((t: string) => t !== tag)
       : [...field.value, tag];
-    form.setValue("proTitle", newValue);
-  };
-  const handleProNumberTagAction = (
-    tag: string,
-    field: any,
-    isRemove: boolean
-  ) => {
-    const newValue = isRemove
-      ? field.value.filter((t: string) => t !== tag)
-      : [...field.value, tag];
-    form.setValue("proNumber", newValue);
-  };
-  const handlePublicTitleTagAction = (
-    tag: string,
-    field: any,
-    isRemove: boolean
-  ) => {
-    const newValue = isRemove
-      ? field.value.filter((t: string) => t !== tag)
-      : [...field.value, tag];
-    form.setValue("publicTitle", newValue);
-  };
-  const handlePublicNumberTagAction = (
-    tag: string,
-    field: any,
-    isRemove: boolean
-  ) => {
-    const newValue = isRemove
-      ? field.value.filter((t: string) => t !== tag)
-      : [...field.value, tag];
-    form.setValue("publicNumber", newValue);
+    form.setValue(field.name, newValue);
   };
 
   return (
@@ -367,7 +276,7 @@ const HomeEditForm = ({ clerkId, user }: Props) => {
                       <Input
                         className="paragraph-regular background-light800_dark400 theme-border-color text-dark300_light700 input-light"
                         placeholder="عنوان مهارت تخصصی"
-                        onKeyDown={(e) => handleProTitleChange(e, field)}
+                        onKeyDown={(e) => handleFieldChange(e, field, "pro")}
                       />
                       <FormMessage className="text-xs text-rose-600" />
                       {field.value.length > 0 && (
@@ -376,9 +285,7 @@ const HomeEditForm = ({ clerkId, user }: Props) => {
                             <Badge
                               key={tag}
                               className="subtle-medium background-light800_dark300 text-light400_light500 flex items-center justify-center gap-2 rounded-md border-none px-4 py-2"
-                              onClick={() =>
-                                handleProTitleTagAction(tag, field, true)
-                              }
+                              onClick={() => handleTagAction(tag, field, true)}
                             >
                               {tag}
 
@@ -412,7 +319,7 @@ const HomeEditForm = ({ clerkId, user }: Props) => {
                         type="number"
                         className="paragraph-regular background-light800_dark400 theme-border-color text-dark300_light700 input-light"
                         placeholder="میزان مهارت بین 0 تا 100"
-                        onKeyDown={(e) => handleProNumberChange(e, field)}
+                        onKeyDown={(e) => handleFieldChange(e, field, "pro")}
                       />
                       <FormMessage className="text-xs text-rose-600" />
                       {field.value.length > 0 && (
@@ -421,9 +328,7 @@ const HomeEditForm = ({ clerkId, user }: Props) => {
                             <Badge
                               key={tag}
                               className="subtle-medium background-light800_dark300 text-light400_light500 flex items-center justify-center gap-2 rounded-md border-none px-4 py-2"
-                              onClick={() =>
-                                handleProNumberTagAction(tag, field, true)
-                              }
+                              onClick={() => handleTagAction(tag, field, true)}
                             >
                               {tag}
 
@@ -458,7 +363,7 @@ const HomeEditForm = ({ clerkId, user }: Props) => {
                       <Input
                         className="paragraph-regular background-light800_dark400 theme-border-color text-dark300_light700 input-light"
                         placeholder="عنوان مهارت عمومی"
-                        onKeyDown={(e) => handlePublicTitleChange(e, field)}
+                        onKeyDown={(e) => handleFieldChange(e, field, "pro")}
                       />
                       <FormMessage className="text-xs text-rose-600" />
                       {field.value.length > 0 && (
@@ -467,9 +372,7 @@ const HomeEditForm = ({ clerkId, user }: Props) => {
                             <Badge
                               key={tag}
                               className="subtle-medium background-light800_dark300 text-light400_light500 flex items-center justify-center gap-2 rounded-md border-none px-4 py-2"
-                              onClick={() =>
-                                handlePublicTitleTagAction(tag, field, true)
-                              }
+                              onClick={() => handleTagAction(tag, field, true)}
                             >
                               {tag}
 
@@ -503,7 +406,7 @@ const HomeEditForm = ({ clerkId, user }: Props) => {
                         type="number"
                         className="paragraph-regular background-light800_dark400 theme-border-color text-dark300_light700 input-light"
                         placeholder="میزان مهارت بین 0 تا 100"
-                        onKeyDown={(e) => handlePublicNumberChange(e, field)}
+                        onKeyDown={(e) => handleFieldChange(e, field, "pro")}
                       />
                       <FormMessage className="text-xs text-rose-600" />
                       {field.value.length > 0 && (
@@ -512,9 +415,7 @@ const HomeEditForm = ({ clerkId, user }: Props) => {
                             <Badge
                               key={tag}
                               className="subtle-medium background-light800_dark300 text-light400_light500 flex items-center justify-center gap-2 rounded-md border-none px-4 py-2"
-                              onClick={() =>
-                                handlePublicNumberTagAction(tag, field, true)
-                              }
+                              onClick={() => handleTagAction(tag, field, true)}
                             >
                               {tag}
 
