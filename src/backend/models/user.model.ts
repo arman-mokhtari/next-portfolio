@@ -1,4 +1,4 @@
-import { Schema, models, model, Document } from "mongoose";
+import { Schema, models, model, Document, Types } from "mongoose";
 
 const CommonSchema = {
   title: { type: String },
@@ -33,6 +33,7 @@ export interface IUser extends Document {
   about?: typeof CommonSchema & { isTopBubble?: boolean; topBubble?: string };
   skills?: typeof CommonSchema;
   skillsItem: {
+    _id: any;
     title: { type: String };
     number: { type: Number };
     type: { type: String };
@@ -80,6 +81,7 @@ const UserSchema = new Schema(
       ...CommonSchema,
     },
     skillsItem: {
+      _id: { type: Schema.Types.ObjectId, required: true, default: () => new Types.ObjectId() },
       title: { type: String, required: true, default: "نامشخص" },
       number: { type: Number, required: true, default: 0 },
       type: { type: String },
