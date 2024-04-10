@@ -29,14 +29,14 @@ export interface IUser extends Document {
   about?: typeof CommonSchema & { isTopBubble?: boolean; topBubble?: string };
   skills?: typeof CommonSchema;
   skillsItem: {
-    title: { type: String };
-    number: { type: Number };
-    type: { type: String };
+    title: { type: string };
+    number: { type: number };
+    type: { type: string };
   };
   resumeItems: {
-    desc: { type: String };
-    date: { type: Date };
-    type: { type: String };
+    desc: { type: string };
+    date: { type: string };
+    type: { type: string };
   };
   socials?: {
     instagram: {
