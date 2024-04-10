@@ -1,7 +1,12 @@
+import { getAdmin } from "@/backend/libs/actions/user.action";
 import { socialData } from "@/constants/socialData";
 import Image from "next/image";
 
-const SidebarSocial = () => {
+const SidebarSocial = async () => {
+  const admin = await getAdmin();
+  if (!admin) {
+    return <div>Loading...</div>;
+  }
   return (
     <div className="flex justify-center gap-4 ">
       {socialData.map(({ ariaLabel, title, href, img, id }) => (

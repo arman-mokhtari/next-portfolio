@@ -25,10 +25,6 @@ export interface IUser extends Document {
   status?: string;
   password?: string;
   location?: string;
-  instagram?: string;
-  twitter?: string;
-  telegram?: string;
-  facebook?: string;
   home?: typeof CommonSchema;
   about?: typeof CommonSchema & { isTopBubble?: boolean; topBubble?: string };
   skills?: typeof CommonSchema;
@@ -41,6 +37,24 @@ export interface IUser extends Document {
     desc: { type: String };
     date: { type: Date };
     type: { type: String };
+  };
+  socials?: {
+    instagram: {
+      href: string;
+      isDisplay: boolean;
+    };
+    twitter: {
+      href: string;
+      isDisplay: boolean;
+    };
+    telegram: {
+      href: string;
+      isDisplay: boolean;
+    };
+    facebook: {
+      href: string;
+      isDisplay: boolean;
+    };
   };
   resume?: typeof CommonSchema;
   activities?: typeof CommonSchema;
@@ -66,15 +80,42 @@ const UserSchema = new Schema(
     status: { type: String },
     password: { type: String },
     typed: [{ type: String }],
+    socials: {
+      instagram: {
+        href: {
+          type: String,
+        },
+        isDisplay: {
+          type: Boolean,
+        },
+      },
+      twitter: {
+        href: {
+          type: String,
+        },
+        isDisplay: {
+          type: Boolean,
+        },
+      },
+      telegram: {
+        href: {
+          type: String,
+        },
+        isDisplay: {
+          type: Boolean,
+        },
+      },
+      facebook: {
+        href: {
+          type: String,
+        },
+        isDisplay: {
+          type: Boolean,
+        },
+      },
+    },
     location: { type: String, required: true, default: "ایران، تهران" },
-    instagram: {
-      type: String,
-    },
-    twitter: {
-      type: String,
-    },
-    telegram: { type: String },
-    facebook: { type: String },
+
     home: CommonSchema,
     about: {
       ...CommonSchema,
