@@ -85,6 +85,10 @@ export const sidebarSettingsSchema = z.object({
   twitter: z.string().optional(),
   telegram: z.string().optional(),
   facebook: z.string().optional(),
+  isDisplayInstagram: z.boolean().default(false).optional(),
+  isDisplayTwitter: z.boolean().default(false).optional(),
+  isDisplayTelegram: z.boolean().default(false).optional(),
+  isDisplayFacebook: z.boolean().default(false).optional(),
 });
 
 const commonValidation = z.object({
@@ -246,9 +250,7 @@ export const resumeEditSchema = z.object({
       message: "مجموع آیتم‌ها نباید بیشتر از 20 آیتم باشند",
     }),
   expDate: z
-    .array(
-      z.string()
-    )
+    .array(z.string())
     .min(2, {
       message: "مجموع آیتم‌ها نباید کمتر از 2 آیتم باشند",
     })
@@ -273,9 +275,7 @@ export const resumeEditSchema = z.object({
       message: "مجموع آیتم‌ها نباید بیشتر از 20 آیتم باشند",
     }),
   docDate: z
-    .array(
-      z.string()
-    )
+    .array(z.string())
     .min(2, {
       message: "مجموع آیتم‌ها نباید کمتر از 2 آیتم باشند",
     })

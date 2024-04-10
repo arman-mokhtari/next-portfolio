@@ -26,13 +26,5 @@ export const socialData = [
     title: "Github",
     href: "https://github.com/arman-mokhtari",
     img: "/assets/icons/social/telegram.svg",
-    // icon: <GitHub sx={{
-    //     color: "text.secondary",
-    //     transition: "all 0.2s linear",
-    //     '&.MuiSvgIcon-root:hover': {
-    //         transform: "scale(1.1)",
-    //         color: "#037fff"
-    //     },
-    // }} />
   },
 ];
