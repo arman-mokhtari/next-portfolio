@@ -42,7 +42,7 @@ export const sidebarLinks: SidebarLink[] = [
   {
     imgURL: "/assets/icons/sidebar/activities.svg",
     route: "/activities",
-    label: "فعالیت‌ها",
+    label: "پروژه‌ها",
   },
   {
     imgURL: "/assets/icons/sidebar/contact.svg",
@@ -86,41 +86,14 @@ export const adminSidebarLinks: SidebarLink[] = [
     route: "/admin/skills-edit",
     label: "تنظیمات مهارت‌ها",
   },
+  {
+    imgURL: "/assets/icons/sidebar/user.svg",
+    route: "/admin/resume-edit",
+    label: "تنظیمات رزومه",
+  },
+  {
+    imgURL: "/assets/icons/sidebar/user.svg",
+    route: "/admin/activities-edit",
+    label: "تنظیمات پروژه‌ها",
+  },
 ];
-
-export const skillData = {
-  public: [
-    {
-      _id: 1,
-      title: "جاوا اسکریپت",
-      number: 65,
-    },
-    {
-      _id: 2,
-      title: "اچ تی ام ال",
-      number: 92,
-    },
-    {
-      _id: 3,
-      title: "سی اس اس",
-      number: 82,
-    }
-  ],
-  pro: [
-    {
-      _id: 5,
-      title: "ری‌اکت",
-      number: 89,
-    },
-    {
-      _id: 6,
-      title: "نود جی اس",
-      number: 75,
-    },
-    {
-      _id: 7,
-      title: "نکست جی اس",
-      number: 85,
-    }
-  ]
-};

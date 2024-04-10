@@ -1,11 +1,9 @@
 "use client";
 
 import { useState } from "react";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -23,6 +21,7 @@ import { updateUser } from "@/backend/libs/actions/user.action";
 import { aboutEditSchema } from "@/lib/validation";
 import { Checkbox } from "@/components/ui/checkbox";
 import Bubble from "@/components/shared/Bubble";
+import SubmitButton from "../shared/SubmitButton";
 
 type FieldName = "title" | "desc" | "metaTitle" | "metaDesk" | "profileImage";
 
@@ -188,13 +187,7 @@ const AboutEditForm = ({ clerkId, user }: Props) => {
           تغییر آنها به تنظیمات پروفایل مراجعه کنید.
         </p>
 
-        <Button
-          className="hover-gradient mt-4 min-h-[46px] min-w-[140px] rounded-full px-4 py-3 text-base !text-light-900 shadow-lg shadow-slate-400 active:shadow-md dark:shadow-none"
-          type="submit"
-          disabled={isSubmit}
-        >
-          {isSubmit ? "در حال ثبت..." : "ثبت"}
-        </Button>
+        <SubmitButton isSubmit={isSubmit} />
       </form>
     </Form>
   );

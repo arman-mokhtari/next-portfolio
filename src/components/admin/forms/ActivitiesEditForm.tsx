@@ -19,7 +19,7 @@ import { toast } from "@/components/ui/use-toast";
 
 import { usePathname, useRouter } from "next/navigation";
 import { updateUser } from "@/backend/libs/actions/user.action";
-import { homeEditSchema } from "@/lib/validation";
+import { activitiesEditSchema } from "@/lib/validation";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import SubmitButton from "../shared/SubmitButton";
@@ -33,20 +33,20 @@ interface Props {
   user: string;
 }
 
-const HomeEditForm = ({ clerkId, user }: Props) => {
+const ActivitiesEditForm = ({ clerkId, user }: Props) => {
   const parsedUser = JSON.parse(user);
   const [isSubmit, setIsSubmit] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
 
-  const form = useForm<z.infer<typeof homeEditSchema>>({
-    resolver: zodResolver(homeEditSchema),
+  const form = useForm<z.infer<typeof activitiesEditSchema>>({
+    resolver: zodResolver(activitiesEditSchema),
     defaultValues: {
-      title: parsedUser.home?.title || "",
-      desc: parsedUser.home?.desc || "",
-      metaTitle: parsedUser.home?.metaTitle || "",
-      metaDesk: parsedUser.home?.metaDesk || "",
-      typed: parsedUser.typed || "",
+      title: parsedUser.activities?.title || "",
+      desc: parsedUser.activities?.desc || "",
+      metaTitle: parsedUser.activities?.metaTitle || "",
+      metaDesk: parsedUser.activities?.metaDesk || "",
+      activityLinks: parsedUser.activities?.activityLinks || "",
     },
   });
 
@@ -59,19 +59,19 @@ const HomeEditForm = ({ clerkId, user }: Props) => {
 
   const fieldNames: FieldName[] = ["title", "desc", "metaTitle", "metaDesk"];
 
-  const onSubmit = async (values: z.infer<typeof homeEditSchema>) => {
+  const onSubmit = async (values: z.infer<typeof activitiesEditSchema>) => {
     setIsSubmit(true);
-    const { typed, title, desc, metaTitle, metaDesk } = values;
+    const { activityLinks, title, desc, metaTitle, metaDesk } = values;
     try {
       await updateUser({
         clerkId,
         updateData: {
-          typed,
-          home: {
+          activities: {
             title,
             desc,
             metaTitle,
             metaDesk,
+            activityLinks
           },
         },
         path: pathname,
@@ -99,23 +99,11 @@ const HomeEditForm = ({ clerkId, user }: Props) => {
       const typedValue = typedInput.value;
 
       if (typedValue !== "") {
-        if (typedValue.length > 70) {
-          return form.setError("typed", {
-            type: "required",
-            message: "آیتم‌ نباید بیشتر از 70 کاراکتر باشد",
-          });
-        }
-
-        if (typedValue.length < 10) {
-          return form.setError("typed", {
-            type: "required",
-            message: "آیتم نباید کمتر از 10 کاراکتر باشد",
-          });
-        }
+       
 
         if (!field.value.includes(typedValue as never)) {
           const newValue = [...field.value, typedValue];
-          form.setValue("typed", newValue);
+          form.setValue("activityLinks", newValue);
         }
       } else {
         form.trigger();
@@ -128,7 +116,7 @@ const HomeEditForm = ({ clerkId, user }: Props) => {
     const newValue = isRemove
       ? field.value.filter((t: string) => t !== tag)
       : [...field.value, tag];
-    form.setValue("typed", newValue);
+    form.setValue("activityLinks", newValue);
   };
 
   return (
@@ -161,17 +149,17 @@ const HomeEditForm = ({ clerkId, user }: Props) => {
 
         <FormField
           control={form.control}
-          name="typed"
+          name="activityLinks"
           render={({ field }) => (
             <FormItem className="mt-6 flex w-full flex-col">
               <FormLabel className="paragraph-semibold text-dark400_light800">
-                متن در حال تایپ صفحه نخست
+                لینک تصویر پروژه‌ها
               </FormLabel>
               <FormControl className="mt-3.5">
                 <>
                   <Input
                     className="paragraph-regular background-light800_dark400 theme-border-color text-dark300_light700 input-light"
-                    placeholder="متن در حال تایپ صفحه نخست"
+                    placeholder="لینک تصویر پروژه"
                     onKeyDown={(e) => handleTypedChange(e, field)}
                   />
                   <FormDescription className="body-regular mt-2.5 text-light-500">
@@ -211,4 +199,4 @@ const HomeEditForm = ({ clerkId, user }: Props) => {
   );
 };
 
-export default HomeEditForm;
+export default ActivitiesEditForm;
