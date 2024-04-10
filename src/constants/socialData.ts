@@ -25,6 +25,6 @@ export const socialData = [
     ariaLabel: "GitHub",
     title: "Github",
     href: "https://github.com/arman-mokhtari",
-    img: "/assets/icons/social/telegram.svg",
+    img: "/assets/icons/social/whatsapp.svg",
   },
 ];
