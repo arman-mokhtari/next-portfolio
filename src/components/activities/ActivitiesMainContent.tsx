@@ -1,9 +1,14 @@
+import { getAdmin } from "@/backend/libs/actions/user.action";
 import ProjectSlider from "./Carousel";
 
-const ActivitiesMainContent = () => {
+const ActivitiesMainContent = async () => {
+  const admin = await getAdmin();
+  if (!admin) {
+    return <div>Loading...</div>;
+  }
   return (
     <div className="relative flex min-h-screen items-center justify-center">
-      <ProjectSlider />
+      <ProjectSlider admin={admin} />
     </div>
   );
 };
