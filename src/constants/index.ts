@@ -42,7 +42,7 @@ export const sidebarLinks: SidebarLink[] = [
   {
     imgURL: "/assets/icons/sidebar/activities.svg",
     route: "/activities",
-    label: "فعالیت‌ها",
+    label: "پروژه‌ها",
   },
   {
     imgURL: "/assets/icons/sidebar/contact.svg",
@@ -90,5 +90,10 @@ export const adminSidebarLinks: SidebarLink[] = [
     imgURL: "/assets/icons/sidebar/user.svg",
     route: "/admin/resume-edit",
     label: "تنظیمات رزومه",
+  },
+  {
+    imgURL: "/assets/icons/sidebar/user.svg",
+    route: "/admin/activities-edit",
+    label: "تنظیمات پروژه‌ها",
   },
 ];

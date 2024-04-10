@@ -7,6 +7,7 @@ import {
 import ProfileImage from "@/common/ProfileImage";
 import Divider from "@/common/Divider";
 import MobileNavContent from "./AdminMobileNavContent";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 const AdminMobileSidebar = () => {
   return (
@@ -31,12 +32,11 @@ const AdminMobileSidebar = () => {
         <div>
           <ProfileImage />
           <Divider />
-          <SheetClose asChild>
-
+          <ScrollArea dir="rtl" className="h-96 w-full">
+            <SheetClose asChild>
               <MobileNavContent />
-
-
-          </SheetClose>
+            </SheetClose>
+          </ScrollArea>
         </div>
       </SheetContent>
     </Sheet>

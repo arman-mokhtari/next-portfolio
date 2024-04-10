@@ -37,6 +37,11 @@ export interface IUser extends Document {
     number: { type: Number };
     type: { type: String };
   };
+  resumeItems: {
+    desc: { type: String };
+    date: { type: Date };
+    type: { type: String };
+  };
   resume?: typeof CommonSchema;
   activities?: typeof CommonSchema;
   contact?: typeof CommonSchema;
@@ -76,16 +81,22 @@ const UserSchema = new Schema(
       isTopBubble: { type: Boolean },
       topBubble: { type: String },
     },
-    skills: {
-      ...CommonSchema,
-    },
+    skills: CommonSchema,
     skillsItem: {
-      title: { type: String, required: true, default: "نامشخص" },
-      number: { type: Number, required: true, default: 0 },
+      title: { type: String, required: true },
+      number: { type: Number, required: true },
       type: { type: String },
     },
     resume: CommonSchema,
-    activities: CommonSchema,
+    resumeItems: {
+      desc: { type: String, required: true },
+      date: { type: Date, required: true },
+      type: { type: String },
+    },
+    activities: {
+      ...CommonSchema,
+      activityLinks: [{ type: String }],
+    },
     contact: CommonSchema,
   },
   {

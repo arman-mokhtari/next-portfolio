@@ -225,3 +225,82 @@ export const skillsEditSchema = z.object({
       message: "مجموع آیتم‌ها نباید بیشتر از 20 آیتم باشند",
     }),
 });
+
+export const resumeEditSchema = z.object({
+  ...commonValidation.shape,
+  expDesc: z
+    .array(
+      z
+        .string()
+        .min(1, {
+          message: "عنوان را وارد کنید",
+        })
+        .max(400, {
+          message: "عنوان نباید بیشتر از 400 کاراکتر باشد",
+        })
+    )
+    .min(2, {
+      message: "مجموع آیتم‌ها نباید کمتر از 2 آیتم باشند",
+    })
+    .max(20, {
+      message: "مجموع آیتم‌ها نباید بیشتر از 20 آیتم باشند",
+    }),
+  expDate: z
+    .array(
+      z.string()
+    )
+    .min(2, {
+      message: "مجموع آیتم‌ها نباید کمتر از 2 آیتم باشند",
+    })
+    .max(20, {
+      message: "مجموع آیتم‌ها نباید بیشتر از 20 آیتم باشند",
+    }),
+  docDesc: z
+    .array(
+      z
+        .string()
+        .min(1, {
+          message: "عنوان را وارد کنید",
+        })
+        .max(400, {
+          message: "عنوان نباید بیشتر از 400 کاراکتر باشد",
+        })
+    )
+    .min(2, {
+      message: "مجموع آیتم‌ها نباید کمتر از 2 آیتم باشند",
+    })
+    .max(20, {
+      message: "مجموع آیتم‌ها نباید بیشتر از 20 آیتم باشند",
+    }),
+  docDate: z
+    .array(
+      z.string()
+    )
+    .min(2, {
+      message: "مجموع آیتم‌ها نباید کمتر از 2 آیتم باشند",
+    })
+    .max(20, {
+      message: "مجموع آیتم‌ها نباید بیشتر از 20 آیتم باشند",
+    }),
+});
+
+export const activitiesEditSchema = z.object({
+  ...commonValidation.shape,
+  activityLinks: z
+    .array(
+      z
+        .string()
+        .min(10, {
+          message: "آیتم نباید کمتر از 10 کاراکتر باشد",
+        })
+        .max(70, {
+          message: "آیتم‌ نباید بیشتر از 70 کاراکتر باشد",
+        })
+    )
+    .min(3, {
+      message: "مجموع آیتم‌ها نباید کمتر از 3 آیتم باشند",
+    })
+    .max(10, {
+      message: "مجموع آیتم‌ها نباید بیشتر از 10 آیتم باشند",
+    }),
+});

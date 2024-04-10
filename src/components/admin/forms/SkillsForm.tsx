@@ -35,17 +35,17 @@ const SkillsEditForm = ({ clerkId, user }: Props) => {
   const router = useRouter();
   const pathname = usePathname();
 
-  const proSkills = parsedUser?.skillsItem.filter(
+  const proSkills = parsedUser?.skillsItem?.filter(
     (item: any) => item.type === "pro"
   );
-  const publicSkills = parsedUser?.skillsItem.filter(
+  const publicSkills = parsedUser?.skillsItem?.filter(
     (item: any) => item.type === "public"
   );
 
-  const groupedProTitle = proSkills.map((item: any) => item.title);
-  const groupedProNumber = proSkills.map((item: any) => item.number);
-  const groupedPublicTitle = publicSkills.map((item: any) => item.title);
-  const groupedPublicNumber = publicSkills.map((item: any) => item.number);
+  const groupedProTitle = proSkills?.map((item: any) => item.title);
+  const groupedProNumber = proSkills?.map((item: any) => item.number);
+  const groupedPublicTitle = publicSkills?.map((item: any) => item.title);
+  const groupedPublicNumber = publicSkills?.map((item: any) => item.number);
 
   const form = useForm<z.infer<typeof skillsEditSchema>>({
     resolver: zodResolver(skillsEditSchema),
