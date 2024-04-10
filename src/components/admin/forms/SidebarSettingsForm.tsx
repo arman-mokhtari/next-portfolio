@@ -89,26 +89,38 @@ const SidebarSettingsForm = ({ clerkId, user }: Props) => {
             instagram: {
               href: values.instagram,
               isDisplay: values.isDisplayInstagram,
+              title: "Instagram",
+              img: "/assets/icons/social/instagram.svg",
             },
             twitter: {
               href: values.twitter,
               isDisplay: values.isDisplayTwitter,
+              title: "X",
+              img: "/assets/icons/social/twitter.svg",
             },
             telegram: {
               href: values.telegram,
               isDisplay: values.isDisplayTelegram,
+              title: "Telegram",
+              img: "/assets/icons/social/telegram.svg",
             },
             facebook: {
               href: values.facebook,
               isDisplay: values.isDisplayFacebook,
+              title: "Facebook",
+              img: "/assets/icons/social/facebook.svg",
             },
             whatsapp: {
               href: values.whatsapp,
               isDisplay: values.isDisplayWhatsapp,
+              title: "Whatsapp",
+              img: "/assets/icons/social/whatsapp.svg",
             },
             github: {
               href: values.github,
               isDisplay: values.isDisplayGithub,
+              title: "Github",
+              img: "/assets/icons/social/github.svg",
             },
           },
         },

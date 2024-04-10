@@ -6,6 +6,12 @@ const CommonSchema = {
   metaTitle: { type: String },
   metaDesk: { type: String },
 };
+const SocialSchema = {
+  href: { type: String },
+  isDisplay: { type: Boolean },
+  title: { type: String },
+  img: { type: String },
+};
 
 export interface IUser extends Document {
   clerkId: string;
@@ -39,30 +45,12 @@ export interface IUser extends Document {
     type: { type: string };
   };
   socials?: {
-    instagram: {
-      href: string;
-      isDisplay: boolean;
-    };
-    twitter: {
-      href: string;
-      isDisplay: boolean;
-    };
-    telegram: {
-      href: string;
-      isDisplay: boolean;
-    };
-    facebook: {
-      href: string;
-      isDisplay: boolean;
-    };
-    whatsapp: {
-      href: string;
-      isDisplay: boolean;
-    };
-    github: {
-      href: string;
-      isDisplay: boolean;
-    };
+    instagram?: typeof SocialSchema;
+    twitter?: typeof SocialSchema;
+    telegram?: typeof SocialSchema;
+    facebook?: typeof SocialSchema;
+    whatsapp?: typeof SocialSchema;
+    github?: typeof SocialSchema;
   };
   resume?: typeof CommonSchema;
   activities?: typeof CommonSchema;
@@ -89,54 +77,12 @@ const UserSchema = new Schema(
     password: { type: String },
     typed: [{ type: String }],
     socials: {
-      instagram: {
-        href: {
-          type: String,
-        },
-        isDisplay: {
-          type: Boolean,
-        },
-      },
-      twitter: {
-        href: {
-          type: String,
-        },
-        isDisplay: {
-          type: Boolean,
-        },
-      },
-      telegram: {
-        href: {
-          type: String,
-        },
-        isDisplay: {
-          type: Boolean,
-        },
-      },
-      facebook: {
-        href: {
-          type: String,
-        },
-        isDisplay: {
-          type: Boolean,
-        },
-      },
-      whatsapp: {
-        href: {
-          type: String,
-        },
-        isDisplay: {
-          type: Boolean,
-        },
-      },
-      github: {
-        href: {
-          type: String,
-        },
-        isDisplay: {
-          type: Boolean,
-        },
-      },
+      instagram: SocialSchema,
+      twitter: SocialSchema,
+      telegram: SocialSchema,
+      facebook: SocialSchema,
+      whatsapp: SocialSchema,
+      github: SocialSchema,
     },
     location: { type: String, required: true, default: "ایران، تهران" },
 
