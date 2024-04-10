@@ -102,6 +102,14 @@ const SidebarSettingsForm = ({ clerkId, user }: Props) => {
               href: values.facebook,
               isDisplay: values.isDisplayFacebook,
             },
+            whatsapp: {
+              href: values.whatsapp,
+              isDisplay: values.isDisplayWhatsapp,
+            },
+            github: {
+              href: values.github,
+              isDisplay: values.isDisplayGithub,
+            },
           },
         },
         path: pathname,
