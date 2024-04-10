@@ -55,6 +55,14 @@ export interface IUser extends Document {
       href: string;
       isDisplay: boolean;
     };
+    whatsapp: {
+      href: string;
+      isDisplay: boolean;
+    };
+    github: {
+      href: string;
+      isDisplay: boolean;
+    };
   };
   resume?: typeof CommonSchema;
   activities?: typeof CommonSchema;
@@ -106,6 +114,22 @@ const UserSchema = new Schema(
         },
       },
       facebook: {
+        href: {
+          type: String,
+        },
+        isDisplay: {
+          type: Boolean,
+        },
+      },
+      whatsapp: {
+        href: {
+          type: String,
+        },
+        isDisplay: {
+          type: Boolean,
+        },
+      },
+      github: {
         href: {
           type: String,
         },

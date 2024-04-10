@@ -85,10 +85,14 @@ export const sidebarSettingsSchema = z.object({
   twitter: z.string().optional(),
   telegram: z.string().optional(),
   facebook: z.string().optional(),
+  whatsapp: z.string().optional(),
+  github: z.string().optional(),
   isDisplayInstagram: z.boolean().default(false).optional(),
   isDisplayTwitter: z.boolean().default(false).optional(),
   isDisplayTelegram: z.boolean().default(false).optional(),
   isDisplayFacebook: z.boolean().default(false).optional(),
+  isDisplayWhatsapp: z.boolean().default(false).optional(),
+  isDisplayGithub: z.boolean().default(false).optional(),
 });
 
 const commonValidation = z.object({
