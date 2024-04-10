@@ -22,7 +22,13 @@ import { sidebarSettingsSchema } from "@/lib/validation";
 import SubmitButton from "../shared/SubmitButton";
 import { Checkbox } from "@/components/ui/checkbox";
 
-type FieldName = "instagram" | "twitter" | "telegram" | "facebook";
+type FieldName =
+  | "instagram"
+  | "twitter"
+  | "telegram"
+  | "facebook"
+  | "whatsapp"
+  | "github";
 
 type Placeholders = Record<FieldName, string>;
 
@@ -44,10 +50,14 @@ const SidebarSettingsForm = ({ clerkId, user }: Props) => {
       twitter: parsedUser.socials?.twitter?.href || "",
       telegram: parsedUser.socials?.telegram?.href || "",
       facebook: parsedUser.socials?.facebook?.href || "",
-      isDisplayInstagram: parsedUser.socials?.instagram?.isDisplay || true,
-      isDisplayTwitter: parsedUser.socials?.twitter?.isDisplay || true,
-      isDisplayTelegram: parsedUser.socials?.telegram?.isDisplay || true,
-      isDisplayFacebook: parsedUser.socials?.facebook?.isDisplay || true,
+      whatsapp: parsedUser.socials?.whatsapp?.href || "",
+      github: parsedUser.socials?.github?.href || "",
+      isDisplayInstagram: parsedUser.socials?.instagram?.isDisplay ?? false,
+      isDisplayTwitter: parsedUser.socials?.twitter?.isDisplay ?? false,
+      isDisplayTelegram: parsedUser.socials?.telegram?.isDisplay ?? false,
+      isDisplayFacebook: parsedUser.socials?.facebook?.isDisplay ?? false,
+      isDisplayWhatsapp: parsedUser.socials?.whatsapp?.isDisplay ?? false,
+      isDisplayGithub: parsedUser.socials?.github?.isDisplay ?? false,
     },
   });
 
@@ -56,6 +66,8 @@ const SidebarSettingsForm = ({ clerkId, user }: Props) => {
     twitter: "لینک توییتر",
     telegram: "لینک تلگرام",
     facebook: "لینک فیسبوک",
+    whatsapp: "لینک واتس‌اپ",
+    github: "لینک گیت‌هاب",
   };
 
   const fieldNames: FieldName[] = [
@@ -63,6 +75,8 @@ const SidebarSettingsForm = ({ clerkId, user }: Props) => {
     "twitter",
     "telegram",
     "facebook",
+    "whatsapp",
+    "github",
   ];
 
   const onSubmit = async (values: z.infer<typeof sidebarSettingsSchema>) => {
@@ -143,6 +157,8 @@ const SidebarSettingsForm = ({ clerkId, user }: Props) => {
                     | "isDisplayTwitter"
                     | "isDisplayTelegram"
                     | "isDisplayFacebook"
+                    | "isDisplayWhatsapp"
+                    | "isDisplayGithub"
                 }
                 render={({ field }) => (
                   <FormItem className="text-dark400_light800 flex flex-col items-start space-x-3 space-y-1 ">

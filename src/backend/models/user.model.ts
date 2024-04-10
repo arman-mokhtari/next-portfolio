@@ -29,14 +29,14 @@ export interface IUser extends Document {
   about?: typeof CommonSchema & { isTopBubble?: boolean; topBubble?: string };
   skills?: typeof CommonSchema;
   skillsItem: {
-    title: { type: String };
-    number: { type: Number };
-    type: { type: String };
+    title: { type: string };
+    number: { type: number };
+    type: { type: string };
   };
   resumeItems: {
-    desc: { type: String };
-    date: { type: Date };
-    type: { type: String };
+    desc: { type: string };
+    date: { type: string };
+    type: { type: string };
   };
   socials?: {
     instagram: {
@@ -52,6 +52,14 @@ export interface IUser extends Document {
       isDisplay: boolean;
     };
     facebook: {
+      href: string;
+      isDisplay: boolean;
+    };
+    whatsapp: {
+      href: string;
+      isDisplay: boolean;
+    };
+    github: {
       href: string;
       isDisplay: boolean;
     };
@@ -106,6 +114,22 @@ const UserSchema = new Schema(
         },
       },
       facebook: {
+        href: {
+          type: String,
+        },
+        isDisplay: {
+          type: Boolean,
+        },
+      },
+      whatsapp: {
+        href: {
+          type: String,
+        },
+        isDisplay: {
+          type: Boolean,
+        },
+      },
+      github: {
         href: {
           type: String,
         },
