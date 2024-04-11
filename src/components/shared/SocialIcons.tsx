@@ -1,5 +1,4 @@
 import { getAdmin } from "@/backend/libs/actions/user.action";
-import { socialData } from "@/constants/socialData";
 import Image from "next/image";
 
 const SidebarSocial = async () => {
@@ -7,11 +6,18 @@ const SidebarSocial = async () => {
   if (!admin) {
     return <div>Loading...</div>;
   }
+
+  const socialsArray = Object.values(admin?.socials || {});
+
+  const displayedItems = socialsArray.filter(
+    (item: any) => item.isDisplay === true
+  );
+  console.log("displayedItems: ", displayedItems);
   return (
     <div className="flex justify-center gap-4 ">
-      {socialData.map(({ ariaLabel, title, href, img, id }) => (
+      {displayedItems.map(({ title, href, img }: any, i) => (
         <a
-          key={id}
+          key={i}
           title={title}
           href={href}
           target="_blank"
@@ -22,8 +28,7 @@ const SidebarSocial = async () => {
             width={24}
             height={24}
             src={img}
-            key={id}
-            aria-label={ariaLabel}
+            aria-label={title}
             className="icon-color duration-200 ease-linear hover:scale-105"
           />
         </a>
