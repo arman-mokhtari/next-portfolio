@@ -27,12 +27,12 @@ const AdminMobileSidebar = () => {
       </SheetTrigger>
       <SheetContent
         side="right"
-        className="sidebar-background custom-scrollbar z-50 flex w-[350px] flex-col justify-between overflow-y-auto border-none px-0 py-2 shadow-2xl lg:hidden"
+        className="sidebar-background custom-scrollbar z-50 flex h-full w-[350px] flex-col justify-between overflow-y-auto border-none px-0 py-2 shadow-2xl lg:hidden"
       >
         <div>
           <ProfileImage />
           <Divider />
-          <ScrollArea dir="rtl" className="h-96 w-full">
+          <ScrollArea dir="rtl" className="h-80 w-full">
             <SheetClose asChild>
               <MobileNavContent />
             </SheetClose>

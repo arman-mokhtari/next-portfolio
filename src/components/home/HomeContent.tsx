@@ -17,7 +17,7 @@ const HomeContent = async () => {
         </span>
         هستم!
       </h1>
-      <div className="h-8 text-center  text-2xl md:text-3xl">
+      <div className="h-8 text-center  text-xl md:text-2xl">
         <TextTyped textArray={admin.typed} />
       </div>
       <p className="text-[1rem] md:text-[1.1rem]">ساکن {admin.location}.</p>
