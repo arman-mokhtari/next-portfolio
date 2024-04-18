@@ -7,7 +7,7 @@ const ActivitiesMainContent = async () => {
     return <div>Loading...</div>;
   }
   return (
-    <div className="relative flex min-h-screen items-center justify-center">
+    <div className="relative mx-5 flex min-h-screen items-center justify-center py-20 md:py-0">
       <ProjectSlider admin={admin} />
     </div>
   );

@@ -60,7 +60,7 @@ const SkillsProgress = ({ admin }: any) => {
 
   return (
     
-      <div className="text-dark400_light900 flex w-full flex-col gap-8 md:w-[95%] xl:w-[80%] xl:flex-row">
+      <div className="text-dark400_light900 flex w-full flex-col gap-8 md:w-[95%] xl:w-[90%] xl:flex-row">
         <div className="w-full">
           <TitleBadge title="مهارت‌های عمومی" />
           <div className="shadow-grey-darknone flex w-full flex-col gap-3 rounded-xl bg-slate-200  p-4 dark:bg-slate-800 ">

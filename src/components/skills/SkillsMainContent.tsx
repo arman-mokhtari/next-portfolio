@@ -8,11 +8,8 @@ const SkillsMainContent = async () => {
     return <div>Loading...</div>;
   }
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center">
-      <TitleHeading
-        heading={admin.skills?.title}
-        text={admin.skills?.desc}
-      />
+    <div className="flex min-h-screen flex-col items-center justify-center py-20 md:py-0">
+      <TitleHeading heading={admin.skills?.title} text={admin.skills?.desc} />
 
       <SkillsProgress admin={admin} />
     </div>

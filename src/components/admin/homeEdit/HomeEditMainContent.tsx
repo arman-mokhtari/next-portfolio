@@ -8,7 +8,7 @@ const HomeEditMainContent = async () => {
   if (!userId) return null;
   const mongoUser = await getUserById({ userId });
   return (
-    <div className="mt-10 lg:mt-0">
+    <div className="py-10 lg:py-0">
       <div className="flex min-h-screen items-center justify-center">
         <HomeEditForm clerkId={userId} user={JSON.stringify(mongoUser)} />
       </div>
