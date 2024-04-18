@@ -8,7 +8,7 @@ const SkillsEditMainContent = async () => {
   if (!userId) return null;
   const mongoUser = await getUserById({ userId });
   return (
-    <div className="mb-4 mt-20 lg:mt-10">
+    <div className="mb-4 py-20">
       <div className="flex min-h-screen items-center justify-center">
         <SkillsEditForm clerkId={userId} user={JSON.stringify(mongoUser)} />
       </div>

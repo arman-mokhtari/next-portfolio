@@ -19,7 +19,7 @@ interface ProjectSliderProps {
 
 const ProjectSlider = ({ admin }: ProjectSliderProps) => {
   return (
-    <div className="absolute w-full md:w-[95%] xl:w-[80%]">
+    <div className="absolute w-full md:w-[95%] xl:w-[95%]">
       <TitleHeading
         heading={admin.activities.title}
         text={admin.activities.desc}

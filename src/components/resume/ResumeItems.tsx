@@ -16,8 +16,10 @@ type Props = {
 };
 
 const ResumeItems = ({ admin }: Props) => {
-  const degreeCv = admin?.resumeItems?.filter((item) => item.type === "degree") || [];
-  const experienceCv = admin?.resumeItems?.filter((item) => item.type === "experience") || [];
+  const degreeCv =
+    admin?.resumeItems?.filter((item) => item.type === "degree") || [];
+  const experienceCv =
+    admin?.resumeItems?.filter((item) => item.type === "experience") || [];
 
   const mapCv = (cvArray: ResumeItem[]) => {
     return cvArray.map((item, i) => (
@@ -36,8 +38,8 @@ const ResumeItems = ({ admin }: Props) => {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center">
-      <div className="my-20 flex w-full flex-col justify-center gap-10 md:w-[95%] lg:flex-row xl:w-[80%]">
+    <div className="my-20 flex min-h-screen items-center justify-center md:my-0">
+      <div className="flex w-full flex-col justify-center gap-10 md:w-[95%] lg:flex-row xl:w-[95%]">
         <div className="flex-1">
           <TitleBadge title="مدارک تحصیلی" />
           <ul>{mapCv(degreeCv)}</ul>

@@ -21,7 +21,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
         <section className="relative flex min-h-screen flex-1 bg-slate-100  dark:bg-slate-950 ">
           <HomeLines />
           <div className="z-[2] mx-auto w-full">
-            <div className="px-10">{children}</div>
+            <div className="px-5 md:px-0">{children}</div>
           </div>
         </section>
       </div>
