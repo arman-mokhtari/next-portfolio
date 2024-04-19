@@ -1,3 +1,4 @@
+import TitleBadgeSkeleton from "../shared/TitleBadgeSkeleton";
 import TitleHeadingSkeleton from "../shared/TitleHeadingSkeleton";
 import { Skeleton } from "../ui/skeleton";
 
@@ -9,14 +10,14 @@ const SkillsSkeleton = () => {
 
         <div className="flex w-full flex-col gap-8 xl:flex-row">
           <div className="w-full space-y-4">
-            <Skeleton className="h-10 w-[35%] items-center rounded-full" />
+            <TitleBadgeSkeleton otherClasses="w-[35%]" />
             <div className="flex w-full flex-col gap-3 rounded-xl ">
               <Skeleton className=" h-[13.2rem] w-full" />
             </div>
           </div>
 
           <div className="w-full space-y-4">
-            <Skeleton className="h-10 w-[35%] items-center rounded-full" />
+            <TitleBadgeSkeleton otherClasses="w-[35%]" />
 
             <div className="flex w-full flex-col gap-3  rounded-xl ">
               <Skeleton className="h-[13.2rem] w-full" />
