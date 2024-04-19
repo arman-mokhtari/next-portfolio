@@ -1,16 +1,15 @@
 import { getAdmin } from "@/backend/libs/actions/user.action";
 import SkillsProgress from "./SkillsProgress";
-import TitleHeading from "../shared/TitleHeading";
+import SkillsSkeleton from "./SkillsSkeleton";
 
 const SkillsMainContent = async () => {
   const admin = await getAdmin();
   if (!admin) {
-    return <div>Loading...</div>;
+    return <SkillsSkeleton />;
   }
+  
   return (
     <div className="flex min-h-screen flex-col items-center justify-center py-20 md:py-0">
-      <TitleHeading heading={admin.skills?.title} text={admin.skills?.desc} />
-
       <SkillsProgress admin={admin} />
     </div>
   );

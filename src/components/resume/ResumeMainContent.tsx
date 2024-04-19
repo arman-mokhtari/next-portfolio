@@ -1,12 +1,13 @@
 import { getAdmin } from "@/backend/libs/actions/user.action";
 import ResumeItems from "./ResumeItems";
+import ResumeSkeleton from "./ResumeSkeleton";
 
 const ResumeMainContent = async () => {
   const admin = await getAdmin();
   if (!admin) {
-    return <div>Loading...</div>;
+    return <ResumeSkeleton />;
   }
- return <ResumeItems admin={admin} />
+  return <ResumeItems admin={admin} />;
 };
 
 export default ResumeMainContent;

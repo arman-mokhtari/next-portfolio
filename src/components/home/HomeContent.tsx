@@ -1,11 +1,12 @@
 import { getAdmin } from "@/backend/libs/actions/user.action";
 import { Button } from "../ui/button";
 import TextTyped from "./TextAnimate";
+import HomeSkeleton from "./HomeSkeleton";
 
 const HomeContent = async () => {
   const admin = await getAdmin();
   if (!admin) {
-    return <div>Loading...</div>;
+    return <HomeSkeleton />;
   }
 
   return (

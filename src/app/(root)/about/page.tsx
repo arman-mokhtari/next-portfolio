@@ -1,9 +1,7 @@
-import MainContent from '@/components/about/MainContent'
+import MainContent from "@/components/about/MainContent";
 
 const Page = () => {
-  return (
-    <MainContent/>
-  )
-}
+  return <MainContent />;
+};
 
-export default Page
+export default Page;

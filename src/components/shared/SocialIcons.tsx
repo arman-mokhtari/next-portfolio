@@ -12,7 +12,7 @@ const SidebarSocial = async () => {
   const displayedItems = socialsArray.filter(
     (item: any) => item.isDisplay === true
   );
-  console.log("displayedItems: ", displayedItems);
+
   return (
     <div className="flex justify-center gap-4 ">
       {displayedItems.map(({ title, href, img }: any, i) => (
