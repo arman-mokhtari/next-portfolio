@@ -1,9 +1,11 @@
-import MainContent from '@/components/about/MainContent'
+import AboutSkeleton from "@/components/about/AboutSkeleton";
+import MainContent from "@/components/about/MainContent";
 
 const Page = () => {
-  return (
-    <MainContent/>
-  )
-}
+  const loading = false;
+  if (loading) return <AboutSkeleton />;
 
-export default Page
+  return <MainContent />;
+};
+
+export default Page;

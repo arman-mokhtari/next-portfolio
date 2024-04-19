@@ -1,6 +1,6 @@
 import { Skeleton } from "../ui/skeleton";
 
-const HomeSkeleton = () => {
+const AboutSkeleton = () => {
   return (
     <div className="flex min-h-screen items-center justify-center">
       <div className="flex flex-col items-center gap-6">
@@ -17,4 +17,4 @@ const HomeSkeleton = () => {
   );
 };
 
-export default HomeSkeleton;
+export default AboutSkeleton;
