@@ -19,9 +19,9 @@ const MainContent = async () => {
             className="object-cover"
             priority
             quality={100}
-            src={admin.avatar}
+            src={admin && admin.profileImage}
             placeholder="blur"
-            blurDataURL={admin.avatar}
+            blurDataURL={admin && admin.profileImage}
             alt="profile"
             sizes="100%"
             fill
