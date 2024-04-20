@@ -60,11 +60,8 @@ const SkillsProgress = ({ admin }: any) => {
   };
 
   return (
-    <div className="text-dark400_light900 flex w-full flex-col items-center justify-center md:w-[95%] xl:w-[90%]">
-      <TitleHeading
-        heading={admin.skills?.title}
-        text={admin.skills?.desc}
-      />
+    <div className="text-dark400_light900 flex w-full flex-col items-center justify-center md:w-[95%] xl:w-[85%]">
+      <TitleHeading heading={admin.skills?.title} text={admin.skills?.desc} />
       <div className="flex w-full flex-col gap-8 xl:flex-row">
         <div className="w-full">
           <TitleBadge title="مهارت‌های عمومی" />
