@@ -43,6 +43,7 @@
     "react-hook-form": "^7.51.1",
     "react-multi-date-picker": "^4.4.1",
     "react-slick": "^0.30.2",
+    "sharp": "^0.33.3",
     "slick-carousel": "^1.8.1",
     "svix": "^1.21.0",
     "tailwind-merge": "^2.2.1",
