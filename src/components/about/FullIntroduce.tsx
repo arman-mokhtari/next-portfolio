@@ -42,18 +42,26 @@ const FullIntroduce = ({ otherClasses, admin }: Props) => {
       <div className="flex items-center justify-between gap-3">
         <div>
           {isBubble && (
-            <Bubble otherClasses="after:left-[40%]" text={admin.about.topBubble} />
+            <Bubble
+              otherClasses="after:left-[40%]"
+              text={admin.about.topBubble}
+            />
           )}
           <div className="border-r-[5px] border-blue-600 pr-2">
             <AdminIntroduce admin={admin} />
           </div>
         </div>
+
         <Image
-          className={`rounded-3xl object-cover ${otherClasses}`}
+          priority
+          placeholder="blur"
+          blurDataURL={admin.profileImage}
+          quality={100}
           src={admin.profileImage}
           alt="profile"
-          width={100}
-          height={100}
+          width={200}
+          height={200}
+          className={`size-24 rounded-3xl object-cover ${otherClasses}`}
         />
       </div>
       <Divider otherClass="mx-0 my-4" />

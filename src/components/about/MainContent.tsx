@@ -20,9 +20,10 @@ const MainContent = async () => {
             priority
             quality={100}
             src={admin.profileImage}
-            blurDataURL="/assets/images/about.png"
-            alt="profile"
             placeholder="blur"
+            blurDataURL={admin.profileImage}
+            alt="profile"
+            sizes="100%"
             fill
           />
         </div>
