@@ -5,9 +5,12 @@ import AboutSkeleton from "./AboutSkeleton";
 
 const MainContent = async () => {
   const admin = await getAdmin();
+ 
   if (!admin) {
     return <AboutSkeleton />;
   }
+ const parsedAdmin = JSON.parse(JSON.stringify(admin));
+
 
   return (
     <div className="flex min-h-screen items-center justify-center">
@@ -19,9 +22,9 @@ const MainContent = async () => {
             className="object-cover"
             priority
             quality={100}
-            src={admin && admin.profileImage}
+            src={parsedAdmin.profileImage}
             placeholder="blur"
-            blurDataURL={admin && admin.profileImage}
+            blurDataURL={parsedAdmin.profileImage}
             alt="profile"
             sizes="100%"
             fill
