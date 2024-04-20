@@ -1,10 +1,11 @@
 import { getAdmin } from "@/backend/libs/actions/user.action";
 import Image from "next/image";
+import SocialIconsSkeleton from "./SocialIconsSkeleton";
 
 const SidebarSocial = async () => {
   const admin = await getAdmin();
   if (!admin) {
-    return <div>Loading...</div>;
+    return <SocialIconsSkeleton />;
   }
 
   const socialsArray = Object.values(admin?.socials || {});

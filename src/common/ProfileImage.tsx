@@ -1,11 +1,12 @@
 import { getAdmin } from "@/backend/libs/actions/user.action";
 import AdminIntroduce from "@/components/shared/AdminIntroduce";
 import Image from "next/image";
+import ProfileImageSkeleton from "./ProfileImageSkeleton";
 
 const ProfileImage = async () => {
   const admin = await getAdmin();
   if (!admin) {
-    return <div>Loading...</div>;
+    return <ProfileImageSkeleton />;
   }
   return (
     <div className="flex w-full flex-col items-center gap-1">
