@@ -4,7 +4,7 @@ import SkillsSkeleton from "./SkillsSkeleton";
 
 const SkillsMainContent = async () => {
   const admin = await getAdmin();
-  if (!admin) {
+  if (!admin && admin.skillsItem) {
     return <SkillsSkeleton />;
   }
   

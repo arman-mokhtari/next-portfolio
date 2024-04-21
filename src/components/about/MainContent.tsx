@@ -5,7 +5,29 @@ import AboutSkeleton from "./AboutSkeleton";
 
 const MainContent = async () => {
   const admin = await getAdmin();
-  if (!admin) {
+
+  const {
+    profileImage,
+    name,
+    age,
+    nationality,
+    languages,
+    location,
+    expertise,
+    status,
+  } = admin || {};
+
+  if (
+    !admin &&
+    !profileImage &&
+    !name &&
+    !age &&
+    !nationality &&
+    !languages &&
+    !location &&
+    !expertise &&
+    !status
+  ) {
     return <AboutSkeleton />;
   }
 
@@ -19,9 +41,9 @@ const MainContent = async () => {
             className="object-cover"
             priority
             quality={100}
-            src={admin.profileImage}
+            src={profileImage}
             placeholder="blur"
-            blurDataURL={admin.profileImage}
+            blurDataURL={profileImage}
             alt="profile"
             sizes="100%"
             fill

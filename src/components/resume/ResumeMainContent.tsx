@@ -4,7 +4,7 @@ import ResumeSkeleton from "./ResumeSkeleton";
 
 const ResumeMainContent = async () => {
   const admin = await getAdmin();
-  if (!admin) {
+  if (!admin && admin && !admin.resumeItems) {
     return <ResumeSkeleton />;
   }
   return <ResumeItems admin={admin} />;

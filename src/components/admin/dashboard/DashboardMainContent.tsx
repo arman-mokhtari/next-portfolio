@@ -5,9 +5,31 @@ import CustomizedCard from "@/components/shared/CustomizedCard";
 
 const DashboardMainContent = async () => {
   const admin = await getAdmin();
-  if (!admin) {
+  const {
+    profileImage,
+    name,
+    age,
+    nationality,
+    languages,
+    location,
+    expertise,
+    status,
+  } = admin || {};
+
+  if (
+    !admin &&
+    !profileImage &&
+    !name &&
+    !age &&
+    !nationality &&
+    !languages &&
+    !location &&
+    !expertise &&
+    !status
+  ) {
     return <AboutSkeleton />;
   }
+
   return (
     <CustomizedCard>
       <FullIntroduce admin={admin} />

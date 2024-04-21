@@ -4,7 +4,7 @@ import SocialIconsSkeleton from "./SocialIconsSkeleton";
 
 const SidebarSocial = async () => {
   const admin = await getAdmin();
-  if (!admin) {
+  if (!admin && !admin.socials) {
     return <SocialIconsSkeleton />;
   }
 

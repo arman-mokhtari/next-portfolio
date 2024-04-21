@@ -4,7 +4,13 @@ import ActivitiesSkeleton from "./ActivitiesSkeleton";
 
 const ActivitiesMainContent = async () => {
   const admin = await getAdmin();
-  if (!admin) {
+
+  if (
+    !admin &&
+    !admin.activities.title &&
+    !admin.activities.desc &&
+    !admin.activities.activityLinks
+  ) {
     return <ActivitiesSkeleton />;
   }
   return (
