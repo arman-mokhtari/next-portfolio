@@ -5,7 +5,7 @@ interface Prop {
   onClick: MouseEventHandler<HTMLButtonElement> | any;
 }
 const ErrorHandling = ({ onClick }: Prop) => {
-  const srcImg = "https://cdn.workfolio.ir/images/svg/errors/error.svg";
+  const srcImg = "/assets/images/svg/error.svg";
   return (
     <div className="flex min-h-screen flex-col items-center justify-center space-y-2">
       <Image
