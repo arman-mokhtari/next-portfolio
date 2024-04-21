@@ -44,7 +44,7 @@ const FullIntroduce = ({ otherClasses, admin }: Props) => {
           {isBubble && (
             <Bubble
               otherClasses="after:left-[40%]"
-              text={admin.about.topBubble}
+              text={admin.about?.topBubble}
             />
           )}
           <div className="border-r-[5px] border-blue-600 pr-2">
