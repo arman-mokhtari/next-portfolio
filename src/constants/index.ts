@@ -96,4 +96,9 @@ export const adminSidebarLinks: SidebarLink[] = [
     route: "/admin/activities-edit",
     label: "تنظیمات پروژه‌ها",
   },
+  {
+    imgURL: "/assets/icons/sidebar/user.svg",
+    route: "/admin/contact-edit",
+    label: "تنظیمات صفحه ارتباط",
+  },
 ];

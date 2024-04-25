@@ -162,6 +162,10 @@ export const aboutEditSchema = z.object({
   }),
 });
 
+export const contactEditSchema = z.object({
+  ...commonValidation.shape,
+});
+
 export const skillsEditSchema = z.object({
   ...commonValidation.shape,
   proTitle: z
