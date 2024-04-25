@@ -5,11 +5,11 @@ export async function generateMetadata() {
   try {
     const admin = await getAdmin();
 
-    const { metaTitle, metaDesc } = admin.home;
+    const { metaTitle, metaDesc } = admin.contact;
 
     return {
       alternates: {
-        canonical: "/",
+        canonical: "/contact",
       },
       title: metaTitle,
       description: metaDesc,
