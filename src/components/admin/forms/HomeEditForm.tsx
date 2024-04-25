@@ -24,7 +24,7 @@ import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import SubmitButton from "../shared/SubmitButton";
 
-type FieldName = "title" | "desc" | "metaTitle" | "metaDesk";
+type FieldName = "title" | "desc" | "metaTitle" | "metaDesc";
 
 type Placeholders = Record<FieldName, string>;
 
@@ -45,7 +45,7 @@ const HomeEditForm = ({ clerkId, user }: Props) => {
       title: parsedUser.home?.title || "",
       desc: parsedUser.home?.desc || "",
       metaTitle: parsedUser.home?.metaTitle || "",
-      metaDesk: parsedUser.home?.metaDesk || "",
+      metaDesc: parsedUser.home?.metaDesc || "",
       typed: parsedUser.typed || "",
     },
   });
@@ -54,14 +54,14 @@ const HomeEditForm = ({ clerkId, user }: Props) => {
     title: "تایتل",
     desc: "توضیحات",
     metaTitle: "متا تایتل",
-    metaDesk: "توضیحات متا",
+    metaDesc: "توضیحات متا",
   };
 
-  const fieldNames: FieldName[] = ["title", "desc", "metaTitle", "metaDesk"];
+  const fieldNames: FieldName[] = ["title", "desc", "metaTitle", "metaDesc"];
 
   const onSubmit = async (values: z.infer<typeof homeEditSchema>) => {
     setIsSubmit(true);
-    const { typed, title, desc, metaTitle, metaDesk } = values;
+    const { typed, title, desc, metaTitle, metaDesc } = values;
     try {
       await updateUser({
         clerkId,
@@ -71,7 +71,7 @@ const HomeEditForm = ({ clerkId, user }: Props) => {
             title,
             desc,
             metaTitle,
-            metaDesk,
+            metaDesc,
           },
         },
         path: pathname,

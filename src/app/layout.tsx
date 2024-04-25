@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Vazirmatn } from "next/font/google";
 import "./globals.css";
@@ -11,10 +11,49 @@ const vazir = Vazirmatn({
   variable: "--font-vazir",
 });
 
+const absoluteUrl = process.env.ABSOLUTE_URL || "";
+const relativeUrl = process.env.RELATIVE_URL || "";
+const owner = process.env.OWNER || "";
+const siteName = process.env.SITENAME || "";
+const twitterId = process.env.TWITTER_ID || "";
+const twitterAcc = process.env.TWITTER_ACC || "";
+const googleVerification = process.env.GOOGLE_VERIFICATION || "";
+
 export const metadata: Metadata = {
-  title: "وبسایت شخصی",
-  description:
-    "اینجا مکانی است که من محتوا و ایده‌های خود را با دیگران به اشتراک می‌گذارم و امیدوارم که این تجربه برای دیگران نیز مفید و جذاب باشد.",
+  metadataBase: new URL(absoluteUrl),
+  category: "technology",
+  generator: `${relativeUrl}`,
+  applicationName: siteName,
+  referrer: "origin-when-cross-origin",
+  authors: { name: owner, url: absoluteUrl },
+  creator: owner,
+  publisher: owner,
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  openGraph: {
+    siteName,
+    locale: "fa_IR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    siteId: twitterId,
+    creator: twitterAcc,
+    creatorId: twitterId,
+  },
+  verification: {
+    google: googleVerification,
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#F1F1F1" },
+    { media: "(prefers-color-scheme: dark)", color: "#22273b" },
+  ],
 };
 
 export default function RootLayout({
