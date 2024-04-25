@@ -4,7 +4,7 @@ const CommonSchema = {
   title: { type: String },
   desc: { type: String },
   metaTitle: { type: String },
-  metaDesk: { type: String },
+  metaDesc: { type: String },
 };
 const SocialSchema = {
   href: { type: String },

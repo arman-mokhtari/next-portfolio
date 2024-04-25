@@ -23,7 +23,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import Bubble from "@/components/shared/Bubble";
 import SubmitButton from "../shared/SubmitButton";
 
-type FieldName = "title" | "desc" | "metaTitle" | "metaDesk" | "profileImage";
+type FieldName = "title" | "desc" | "metaTitle" | "metaDesc" | "profileImage";
 
 type Placeholders = Record<FieldName, string>;
 
@@ -44,7 +44,7 @@ const AboutEditForm = ({ clerkId, user }: Props) => {
       title: parsedUser.about?.title || "",
       desc: parsedUser.about?.desc || "",
       metaTitle: parsedUser.about?.metaTitle || "",
-      metaDesk: parsedUser.about?.metaDesk || "",
+      metaDesc: parsedUser.about?.metaDesc || "",
       profileImage: parsedUser.profileImage || "",
       isTopBubble: parsedUser.about?.isTopBubble || true,
       topBubble: parsedUser.about?.topBubble || "",
@@ -55,7 +55,7 @@ const AboutEditForm = ({ clerkId, user }: Props) => {
     title: "تایتل",
     desc: "توضیحات",
     metaTitle: "متا تایتل",
-    metaDesk: "توضیحات متا",
+    metaDesc: "توضیحات متا",
     profileImage: "لینک تصویر",
   };
 
@@ -63,7 +63,7 @@ const AboutEditForm = ({ clerkId, user }: Props) => {
     "title",
     "desc",
     "metaTitle",
-    "metaDesk",
+    "metaDesc",
     "profileImage",
   ];
 
@@ -75,7 +75,7 @@ const AboutEditForm = ({ clerkId, user }: Props) => {
       title,
       desc,
       metaTitle,
-      metaDesk,
+      metaDesc,
       profileImage,
     } = values;
     try {
@@ -87,7 +87,7 @@ const AboutEditForm = ({ clerkId, user }: Props) => {
             title,
             desc,
             metaTitle,
-            metaDesk,
+            metaDesc,
             isTopBubble,
             topBubble,
           },

@@ -120,7 +120,7 @@ const commonValidation = z.object({
     .max(70, {
       message: "متا تایتل نباید بیشتر از 70 کاراکتر باشد",
     }),
-  metaDesk: z
+  metaDesc: z
     .string()
     .min(1, {
       message: "توضیحات متا را وارد کنید",

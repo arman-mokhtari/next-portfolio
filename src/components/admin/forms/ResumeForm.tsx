@@ -22,7 +22,7 @@ import { Badge } from "@/components/ui/badge";
 import SubmitButton from "../shared/SubmitButton";
 import CustomTimePicker from "./TimePicker";
 
-type FieldName = "title" | "desc" | "metaTitle" | "metaDesk";
+type FieldName = "title" | "desc" | "metaTitle" | "metaDesc";
 type Placeholders = Record<FieldName, string>;
 
 interface Props {
@@ -54,7 +54,7 @@ const SkillsEditForm = ({ clerkId, user }: Props) => {
       title: parsedUser.resume?.title || "",
       desc: parsedUser.resume?.desc || "",
       metaTitle: parsedUser.resume?.metaTitle || "",
-      metaDesk: parsedUser.resume?.metaDesk || "",
+      metaDesc: parsedUser.resume?.metaDesc || "",
       docDesc: groupedDocDesc || [],
       docDate: groupedDocDate || [],
       expDesc: groupedExpDesc || [],
@@ -66,10 +66,10 @@ const SkillsEditForm = ({ clerkId, user }: Props) => {
     title: "تایتل",
     desc: "توضیحات",
     metaTitle: "متا تایتل",
-    metaDesk: "توضیحات متا",
+    metaDesc: "توضیحات متا",
   };
 
-  const fieldNames: FieldName[] = ["title", "desc", "metaTitle", "metaDesk"];
+  const fieldNames: FieldName[] = ["title", "desc", "metaTitle", "metaDesc"];
 
   const onSubmit = async (values: z.infer<typeof resumeEditSchema>) => {
     setIsSubmit(true);
@@ -79,7 +79,7 @@ const SkillsEditForm = ({ clerkId, user }: Props) => {
         title,
         desc,
         metaTitle,
-        metaDesk,
+        metaDesc,
         docDesc,
         docDate,
         expDesc,
@@ -99,7 +99,7 @@ const SkillsEditForm = ({ clerkId, user }: Props) => {
             title: string;
             desc: string;
             metaTitle: string;
-            metaDesk: string;
+            metaDesc: string;
           };
           resumeItems: resumeItems[]; // Explicitly define the type as SkillsItem[]
         };
@@ -111,7 +111,7 @@ const SkillsEditForm = ({ clerkId, user }: Props) => {
             title,
             desc,
             metaTitle,
-            metaDesk,
+            metaDesc,
           },
           resumeItems: [], // Initialize as an empty array
         },
@@ -162,48 +162,46 @@ const SkillsEditForm = ({ clerkId, user }: Props) => {
       e.preventDefault();
       const typedInput = e.target as HTMLInputElement;
       const typedValue = typedInput.value;
-  
+
       if (typedValue !== "") {
         const isDateField = field.name.includes("Date");
         const newValue = Array.isArray(field.value) ? [...field.value] : [];
-  
+
         if (isDateField) {
           // Check if the entered value can be parsed as a valid date
           // const parsedDate = new Date(typedValue);
-    
-  
+
           newValue.push(typedValue);
           form.setValue(field.name, newValue);
         } else {
           // Handle non-date fields
           const maxLength = 400;
           const minLength = 1;
-  
+
           if (typedValue.length > maxLength) {
             return form.setError(field.name, {
               type: "required",
               message: `آیتم‌ نباید بیشتر از ${maxLength} کاراکتر باشد`,
             });
           }
-  
+
           if (typedValue.length < minLength) {
             return form.setError(field.name, {
               type: "required",
               message: `آیتم نباید کمتر از ${minLength} کاراکتر باشد`,
             });
           }
-  
+
           newValue.push(typedValue);
           form.setValue(field.name, newValue);
         }
       } else {
         form.trigger();
       }
-  
+
       typedInput.value = "";
     }
   };
-  
 
   const handleTagAction = (tag: string, field: any, isRemove: boolean) => {
     const newValue = isRemove
@@ -290,7 +288,7 @@ const SkillsEditForm = ({ clerkId, user }: Props) => {
               render={({ field }) => (
                 <FormItem className="mt-6 flex w-full flex-col">
                   <FormLabel className="paragraph-semibold text-dark400_light800">
-                  تاریخ دریافت مدرک تحصیلی
+                    تاریخ دریافت مدرک تحصیلی
                   </FormLabel>
                   <FormControl className="mt-3.5">
                     <>

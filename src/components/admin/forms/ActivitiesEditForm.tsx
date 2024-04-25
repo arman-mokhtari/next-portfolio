@@ -24,7 +24,7 @@ import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import SubmitButton from "../shared/SubmitButton";
 
-type FieldName = "title" | "desc" | "metaTitle" | "metaDesk";
+type FieldName = "title" | "desc" | "metaTitle" | "metaDesc";
 
 type Placeholders = Record<FieldName, string>;
 
@@ -45,7 +45,7 @@ const ActivitiesEditForm = ({ clerkId, user }: Props) => {
       title: parsedUser.activities?.title || "",
       desc: parsedUser.activities?.desc || "",
       metaTitle: parsedUser.activities?.metaTitle || "",
-      metaDesk: parsedUser.activities?.metaDesk || "",
+      metaDesc: parsedUser.activities?.metaDesc || "",
       activityLinks: parsedUser.activities?.activityLinks || "",
     },
   });
@@ -54,14 +54,14 @@ const ActivitiesEditForm = ({ clerkId, user }: Props) => {
     title: "تایتل",
     desc: "توضیحات",
     metaTitle: "متا تایتل",
-    metaDesk: "توضیحات متا",
+    metaDesc: "توضیحات متا",
   };
 
-  const fieldNames: FieldName[] = ["title", "desc", "metaTitle", "metaDesk"];
+  const fieldNames: FieldName[] = ["title", "desc", "metaTitle", "metaDesc"];
 
   const onSubmit = async (values: z.infer<typeof activitiesEditSchema>) => {
     setIsSubmit(true);
-    const { activityLinks, title, desc, metaTitle, metaDesk } = values;
+    const { activityLinks, title, desc, metaTitle, metaDesc } = values;
     try {
       await updateUser({
         clerkId,
@@ -70,8 +70,8 @@ const ActivitiesEditForm = ({ clerkId, user }: Props) => {
             title,
             desc,
             metaTitle,
-            metaDesk,
-            activityLinks
+            metaDesc,
+            activityLinks,
           },
         },
         path: pathname,
@@ -99,8 +99,6 @@ const ActivitiesEditForm = ({ clerkId, user }: Props) => {
       const typedValue = typedInput.value;
 
       if (typedValue !== "") {
-       
-
         if (!field.value.includes(typedValue as never)) {
           const newValue = [...field.value, typedValue];
           form.setValue("activityLinks", newValue);
