@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { GoogleTagManager } from "@next/third-parties/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Vazirmatn } from "next/font/google";
 import "./globals.css";
@@ -63,6 +64,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fa" dir="rtl">
+      <GoogleTagManager gtmId="GTM-WNVC3QP2" />
       <body className={vazir.className}>
         <ClerkProvider
           appearance={{
