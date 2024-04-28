@@ -13,7 +13,7 @@ type Skill = {
 };
 
 type Skills = {
-  [key: number]: number;
+  [key: string]: number;
 };
 
 const SkillsProgress = ({ admin }: any) => {
@@ -31,10 +31,10 @@ const SkillsProgress = ({ admin }: any) => {
       setSkills((prevSkills) => {
         const newSkills: Skills = {};
         proSkills?.forEach((skill: Skill, index: number) => {
-          newSkills[index] = skill.number;
+          newSkills[`pro_${index}`] = skill.number;
         });
         publicSkills?.forEach((skill: Skill, index: number) => {
-          newSkills[index] = skill.number;
+          newSkills[`public_${index}`] = skill.number;
         });
         return { ...prevSkills, ...newSkills };
       });
@@ -43,16 +43,16 @@ const SkillsProgress = ({ admin }: any) => {
     return () => clearTimeout(timer);
   }, [proSkills, publicSkills]);
 
-  const mapSkills = (skillsArray: Skill[]) => {
+  const mapSkills = (skillsArray: Skill[], type: string) => {
     return skillsArray.map((skill, index) => (
-      <div key={index}>
+      <div key={`${type}_${index}`}>
         <Badge className="background-slate300_slate700 transition-none">
           <p>{skill.title}</p>
         </Badge>
         <div className="flex items-center gap-2">
-          <Progress className="h-2" value={skills[index]} />
+          <Progress className="h-2" value={skills[`${type}_${index}`]} />
           <Badge className="background-slate300_slate700 relative inline-flex h-6 w-10 justify-center text-center align-middle transition-none">
-            <span className="absolute top-[.310rem]">{skills[index]}%</span>
+            <span className="absolute top-[.310rem]">{skills[`${type}_${index}`]}%</span>
           </Badge>
         </div>
       </div>
@@ -66,14 +66,14 @@ const SkillsProgress = ({ admin }: any) => {
         <div className="w-full">
           <TitleBadge title="مهارت‌های عمومی" />
           <div className="shadow-grey-darknone flex w-full flex-col gap-3 rounded-xl bg-slate-200  p-4 dark:bg-slate-800 ">
-            {mapSkills(publicSkills)}
+            {mapSkills(publicSkills, "public")}
           </div>
         </div>
 
         <div className="w-full">
           <TitleBadge title="مهارت‌های تخصصی" />
           <div className="shadow-grey-darknone flex w-full flex-col gap-3  rounded-xl bg-slate-200 p-4 dark:bg-slate-800">
-            {mapSkills(proSkills)}
+            {mapSkills(proSkills, "pro")}
           </div>
         </div>
       </div>
