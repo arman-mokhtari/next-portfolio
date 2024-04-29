@@ -36,18 +36,6 @@ const SkillsEditForm = ({ clerkId, user }: Props) => {
   const router = useRouter();
   const pathname = usePathname();
 
-  const doc = parsedUser?.resumeItems?.filter(
-    (item: any) => item.type === "degree"
-  );
-  const exp = parsedUser?.resumeItems?.filter(
-    (item: any) => item.type === "experience"
-  );
-
-  const groupedDocDesc = doc?.map((item: any) => item.desc);
-  const groupedDocDate = doc?.map((item: any) => item.date);
-  const groupedExpDesc = exp?.map((item: any) => item.desc);
-  const groupedExpDate = exp?.map((item: any) => item.date);
-
   const form = useForm<z.infer<typeof resumeEditSchema>>({
     resolver: zodResolver(resumeEditSchema),
     defaultValues: {
@@ -55,10 +43,18 @@ const SkillsEditForm = ({ clerkId, user }: Props) => {
       desc: parsedUser.resume?.desc || "",
       metaTitle: parsedUser.resume?.metaTitle || "",
       metaDesc: parsedUser.resume?.metaDesc || "",
-      docDesc: groupedDocDesc || [],
-      docDate: groupedDocDate || [],
-      expDesc: groupedExpDesc || [],
-      expDate: groupedExpDate || [],
+      docDesc: parsedUser?.resumeItems
+        ?.filter((item: any) => item.type === "degree")
+        .map((item: any) => item.desc) || [],
+      docDate: parsedUser?.resumeItems
+        ?.filter((item: any) => item.type === "degree")
+        .map((item: any) => item.date) || [],
+      expDesc: parsedUser?.resumeItems
+        ?.filter((item: any) => item.type === "experience")
+        .map((item: any) => item.desc) || [],
+      expDate: parsedUser?.resumeItems
+        ?.filter((item: any) => item.type === "experience")
+        .map((item: any) => item.date) || [],
     },
   });
 
@@ -86,25 +82,20 @@ const SkillsEditForm = ({ clerkId, user }: Props) => {
         expDate,
       } = values;
 
-      type resumeItems = {
-        desc: string;
-        date: any;
-        type: string;
-      };
+      const resumeItems = [
+        ...docDesc.map((desc: string, index: number) => ({
+          desc,
+          date: docDate[index],
+          type: "degree",
+        })),
+        ...expDesc.map((desc: string, index: number) => ({
+          desc,
+          date: expDate[index],
+          type: "experience",
+        })),
+      ];
 
-      const data: {
-        clerkId: string;
-        updateData: {
-          resume: {
-            title: string;
-            desc: string;
-            metaTitle: string;
-            metaDesc: string;
-          };
-          resumeItems: resumeItems[]; // Explicitly define the type as SkillsItem[]
-        };
-        path: string;
-      } = {
+      const data = {
         clerkId,
         updateData: {
           resume: {
@@ -113,28 +104,11 @@ const SkillsEditForm = ({ clerkId, user }: Props) => {
             metaTitle,
             metaDesc,
           },
-          resumeItems: [], // Initialize as an empty array
+          resumeItems,
         },
         path: pathname,
       };
 
-      for (let i = 0; i < expDesc.length; i++) {
-        const resumeItems: resumeItems = {
-          desc: expDesc[i] || "عنوان",
-          date: expDate[i] || new Date(),
-          type: "degree",
-        };
-        data.updateData.resumeItems.push(resumeItems);
-      }
-
-      for (let i = 0; i < docDesc.length; i++) {
-        const resumeItems: resumeItems = {
-          desc: docDesc[i] || "عنوان",
-          date: docDate[i] || new Date(),
-          type: "experience",
-        };
-        data.updateData.resumeItems.push(resumeItems);
-      }
       await updateUser(data);
       router.push("/admin/dashboard");
       toast({
@@ -155,8 +129,7 @@ const SkillsEditForm = ({ clerkId, user }: Props) => {
 
   const handleFieldChange = (
     e: KeyboardEvent<HTMLInputElement>,
-    field: any,
-    type: string
+    field: any
   ) => {
     if (e.key === "Enter") {
       e.preventDefault();
@@ -168,13 +141,9 @@ const SkillsEditForm = ({ clerkId, user }: Props) => {
         const newValue = Array.isArray(field.value) ? [...field.value] : [];
 
         if (isDateField) {
-          // Check if the entered value can be parsed as a valid date
-          // const parsedDate = new Date(typedValue);
-
           newValue.push(typedValue);
           form.setValue(field.name, newValue);
         } else {
-          // Handle non-date fields
           const maxLength = 400;
           const minLength = 1;
 
@@ -242,7 +211,7 @@ const SkillsEditForm = ({ clerkId, user }: Props) => {
           <div className="grid grid-cols-2 gap-4">
             <FormField
               control={form.control}
-              name="expDesc"
+              name="docDesc"
               render={({ field }) => (
                 <FormItem className="mt-6 flex w-full flex-col">
                   <FormLabel className="paragraph-semibold text-dark400_light800">
@@ -253,96 +222,7 @@ const SkillsEditForm = ({ clerkId, user }: Props) => {
                       <Input
                         className="paragraph-regular background-light800_dark400 theme-border-color text-dark300_light700 input-light"
                         placeholder="عنوان مدرک تحصیلی"
-                        onKeyDown={(e) => handleFieldChange(e, field, "pro")}
-                      />
-                      <FormMessage className="text-xs text-rose-600" />
-                      {field.value.length > 0 && (
-                        <div className="mt-2.5 flex flex-col items-start gap-2.5">
-                          {field.value.map((tag: any) => (
-                            <Badge
-                              key={tag}
-                              className="subtle-medium background-light800_dark300 text-light400_light500 flex items-center justify-center gap-2 rounded-md border-none px-4 py-2"
-                              onClick={() => handleTagAction(tag, field, true)}
-                            >
-                              {tag}
-
-                              <Image
-                                src="/assets/icons/close.svg"
-                                alt="Close icon"
-                                width={12}
-                                height={12}
-                                className="cursor-pointer object-contain invert-0 dark:invert"
-                              />
-                            </Badge>
-                          ))}
-                        </div>
-                      )}
-                    </>
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="expDate"
-              render={({ field }) => (
-                <FormItem className="mt-6 flex w-full flex-col">
-                  <FormLabel className="paragraph-semibold text-dark400_light800">
-                    تاریخ دریافت مدرک تحصیلی
-                  </FormLabel>
-                  <FormControl className="mt-3.5">
-                    <>
-                      <CustomTimePicker
-                        className="paragraph-regular background-light800_dark400 theme-border-color text-dark300_light700 input-light"
-                        placeholder="تاریخ دریافت"
-                        onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
-                          handleFieldChange(e, field, "Date")
-                        }
-                        form={form}
-                      />
-                      <FormMessage className="text-xs text-rose-600" />
-                      {field.value.length > 0 && (
-                        <div className="mt-2.5 flex flex-col items-start gap-2.5">
-                          {field.value.map((tag: any) => (
-                            <Badge
-                              key={tag}
-                              className="subtle-medium background-light800_dark300 text-light400_light500 flex items-center justify-center gap-2 rounded-md border-none px-4 py-2"
-                              onClick={() => handleTagAction(tag, field, true)}
-                            >
-                              {tag}
-
-                              <Image
-                                src="/assets/icons/close.svg"
-                                alt="Close icon"
-                                width={12}
-                                height={12}
-                                className="cursor-pointer object-contain invert-0 dark:invert"
-                              />
-                            </Badge>
-                          ))}
-                        </div>
-                      )}
-                    </>
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-          </div>
-          <div className="grid grid-cols-2 gap-4">
-            <FormField
-              control={form.control}
-              name="docDesc"
-              render={({ field }) => (
-                <FormItem className="mt-6 flex w-full flex-col">
-                  <FormLabel className="paragraph-semibold text-dark400_light800">
-                    عنوان تجربه کاری
-                  </FormLabel>
-                  <FormControl className="mt-3.5">
-                    <>
-                      <Input
-                        className="paragraph-regular background-light800_dark400 theme-border-color text-dark300_light700 input-light"
-                        placeholder="عنوان تجربه کاری"
-                        onKeyDown={(e) => handleFieldChange(e, field, "pro")}
+                        onKeyDown={(e) => handleFieldChange(e, field)}
                       />
                       <FormMessage className="text-xs text-rose-600" />
                       {field.value.length > 0 && (
@@ -377,6 +257,95 @@ const SkillsEditForm = ({ clerkId, user }: Props) => {
               render={({ field }) => (
                 <FormItem className="mt-6 flex w-full flex-col">
                   <FormLabel className="paragraph-semibold text-dark400_light800">
+                    تاریخ دریافت مدرک تحصیلی
+                  </FormLabel>
+                  <FormControl className="mt-3.5">
+                    <>
+                      <CustomTimePicker
+                        className="paragraph-regular background-light800_dark400 theme-border-color text-dark300_light700 input-light"
+                        placeholder="تاریخ دریافت"
+                        onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
+                          handleFieldChange(e, field)
+                        }
+                        form={form}
+                      />
+                      <FormMessage className="text-xs text-rose-600" />
+                      {field.value.length > 0 && (
+                        <div className="mt-2.5 flex flex-col items-start gap-2.5">
+                          {field.value.map((tag: any) => (
+                            <Badge
+                              key={tag}
+                              className="subtle-medium background-light800_dark300 text-light400_light500 flex items-center justify-center gap-2 rounded-md border-none px-4 py-2"
+                              onClick={() => handleTagAction(tag, field, true)}
+                            >
+                              {tag}
+
+                              <Image
+                                src="/assets/icons/close.svg"
+                                alt="Close icon"
+                                width={12}
+                                height={12}
+                                className="cursor-pointer object-contain invert-0 dark:invert"
+                              />
+                            </Badge>
+                          ))}
+                        </div>
+                      )}
+                    </>
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <FormField
+              control={form.control}
+              name="expDesc"
+              render={({ field }) => (
+                <FormItem className="mt-6 flex w-full flex-col">
+                  <FormLabel className="paragraph-semibold text-dark400_light800">
+                    عنوان تجربه کاری
+                  </FormLabel>
+                  <FormControl className="mt-3.5">
+                    <>
+                      <Input
+                        className="paragraph-regular background-light800_dark400 theme-border-color text-dark300_light700 input-light"
+                        placeholder="عنوان تجربه کاری"
+                        onKeyDown={(e) => handleFieldChange(e, field)}
+                      />
+                      <FormMessage className="text-xs text-rose-600" />
+                      {field.value.length > 0 && (
+                        <div className="mt-2.5 flex flex-col items-start gap-2.5">
+                          {field.value.map((tag: any) => (
+                            <Badge
+                              key={tag}
+                              className="subtle-medium background-light800_dark300 text-light400_light500 flex items-center justify-center gap-2 rounded-md border-none px-4 py-2"
+                              onClick={() => handleTagAction(tag, field, true)}
+                            >
+                              {tag}
+
+                              <Image
+                                src="/assets/icons/close.svg"
+                                alt="Close icon"
+                                width={12}
+                                height={12}
+                                className="cursor-pointer object-contain invert-0 dark:invert"
+                              />
+                            </Badge>
+                          ))}
+                        </div>
+                      )}
+                    </>
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="expDate"
+              render={({ field }) => (
+                <FormItem className="mt-6 flex w-full flex-col">
+                  <FormLabel className="paragraph-semibold text-dark400_light800">
                     حدود زمانی تجربه کاری
                   </FormLabel>
                   <FormControl className="mt-3.5">
@@ -385,7 +354,7 @@ const SkillsEditForm = ({ clerkId, user }: Props) => {
                         className="paragraph-regular background-light800_dark400 theme-border-color text-dark300_light700 input-light"
                         placeholder="محدوده زمانی"
                         onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
-                          handleFieldChange(e, field, "Date")
+                          handleFieldChange(e, field)
                         }
                         form={form}
                       />
