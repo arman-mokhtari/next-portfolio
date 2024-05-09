@@ -43,18 +43,22 @@ const SkillsEditForm = ({ clerkId, user }: Props) => {
       desc: parsedUser.resume?.desc || "",
       metaTitle: parsedUser.resume?.metaTitle || "",
       metaDesc: parsedUser.resume?.metaDesc || "",
-      docDesc: parsedUser?.resumeItems
-        ?.filter((item: any) => item.type === "degree")
-        .map((item: any) => item.desc) || [],
-      docDate: parsedUser?.resumeItems
-        ?.filter((item: any) => item.type === "degree")
-        .map((item: any) => item.date) || [],
-      expDesc: parsedUser?.resumeItems
-        ?.filter((item: any) => item.type === "experience")
-        .map((item: any) => item.desc) || [],
-      expDate: parsedUser?.resumeItems
-        ?.filter((item: any) => item.type === "experience")
-        .map((item: any) => item.date) || [],
+      docDesc:
+        parsedUser?.resumeItems
+          ?.filter((item: any) => item.type === "degree")
+          .map((item: any) => item.desc) || [],
+      docDate:
+        parsedUser?.resumeItems
+          ?.filter((item: any) => item.type === "degree")
+          .map((item: any) => item.date) || [],
+      expDesc:
+        parsedUser?.resumeItems
+          ?.filter((item: any) => item.type === "experience")
+          .map((item: any) => item.desc) || [],
+      expDate:
+        parsedUser?.resumeItems
+          ?.filter((item: any) => item.type === "experience")
+          .map((item: any) => item.date) || [],
     },
   });
 

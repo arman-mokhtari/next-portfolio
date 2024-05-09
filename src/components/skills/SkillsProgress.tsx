@@ -52,7 +52,9 @@ const SkillsProgress = ({ admin }: any) => {
         <div className="flex items-center gap-2">
           <Progress className="h-2" value={skills[`${type}_${index}`]} />
           <Badge className="background-slate300_slate700 relative inline-flex h-6 w-10 justify-center text-center align-middle transition-none">
-            <span className="absolute top-[.310rem]">{skills[`${type}_${index}`]}%</span>
+            <span className="absolute top-[.310rem]">
+              {skills[`${type}_${index}`]}%
+            </span>
           </Badge>
         </div>
       </div>

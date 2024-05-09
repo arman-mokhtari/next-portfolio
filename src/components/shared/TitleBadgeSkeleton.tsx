@@ -4,9 +4,7 @@ interface Prop {
 }
 const TitleBadgeSkeleton = ({ otherClasses }: Prop) => {
   return (
-    <Skeleton
-      className={`h-10 items-center rounded-full ${otherClasses}`}
-    />
+    <Skeleton className={`h-10 items-center rounded-full ${otherClasses}`} />
   );
 };
 
