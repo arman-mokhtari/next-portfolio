@@ -7,7 +7,7 @@ const SkillsMainContent = async () => {
   if (!admin && admin.skillsItem) {
     return <SkillsSkeleton />;
   }
-  
+
   return (
     <div className="flex min-h-screen flex-col items-center justify-center py-20 md:py-0">
       <SkillsProgress admin={admin} />

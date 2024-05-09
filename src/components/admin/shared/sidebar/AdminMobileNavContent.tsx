@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { SheetClose } from "@/components/ui/sheet";
 import { adminSidebarLinks } from "@/constants";
