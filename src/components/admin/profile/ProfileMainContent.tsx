@@ -1,4 +1,4 @@
-import { auth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 import ProfileForm from "../forms/ProfileForm";
 import { getUserById } from "@/backend/libs/actions/user.action";
 

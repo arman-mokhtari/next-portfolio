@@ -1,5 +1,5 @@
 import { getUserById } from "@/backend/libs/actions/user.action";
-import { auth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 import HomeEditForm from "../forms/HomeEditForm";
 
 const HomeEditMainContent = async () => {

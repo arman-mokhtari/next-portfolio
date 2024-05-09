@@ -1,7 +1,6 @@
 import { getUserById } from "@/backend/libs/actions/user.action";
-import { auth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 import AboutEditForm from "../forms/AboutEditForm";
-
 
 const AboutEditMainContent = async () => {
   const { userId } = auth();
