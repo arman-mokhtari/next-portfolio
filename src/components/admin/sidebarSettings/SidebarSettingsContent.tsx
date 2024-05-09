@@ -1,6 +1,6 @@
 import { getUserById } from "@/backend/libs/actions/user.action";
 import SidebarSettingsForm from "../forms/SidebarSettingsForm";
-import { auth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 
 const SidebarSettingsContent = async () => {
   const { userId } = auth();
