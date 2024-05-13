@@ -31,10 +31,10 @@ const SkillsProgress = ({ admin }: any) => {
       setSkills((prevSkills) => {
         const newSkills: Skills = {};
         proSkills?.forEach((skill: Skill, index: number) => {
-          newSkills[`pro_${index}`] = skill.number;
+          newSkills[`pro_${index}`] = Number(skill.title.split("&")[1]);
         });
         publicSkills?.forEach((skill: Skill, index: number) => {
-          newSkills[`public_${index}`] = skill.number;
+          newSkills[`public_${index}`] = Number(skill.title.split("&")[1]);
         });
         return { ...prevSkills, ...newSkills };
       });
@@ -47,7 +47,7 @@ const SkillsProgress = ({ admin }: any) => {
     return skillsArray.map((skill, index) => (
       <div key={`${type}_${index}`}>
         <Badge className="background-slate300_slate700 transition-none">
-          <p>{skill.title}</p>
+          <p>{skill.title.split("&")[0]}</p>
         </Badge>
         <div className="flex items-center gap-2">
           <Progress className="h-2" value={skills[`${type}_${index}`]} />

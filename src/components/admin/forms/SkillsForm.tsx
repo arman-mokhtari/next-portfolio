@@ -17,9 +17,9 @@ import { toast } from "@/components/ui/use-toast";
 import { usePathname, useRouter } from "next/navigation";
 import { updateUser } from "@/backend/libs/actions/user.action";
 import { skillsEditSchema } from "@/lib/validation";
-import Image from "next/image";
-import { Badge } from "@/components/ui/badge";
+import { Trash2 } from "lucide-react";
 import SubmitButton from "../shared/SubmitButton";
+import { Button } from "@/components/ui/button";
 
 type FieldName = "title" | "desc" | "metaTitle" | "metaDesc";
 type Placeholders = Record<FieldName, string>;
@@ -43,9 +43,7 @@ const SkillsEditForm = ({ clerkId, user }: Props) => {
   );
 
   const groupedProTitle = proSkills?.map((item: any) => item.title);
-  const groupedProNumber = proSkills?.map((item: any) => item.number);
   const groupedPublicTitle = publicSkills?.map((item: any) => item.title);
-  const groupedPublicNumber = publicSkills?.map((item: any) => item.number);
 
   const form = useForm<z.infer<typeof skillsEditSchema>>({
     resolver: zodResolver(skillsEditSchema),
@@ -55,9 +53,7 @@ const SkillsEditForm = ({ clerkId, user }: Props) => {
       metaTitle: parsedUser.skills?.metaTitle || "",
       metaDesc: parsedUser.skills?.metaDesc || "",
       proTitle: groupedProTitle || [],
-      proNumber: groupedProNumber || [],
       publicTitle: groupedPublicTitle || [],
-      publicNumber: groupedPublicNumber || [],
     },
   });
 
@@ -74,21 +70,12 @@ const SkillsEditForm = ({ clerkId, user }: Props) => {
     setIsSubmit(true);
 
     try {
-      const {
-        title,
-        desc,
-        metaTitle,
-        metaDesc,
-        proTitle,
-        proNumber,
-        publicTitle,
-        publicNumber,
-      } = values;
+      const { title, desc, metaTitle, metaDesc, proTitle, publicTitle } =
+        values;
 
       // Define the type for skillsItem
       type SkillsItem = {
         title: string;
-        number: number;
         type: string;
       };
 
@@ -122,8 +109,7 @@ const SkillsEditForm = ({ clerkId, user }: Props) => {
       // Populate skillsItem array with professional skills
       for (let i = 0; i < proTitle.length; i++) {
         const skillItem: SkillsItem = {
-          title: proTitle[i] || "عنوان",
-          number: proNumber[i] || 0,
+          title: proTitle[i] || "عنوان & 0",
           type: "pro",
         };
         data.updateData.skillsItem.push(skillItem);
@@ -132,8 +118,7 @@ const SkillsEditForm = ({ clerkId, user }: Props) => {
       // Populate skillsItem array with public skills
       for (let i = 0; i < publicTitle.length; i++) {
         const skillItem: SkillsItem = {
-          title: publicTitle[i] || "عنوان",
-          number: publicNumber[i] || 0,
+          title: publicTitle[i] || "عنوان & 0",
           type: "public",
         };
         data.updateData.skillsItem.push(skillItem);
@@ -174,49 +159,43 @@ const SkillsEditForm = ({ clerkId, user }: Props) => {
       const typedValue = typedInput.value;
 
       if (typedValue !== "") {
-        const isNumberField = field.name.includes("Number");
         const newValue = Array.isArray(field.value) ? [...field.value] : [];
-
         // Check if the field is a number field
-        if (isNumberField) {
-          const numericValue = Number(typedValue);
+        const maxLength = 100;
+        const minLength = 5;
 
-          // Check if the value is a valid number between 0 and 100
-          if (
-            !isNaN(numericValue) &&
-            numericValue >= 0 &&
-            numericValue <= 100
-          ) {
-            newValue.push(numericValue);
-            form.setValue(field.name, newValue);
-          } else {
-            form.setError(field.name, {
-              type: "required",
-              message: "مقدار باید عددی بین 0 و 100 باشد",
-            });
-          }
-        } else {
-          const maxLength = 100;
-          const minLength = 1;
-
-          if (typedValue.length > maxLength) {
-            return form.setError(field.name, {
-              type: "required",
-              message: `آیتم‌ نباید بیشتر از ${maxLength} کاراکتر باشد`,
-            });
-          }
-
-          if (typedValue.length < minLength) {
-            return form.setError(field.name, {
-              type: "required",
-              message: `آیتم نباید کمتر از ${minLength} کاراکتر باشد`,
-            });
-          }
-
-          // Push the value to the array
-          newValue.push(typedValue);
-          form.setValue(field.name, newValue);
+        if (typedValue.length > maxLength) {
+          return form.setError(field.name, {
+            type: "required",
+            message: `آیتم‌ نباید بیشتر از ${maxLength} کاراکتر باشد`,
+          });
         }
+
+        if (typedValue.length < minLength) {
+          return form.setError(field.name, {
+            type: "required",
+            message: `آیتم نباید کمتر از ${minLength} کاراکتر باشد`,
+          });
+        }
+
+        if (!typedValue.includes("&")) {
+          return form.setError(field.name, {
+            type: "required",
+            message:
+              "ابتدا باید عنوان مهارت سپس علامت & و بعد میزان عددی مهارت بین 0 تا 100 را وارد کنید",
+          });
+        }
+        const numberValue = Number(typedValue.split("&")[1]);
+        if (numberValue > 100 || numberValue < 0) {
+          return form.setError(field.name, {
+            type: "required",
+            message: "میزان عددی مهارت باید بین 0 تا 100 باشد",
+          });
+        }
+
+        // Push the value to the array
+        newValue.push(typedValue);
+        form.setValue(field.name, newValue);
       } else {
         // Trigger validation for empty input
         form.trigger();
@@ -234,13 +213,11 @@ const SkillsEditForm = ({ clerkId, user }: Props) => {
   };
 
   const skillFields = [
-    { title: "عنوان مهارت تخصصی", name: "proTitle" as const, type: "text" },
-    { title: "میزان مهارت تخصصی", name: "proNumber" as const, type: "number" },
-    { title: "عنوان مهارت عمومی", name: "publicTitle" as const, type: "text" },
+    { title: "عنوان و مهارت تخصصی", name: "proTitle" as const, type: "text" },
     {
-      title: "میزان مهارت عمومی",
-      name: "publicNumber" as const,
-      type: "number",
+      title: "عنوان و مهارت عمومی",
+      name: "publicTitle" as const,
+      type: "text",
     },
   ];
 
@@ -295,24 +272,29 @@ const SkillsEditForm = ({ clerkId, user }: Props) => {
                         <FormMessage className="text-xs text-rose-600" />
                         {field.value.length > 0 && (
                           <div className="mt-2.5 flex flex-col items-start gap-2.5">
-                            {field.value.map((tag: any) => (
-                              <Badge
-                                key={tag}
-                                className="subtle-medium background-light800_dark300 text-light400_light500 flex items-center justify-center gap-2 rounded-md border-none px-4 py-2"
-                                onClick={() =>
-                                  handleTagAction(tag, field, true)
-                                }
-                              >
-                                {tag}
-
-                                <Image
-                                  src="/assets/icons/close.svg"
-                                  alt="Close icon"
-                                  width={12}
-                                  height={12}
-                                  className="cursor-pointer object-contain invert-0 dark:invert"
+                            {field.value.map((tag: any, index: number) => (
+                              <div className="flex w-full" key={index}>
+                                <Input
+                                  className="background-light800_dark400  text-dark300_light700"
+                                  value={tag}
+                                  onChange={(e) => {
+                                    const newValue = [...field.value].map(
+                                      (value: string) => String(value)
+                                    );
+                                    newValue[index] = e.target.value; // Set the new value
+                                    form.setValue(field.name, newValue);
+                                  }}
                                 />
-                              </Badge>
+
+                                <Button
+                                  onClick={() =>
+                                    handleTagAction(tag, field, true)
+                                  }
+                                  type="button"
+                                >
+                                  <Trash2 className="size-4 text-red-600" />
+                                </Button>
+                              </div>
                             ))}
                           </div>
                         )}
@@ -326,13 +308,8 @@ const SkillsEditForm = ({ clerkId, user }: Props) => {
 
           <div>
             <p className="body-regular text-light-500">
-              در فیلدهای بالا مقدار را تایپ کرده و سپس کلید Enter را بفشارید و
-              برای اضافه کردن متن‌های بیشتر این پروسه را تکرار نمایید.
-            </p>
-            <p className="body-regular mt-1 text-light-500">
-              <span className="ml-1 text-rose-500">*</span>
-              توجه داشته باشید بابت هر عنوان باید مقدار مهارت وارد شود و بلعکس
-              در غیر اینصورت مقادیر پیش‌فرض جایگزین خواهند شد.
+            <span className="ml-1 text-rose-500">*</span>
+            در فیلدهای بالا ابتدا نام مهارت سپس علامت & و سپس مقدار عددی مهارت را مشابه نمونه &quot;فتوشاپ & 85&quot; وارد کنید و سپس کلید Enter را بفشارید و برای اضافه کردن موارد بیشتر این پروسه را تکرار نمایید.
             </p>
           </div>
         </div>
