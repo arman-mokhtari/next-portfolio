@@ -36,7 +36,6 @@ export interface IUser extends Document {
   skills?: typeof CommonSchema;
   skillsItem: {
     title: { type: string };
-    number: { type: number };
     type: { type: string };
   };
   resumeItems: {
@@ -94,14 +93,13 @@ const UserSchema = new Schema(
     },
     skills: CommonSchema,
     skillsItem: {
-      title: { type: String, required: true },
-      number: { type: Number, required: true },
+      title: { type: String },
       type: { type: String },
     },
     resume: CommonSchema,
     resumeItems: {
-      desc: { type: String, required: true },
-      date: { type: Date, required: true },
+      desc: { type: String, },
+      date: { type: Date },
       type: { type: String },
     },
     activities: {

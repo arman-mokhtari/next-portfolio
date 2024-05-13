@@ -30,7 +30,12 @@ const ResumeItems = ({ admin }: Props) => {
         <div className="before:absolute before:right-0 before:size-3 before:rounded-full before:bg-blue-600" />
 
         <div className="text-sm">
-          <p className="text-gray-500 dark:text-gray-400">{item.date}</p>
+          <p className="text-gray-500 dark:text-gray-400">
+            {new Date(item.date).toLocaleDateString("fa-IR", {
+              year: "numeric",
+              month: "long",
+            })}
+          </p>
           <p className="text-dark500_light700 mt-2">{item.desc}</p>
         </div>
       </li>

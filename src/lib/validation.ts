@@ -185,23 +185,6 @@ export const skillsEditSchema = z.object({
     .max(20, {
       message: "مجموع آیتم‌ها نباید بیشتر از 20 آیتم باشند",
     }),
-  proNumber: z
-    .array(
-      z
-        .number()
-        .min(0, {
-          message: "میزان مهارت را از بین اعداد 0 تا 100 وارد کنید",
-        })
-        .max(100, {
-          message: "میزان مهارت نباید بیشتر از 100 باشد",
-        })
-    )
-    .min(2, {
-      message: "مجموع آیتم‌ها نباید کمتر از 2 آیتم باشند",
-    })
-    .max(20, {
-      message: "مجموع آیتم‌ها نباید بیشتر از 20 آیتم باشند",
-    }),
   publicTitle: z
     .array(
       z
@@ -211,23 +194,6 @@ export const skillsEditSchema = z.object({
         })
         .max(100, {
           message: "عنوان نباید بیشتر از 100 کاراکتر باشد",
-        })
-    )
-    .min(2, {
-      message: "مجموع آیتم‌ها نباید کمتر از 2 آیتم باشند",
-    })
-    .max(20, {
-      message: "مجموع آیتم‌ها نباید بیشتر از 20 آیتم باشند",
-    }),
-  publicNumber: z
-    .array(
-      z
-        .number()
-        .min(0, {
-          message: "میزان مهارت را از بین اعداد 0 تا 100 وارد کنید",
-        })
-        .max(100, {
-          message: "میزان مهارت نباید بیشتر از 100 باشد",
         })
     )
     .min(2, {
@@ -258,7 +224,7 @@ export const resumeEditSchema = z.object({
       message: "مجموع آیتم‌ها نباید بیشتر از 20 آیتم باشند",
     }),
   expDate: z
-    .array(z.string())
+    .array(z.any())
     .min(2, {
       message: "مجموع آیتم‌ها نباید کمتر از 2 آیتم باشند",
     })
@@ -283,7 +249,7 @@ export const resumeEditSchema = z.object({
       message: "مجموع آیتم‌ها نباید بیشتر از 20 آیتم باشند",
     }),
   docDate: z
-    .array(z.string())
+    .array(z.any())
     .min(2, {
       message: "مجموع آیتم‌ها نباید کمتر از 2 آیتم باشند",
     })
