@@ -1,4 +1,6 @@
 /* eslint-disable camelcase */
+"use client";
+
 import React, { useState } from "react";
 import DatePicker from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
