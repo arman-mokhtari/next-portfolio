@@ -17,10 +17,10 @@ import { toast } from "@/components/ui/use-toast";
 import { usePathname, useRouter } from "next/navigation";
 import { updateUser } from "@/backend/libs/actions/user.action";
 import { resumeEditSchema } from "@/lib/validation";
-import Image from "next/image";
-import { Badge } from "@/components/ui/badge";
 import SubmitButton from "../shared/SubmitButton";
 import CustomTimePicker from "./TimePicker";
+import { Button } from "@/components/ui/button";
+import { Trash2 } from "lucide-react";
 
 type FieldName = "title" | "desc" | "metaTitle" | "metaDesc";
 type Placeholders = Record<FieldName, string>;
@@ -86,6 +86,13 @@ const SkillsEditForm = ({ clerkId, user }: Props) => {
         expDate,
       } = values;
 
+      if (
+        docDesc.length !== docDate.length ||
+        expDesc.length !== expDate.length
+      ) {
+        throw new Error("باید برای هر عنوان یک تاریخ ثبت شود.");
+      }
+
       const resumeItems = [
         ...docDesc.map((desc: string, index: number) => ({
           desc,
@@ -119,11 +126,11 @@ const SkillsEditForm = ({ clerkId, user }: Props) => {
         title: "تغییرات ثبت شد!",
         variant: !isSubmit ? "default" : "destructive",
       });
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
 
       toast({
-        title: "خطا در ذخیره اطلاعات!",
+        title: (error as Error).message || "خطا در ذخیره اطلاعات!",
         variant: "destructive",
       });
     } finally {
@@ -231,22 +238,29 @@ const SkillsEditForm = ({ clerkId, user }: Props) => {
                       <FormMessage className="text-xs text-rose-600" />
                       {field.value.length > 0 && (
                         <div className="mt-2.5 flex flex-col items-start gap-2.5">
-                          {field.value.map((tag: any) => (
-                            <Badge
-                              key={tag}
-                              className="subtle-medium background-light800_dark300 text-light400_light500 flex items-center justify-center gap-2 rounded-md border-none px-4 py-2"
-                              onClick={() => handleTagAction(tag, field, true)}
-                            >
-                              {tag}
-
-                              <Image
-                                src="/assets/icons/close.svg"
-                                alt="Close icon"
-                                width={12}
-                                height={12}
-                                className="cursor-pointer object-contain invert-0 dark:invert"
+                          {field.value.map((tag: any, index: number) => (
+                            <div className="flex w-full" key={index}>
+                              <Input
+                                className="background-light800_dark400  text-dark300_light700"
+                                value={tag}
+                                onChange={(e) => {
+                                  const newValue = [...field.value].map(
+                                    (value: string) => String(value)
+                                  );
+                                  newValue[index] = e.target.value; // Set the new value
+                                  form.setValue(field.name, newValue);
+                                }}
                               />
-                            </Badge>
+
+                              <Button
+                                onClick={() =>
+                                  handleTagAction(tag, field, true)
+                                }
+                                type="button"
+                              >
+                                <Trash2 className="size-4 text-red-600" />
+                              </Button>
+                            </div>
                           ))}
                         </div>
                       )}
@@ -268,6 +282,7 @@ const SkillsEditForm = ({ clerkId, user }: Props) => {
                       <CustomTimePicker
                         className="paragraph-regular background-light800_dark400 theme-border-color text-dark300_light700 input-light"
                         placeholder="تاریخ دریافت"
+                        onChange={() => {}}
                         onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
                           handleFieldChange(e, field)
                         }
@@ -276,22 +291,26 @@ const SkillsEditForm = ({ clerkId, user }: Props) => {
                       <FormMessage className="text-xs text-rose-600" />
                       {field.value.length > 0 && (
                         <div className="mt-2.5 flex flex-col items-start gap-2.5">
-                          {field.value.map((tag: any) => (
-                            <Badge
-                              key={tag}
-                              className="subtle-medium background-light800_dark300 text-light400_light500 flex items-center justify-center gap-2 rounded-md border-none px-4 py-2"
-                              onClick={() => handleTagAction(tag, field, true)}
-                            >
-                              {tag}
-
-                              <Image
-                                src="/assets/icons/close.svg"
-                                alt="Close icon"
-                                width={12}
-                                height={12}
-                                className="cursor-pointer object-contain invert-0 dark:invert"
+                          {field.value.map((tag: any, index: number) => (
+                            <div className="flex w-full" key={index}>
+                              <CustomTimePicker
+                                className="background-light800_dark400 text-dark300_light700"
+                                value={tag}
+                                onChange={(newValue: string) => {
+                                  const updatedTags = [...field.value];
+                                  updatedTags[index] = newValue;
+                                  form.setValue(field.name, updatedTags);
+                                }}
                               />
-                            </Badge>
+                              <Button
+                                onClick={() =>
+                                  handleTagAction(tag, field, true)
+                                }
+                                type="button"
+                              >
+                                <Trash2 className="size-4 text-red-600" />
+                              </Button>
+                            </div>
                           ))}
                         </div>
                       )}
@@ -320,22 +339,29 @@ const SkillsEditForm = ({ clerkId, user }: Props) => {
                       <FormMessage className="text-xs text-rose-600" />
                       {field.value.length > 0 && (
                         <div className="mt-2.5 flex flex-col items-start gap-2.5">
-                          {field.value.map((tag: any) => (
-                            <Badge
-                              key={tag}
-                              className="subtle-medium background-light800_dark300 text-light400_light500 flex items-center justify-center gap-2 rounded-md border-none px-4 py-2"
-                              onClick={() => handleTagAction(tag, field, true)}
-                            >
-                              {tag}
-
-                              <Image
-                                src="/assets/icons/close.svg"
-                                alt="Close icon"
-                                width={12}
-                                height={12}
-                                className="cursor-pointer object-contain invert-0 dark:invert"
+                          {field.value.map((tag: any, index: number) => (
+                            <div className="flex w-full" key={index}>
+                              <Input
+                                className="background-light800_dark400  text-dark300_light700"
+                                value={tag}
+                                onChange={(e) => {
+                                  const newValue = [...field.value].map(
+                                    (value: string) => String(value)
+                                  );
+                                  newValue[index] = e.target.value; // Set the new value
+                                  form.setValue(field.name, newValue);
+                                }}
                               />
-                            </Badge>
+
+                              <Button
+                                onClick={() =>
+                                  handleTagAction(tag, field, true)
+                                }
+                                type="button"
+                              >
+                                <Trash2 className="size-4 text-red-600" />
+                              </Button>
+                            </div>
                           ))}
                         </div>
                       )}
@@ -357,6 +383,7 @@ const SkillsEditForm = ({ clerkId, user }: Props) => {
                       <CustomTimePicker
                         className="paragraph-regular background-light800_dark400 theme-border-color text-dark300_light700 input-light"
                         placeholder="محدوده زمانی"
+                        onChange={() => {}}
                         onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
                           handleFieldChange(e, field)
                         }
@@ -365,22 +392,26 @@ const SkillsEditForm = ({ clerkId, user }: Props) => {
                       <FormMessage className="text-xs text-rose-600" />
                       {field.value.length > 0 && (
                         <div className="mt-2.5 flex flex-col items-start gap-2.5">
-                          {field.value.map((tag: any) => (
-                            <Badge
-                              key={tag}
-                              className="subtle-medium background-light800_dark300 text-light400_light500 flex items-center justify-center gap-2 rounded-md border-none px-4 py-2"
-                              onClick={() => handleTagAction(tag, field, true)}
-                            >
-                              {tag}
-
-                              <Image
-                                src="/assets/icons/close.svg"
-                                alt="Close icon"
-                                width={12}
-                                height={12}
-                                className="cursor-pointer object-contain invert-0 dark:invert"
+                          {field.value.map((tag: any, index: number) => (
+                            <div className="flex w-full" key={index}>
+                              <CustomTimePicker
+                                className="background-light800_dark400 text-dark300_light700"
+                                value={tag}
+                                onChange={(newValue: string) => {
+                                  const updatedTags = [...field.value];
+                                  updatedTags[index] = newValue;
+                                  form.setValue(field.name, updatedTags);
+                                }}
                               />
-                            </Badge>
+                              <Button
+                                onClick={() =>
+                                  handleTagAction(tag, field, true)
+                                }
+                                type="button"
+                              >
+                                <Trash2 className="size-4 text-red-600" />
+                              </Button>
+                            </div>
                           ))}
                         </div>
                       )}
@@ -397,8 +428,7 @@ const SkillsEditForm = ({ clerkId, user }: Props) => {
             </p>
             <p className="body-regular mt-1 text-light-500">
               <span className="text-rose-500">* </span>
-              توجه داشته باشید بابت هر عنوان باید مقدار مهارت وارد شود و بلعکس
-              در غیر اینصورت مقادیر از پیش تایید شده جایگزین خواهند شد.
+              توجه داشته باشید بابت هر عنوان باید تاریخ وارد شود.
             </p>
           </div>
         </div>

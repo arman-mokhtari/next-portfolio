@@ -224,7 +224,7 @@ export const resumeEditSchema = z.object({
       message: "مجموع آیتم‌ها نباید بیشتر از 20 آیتم باشند",
     }),
   expDate: z
-    .array(z.string())
+    .array(z.any())
     .min(2, {
       message: "مجموع آیتم‌ها نباید کمتر از 2 آیتم باشند",
     })
@@ -249,7 +249,7 @@ export const resumeEditSchema = z.object({
       message: "مجموع آیتم‌ها نباید بیشتر از 20 آیتم باشند",
     }),
   docDate: z
-    .array(z.string())
+    .array(z.any())
     .min(2, {
       message: "مجموع آیتم‌ها نباید کمتر از 2 آیتم باشند",
     })
