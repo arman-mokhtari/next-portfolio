@@ -20,9 +20,9 @@ import { toast } from "@/components/ui/use-toast";
 import { usePathname, useRouter } from "next/navigation";
 import { updateUser } from "@/backend/libs/actions/user.action";
 import { homeEditSchema } from "@/lib/validation";
-import { Badge } from "@/components/ui/badge";
-import Image from "next/image";
 import SubmitButton from "../shared/SubmitButton";
+import { Button } from "@/components/ui/button";
+import { Trash2 } from "lucide-react";
 
 type FieldName = "title" | "desc" | "metaTitle" | "metaDesc";
 
@@ -181,24 +181,31 @@ const HomeEditForm = ({ clerkId, user }: Props) => {
                   <FormMessage className="text-xs text-rose-600" />
                   {field.value.length > 0 && (
                     <div className="mt-2.5 flex flex-col items-start gap-2.5">
-                      {field.value.map((tag: any) => (
-                        <Badge
-                          key={tag}
-                          className="subtle-medium background-light800_dark300 text-light400_light500 flex items-center justify-center gap-2 rounded-md border-none px-4 py-2"
-                          onClick={() => handleTagAction(tag, field, true)}
-                        >
-                          {tag}
+                    {field.value.map((tag: any, index: number) => (
+                      <div className="flex w-full" key={index}>
+                        <Input
+                          className="background-light800_dark400  text-dark300_light700"
+                          value={tag}
+                          onChange={(e) => {
+                            const newValue = [...field.value].map(
+                              (value: string) => String(value)
+                            );
+                            newValue[index] = e.target.value; // Set the new value
+                            form.setValue(field.name, newValue);
+                          }}
+                        />
 
-                          <Image
-                            src="/assets/icons/close.svg"
-                            alt="Close icon"
-                            width={12}
-                            height={12}
-                            className="cursor-pointer object-contain invert-0 dark:invert"
-                          />
-                        </Badge>
-                      ))}
-                    </div>
+                        <Button
+                          onClick={() =>
+                            handleTagAction(tag, field, true)
+                          }
+                          type="button"
+                        >
+                          <Trash2 className="size-4 text-red-600" />
+                        </Button>
+                      </div>
+                    ))}
+                  </div>
                   )}
                 </>
               </FormControl>
