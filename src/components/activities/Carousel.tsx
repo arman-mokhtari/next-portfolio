@@ -35,7 +35,7 @@ const ProjectSlider = ({ admin }: ProjectSliderProps) => {
       />
       <div className="flex justify-center px-6">
         <Carousel
-          opts={{
+        opts={{
             align: "start",
             loop: true,
           }}
@@ -44,37 +44,38 @@ const ProjectSlider = ({ admin }: ProjectSliderProps) => {
               delay: 2000,
             }),
           ]}
-          className="w-full"
-        >
-          <CarouselContent>
-            {admin.activities.activityLinks.map((item, index) => (
-              <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-                <div className="p-1">
-                  <Card>
-                    <CardContent className="flex items-center justify-center p-0">
-                      <Link
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href={item.split("&")[1]}
-                      >
-                        <Image
-                          className="size-full object-cover"
-                          alt="Project image"
-                          src={item.split("&")[0]}
-                          width={450}
-                          height={450}
-                        />
-                      </Link>
-                    </CardContent>
-                  </Card>
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
-        </Carousel>
+        className="w-full"
+      >
+        <CarouselContent>
+          {admin.activities.activityLinks.map((item, index) => (
+            <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+              <div className="p-1">
+                <Card>
+                  <CardContent className="flex items-center justify-center p-0">
+                    <Link
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href={item.split("&")[1]}
+                    >
+                      <Image
+                        className="rounded-md"
+                        alt="تصویر پروژه"
+                        src={item.split("&")[0]}
+                        width={450}
+                        height={450}
+                      />
+                    </Link>
+                  </CardContent>
+                </Card>
+              </div>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselPrevious />
+        <CarouselNext />
+      </Carousel>
       </div>
+      
     </div>
   );
 };
