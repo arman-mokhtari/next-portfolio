@@ -272,20 +272,6 @@ code {
   display: flex !important;
 }
 /* imp */
-/* slick carousel */
-.slick-dots li.slick-active button:before {
-  color: #2563eb !important;
-}
-
-.slick-dots li button:before {
-  color: #868686 !important;
-}
-
-.slick-next:before,
-.slick-prev:before {
-  color: #2563eb !important;
-}
-/* slick carousel */
 
 /* hover card */
 .customized-card {
