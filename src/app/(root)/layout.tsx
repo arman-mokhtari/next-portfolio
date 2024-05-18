@@ -4,8 +4,6 @@ import RightSidebar from "@/components/shared/sidebar/RightSidebar";
 import MobileSidebar from "@/components/shared/sidebar/MobileSidebar";
 import HomeLines from "@/components/shared/HomeLines";
 import ProfileBtn from "@/components/shared/ProfileBtn";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
